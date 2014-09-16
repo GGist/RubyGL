@@ -1,22 +1,40 @@
-require './NativeGL/gl_window'
-require './NativeGL/input'
-require './NativeGL/opengl'
+require 'ffi'
+require 'rbconfig'
 
-window = RubyWrapper.createGLWindow()
-context = RubyWrapper.createGLContext(window)
-
-puts("Load OpenGL returned: " + CWrapper.loadLibrary.to_s)
-
-RubyWrapper.bindCallback do
-	puts 't'
+# OS Detection
+def os
+	@os ||= (
+		host_os = RbConfig::CONFIG['host_os']
+		
+		case host_os
+			when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+				:windows
+			when /darwin|mac os/
+				:macosx
+			when /linux/
+				:linux
+			when /solaris|bsd/
+				:unix
+			else
+				raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
+		end
+    )
 end
 
-NativeGL.glClearColor(0.0, 0.0, 1.0, 1.0)
- 
-while (true) do
-	NativeGL.glClear(NativeGL::GL_COLOR_BUFFER_BIT)
-	
-	CWrapper.swapBuffer(window)
-	
-	CWrapper.pumpEvents()
+# Initialize All Modules
+module RubyGL
+
 end
+
+module RubyGL::Native
+	extend FFI::Library
+	ffi_lib "../ext/#{os.to_s}/SDL2.dll"
+	ffi_lib "../ext/#{os.to_s}/RubyGL.so"
+	
+end
+
+# Load Module Code
+require './RubyGL/Native/window'
+require './RubyGL/Native/glcontext'
+require './RubyGL/Native/input'
+require './RubyGL/Native/opengl'

@@ -1,9 +1,6 @@
 require 'ffi'
 
-module NativeGL
-	extend FFI::Library
-	ffi_lib 'libwin.so'
-	
+module RubyGL::Native
     attach_function :glActiveShaderProgram, [:uint, :uint], :void
     attach_function :glActiveTexture, [:uint], :void
     attach_function :glAttachShader, [:uint, :uint], :void
@@ -259,8 +256,8 @@ module NativeGL
     attach_function :glGetShaderPrecisionFormat, [:uint, :uint, :pointer, :pointer], :void
     attach_function :glGetShaderSource, [:uint, :int, :pointer, :pointer], :void
     attach_function :glGetShaderiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetString, [:uint], :uchar
-    attach_function :glGetStringi, [:uint, :uint], :uchar
+    attach_function :glGetString, [:uint], :string
+    attach_function :glGetStringi, [:uint, :uint], :string
     attach_function :glGetSubroutineIndex, [:uint, :uint, :pointer], :uint
     attach_function :glGetSubroutineUniformLocation, [:uint, :uint, :pointer], :int
     attach_function :glGetSynciv, [:pointer, :uint, :int, :pointer, :pointer], :void
@@ -345,10 +342,10 @@ module NativeGL
     attach_function :glLineWidth, [:float], :void
     attach_function :glLinkProgram, [:uint], :void
     attach_function :glLogicOp, [:uint], :void
-    attach_function :glMapBuffer, [:uint, :uint], :void
-    attach_function :glMapBufferRange, [:uint, :int, :int, :uint], :void
-    attach_function :glMapNamedBuffer, [:uint, :uint], :void
-    attach_function :glMapNamedBufferRange, [:uint, :int, :int, :uint], :void
+    attach_function :glMapBuffer, [:uint, :uint], :pointer
+    attach_function :glMapBufferRange, [:uint, :int, :int, :uint], :pointer
+    attach_function :glMapNamedBuffer, [:uint, :uint], :pointer
+    attach_function :glMapNamedBufferRange, [:uint, :int, :int, :uint], :pointer
     attach_function :glMemoryBarrier, [:uint], :void
     attach_function :glMemoryBarrierByRegion, [:uint], :void
     attach_function :glMinSampleShading, [:float], :void
@@ -613,7 +610,7 @@ module NativeGL
     attach_function :glVertexAttrib4Niv, [:uint, :pointer], :void
     attach_function :glVertexAttrib4Nsv, [:uint, :pointer], :void
     attach_function :glVertexAttrib4Nub, [:uint, :uchar, :uchar, :uchar, :uchar], :void
-    attach_function :glVertexAttrib4Nubv, [:uint, :pointer], :void
+    attach_function :glVertexAttrib4Nubv, [:uint, :string], :void
     attach_function :glVertexAttrib4Nuiv, [:uint, :pointer], :void
     attach_function :glVertexAttrib4Nusv, [:uint, :pointer], :void
     attach_function :glVertexAttrib4bv, [:uint, :pointer], :void
@@ -624,7 +621,7 @@ module NativeGL
     attach_function :glVertexAttrib4iv, [:uint, :pointer], :void
     attach_function :glVertexAttrib4s, [:uint, :short, :short, :short, :short], :void
     attach_function :glVertexAttrib4sv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4ubv, [:uint, :pointer], :void
+    attach_function :glVertexAttrib4ubv, [:uint, :string], :void
     attach_function :glVertexAttrib4uiv, [:uint, :pointer], :void
     attach_function :glVertexAttrib4usv, [:uint, :pointer], :void
     attach_function :glVertexAttribBinding, [:uint, :uint], :void
@@ -646,7 +643,7 @@ module NativeGL
     attach_function :glVertexAttribI4i, [:uint, :int, :int, :int, :int], :void
     attach_function :glVertexAttribI4iv, [:uint, :pointer], :void
     attach_function :glVertexAttribI4sv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI4ubv, [:uint, :pointer], :void
+    attach_function :glVertexAttribI4ubv, [:uint, :string], :void
     attach_function :glVertexAttribI4ui, [:uint, :uint, :uint, :uint, :uint], :void
     attach_function :glVertexAttribI4uiv, [:uint, :pointer], :void
     attach_function :glVertexAttribI4usv, [:uint, :pointer], :void
@@ -2011,6 +2008,5 @@ module NativeGL
     GL_XOR = 0x1506
     GL_ZERO = 0
     GL_ZERO_TO_ONE = 0x935F
-
 
 end

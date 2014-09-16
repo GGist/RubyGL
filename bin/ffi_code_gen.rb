@@ -36,7 +36,7 @@ FFI_TYPES = { 'char' => 'char', 'signed char' => 'char',
 'unsigned long int' => 'ulong', 'int64_t' => 'int64', 'uint64_t' => 'uint64', 
 'long long int' => 'long_long', 'unsigned long long int' => 'ulong_long', 
 'float' => 'float', 'double' => 'double' }
-FFI_PTR_TYPES = { /const *char *\*/ => 'string', /\*/ => 'pointer' }
+FFI_PTR_TYPES = { /const +(?:unsigned)? +char *\*/ => 'string', /\*/ => 'pointer' }
 
 # Open Pre-Processor(ed) Source File
 source_code = ''
@@ -79,14 +79,10 @@ gl_functions = source_code.scan(/^.+gl.+\(.+\);$/)
 
 ffi_template = "require 'ffi'
 
-module NativeGL
-	extend FFI::Library
-	ffi_lib '#{ARGV[3]}'
-	
+module RubyGL::Native
 FUNCTIONS_GO_HERE
 	
 CONSTANTS_GO_HERE
-
 end
 "
 
@@ -102,10 +98,8 @@ gl_functions.each { |signature|
 	# Type Definition -> Primitive (Actual) Type
 	param_type_list.map! { |param_type|
 		# Parameter Type Could Use Multiple Type Definitions
-		param_type.gsub!(/const/, '') # Ignore Const Qualifiers
-		param_type.strip!
 		
-		simple_param_types = param_type.gsub(/\*/, ' ').split(' ')
+		simple_param_types = param_type.gsub(/(?:\*|const)/, ' ').split(' ')
 		# Translate Each Type And Put Back Into param_type
 		simple_param_types.each { |simple_param_type|
 			primitive_type = resolve_typedef(simple_param_type, typedef_hash)
@@ -118,8 +112,10 @@ gl_functions.each { |signature|
 
 	# Primitive Type -> Ruby FFI Type
 	param_type_list.each { |param_type|
-		if (get_type(param_type, FFI_TYPES)) then
-			param_type = get_type(param_type, FFI_TYPES)
+		mutable_type = param_type.gsub(/const/, '').strip
+
+		if (get_type(mutable_type, FFI_TYPES)) then
+			param_type = get_type(mutable_type, FFI_TYPES)
 		else
 			param_type = match_type(param_type, FFI_PTR_TYPES)
 		end
@@ -134,11 +130,22 @@ gl_functions.each { |signature|
 	end
 	
 	# Get Return Type
-	return_type = signature.gsub(/ *const */, '')[/(.*?) /, 1]
-	return_type = resolve_typedef(return_type, typedef_hash)
-	
-	if (get_type(return_type, FFI_TYPES)) then
-		return_type = get_type(return_type, FFI_TYPES)
+	# We Do Not Care About const If We Can Match Our Return Type With A
+	# Primitive Type. Otherwise, We Might Be Able To Match Against A 
+	# const char* Or const unsigned char* In Which Case We Prefer To Use A 
+	# string Type.
+	return_type = signature[/(.*?) gl[^ ]+\(/, 1]
+	mutable_return_type = return_type.gsub(/ *const */, '')
+
+	mutable_return_type.gsub(/\*/, ' ').split(' ').each { |type|
+		resolved_type = resolve_typedef(type, typedef_hash)
+		
+		mutable_return_type.sub!(/#{type}/, resolved_type)
+		return_type.sub!(/#{type}/, resolved_type)
+	}
+		
+	if (get_type(mutable_return_type, FFI_TYPES)) then
+		return_type = get_type(mutable_return_type, FFI_TYPES)
 	elsif (match_type(return_type, FFI_PTR_TYPES))
 		return_type = match_type(return_type, FFI_PTR_TYPES)
 	end

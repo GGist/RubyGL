@@ -2,34 +2,61 @@ require 'rake/task'
 require 'rake/testtask'
 require 'tmpdir'
 
-/---------------------------------CONSTANTS-----------------------------------/
+SDL_INCLUDE = 'C:\Users\GG\Desktop\SDL2-2.0.3\include'
+SDL_LIB = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\lib'
+SDL_BIN = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\bin'
 
-SDL_INCLUDE = 'C:\SDL\SDL2-2.0.3-master\include'
-SDL_LIB = 'C:\SDL\SDL2-2.0.3'
-SDL_BIN = 'C:\SDL\SDL2-2.0.3'
+MINGW_LIB = ''
 
-MINGW_LIB = 'C:\Users\millera9\Desktop\Dev\mingw32\lib'
+PROJ_INCLUDE = 'lib/RubyGL/Native/include'
+PROJ_SRC = 'lib/RubyGL/Native/src/'
 
-PROJ_INCLUDE = 'lib/NativeGL/include/'
-PROJ_SRC = 'lib/NativeGL/src/'
+# OS Detection
+def os
+	@os ||= (
+		host_os = RbConfig::CONFIG['host_os']
+		
+		case host_os
+			when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+				:windows
+			when /darwin|mac os/
+				:macosx
+			when /linux/
+				:linux
+			when /solaris|bsd/
+				:unix
+			else
+				raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
+		end
+    )
+end
 
 /---------------------------------RAKE JOBS-----------------------------------/
 
 task :default do
-	files = ['Audio', 'GLWindow', 'Input', 'OpenGL']
-
+	files = ['Audio', 'Window', 'GLContext', 'Input', 'OpenGL']
+	
+	# Build Object Files
 	obj = "gcc -I#{SDL_INCLUDE}  -I#{PROJ_INCLUDE} -c -fPIC REPLACE.c -o REPLACE.o"
 	files.each { |file|
 		sh (obj.gsub(/REPLACE/, PROJ_SRC + file))
 		file = file.prepend PROJ_SRC
 	}
 
-	bin = "gcc -L#{SDL_LIB} -L#{MINGW_LIB} #{files.join('.o ') << '.o'} -lmingw32 -lSDL2main -lSDL2 -lopengl32 -shared -o ext/libwin.so"
+	# Build Shared Object File
+	bin = "gcc -L#{SDL_LIB} -L#{MINGW_LIB} #{files.join('.o ') << '.o'} \
+		-lmingw32 -lSDL2main -lSDL2 -lopengl32 -shared -o \
+		ext/#{os.to_s}/RubyGL.so"
 	sh bin
 end
 
-task :bindings do
-	shared_lib = "libwin.so"
+task :clean do
+	# Clean Out Object Files
+	FileUtils.rm Dir.glob(PROJ_SRC + '/*.o')
+end
+
+task :opengl do
+	shared_lib = "RubyGL.so"
 
 	Dir.mktmpdir { |dir|
 		# Generates Header And Source C Files
@@ -45,7 +72,7 @@ task :bindings do
 		# Move Files To Correct Folders
 		mv "#{dir}/OpenGL.h", PROJ_INCLUDE
 		mv "#{dir}/OpenGL.c", PROJ_SRC
-		mv "#{dir}/opengl.rb", "lib/NativeGL"
+		mv "#{dir}/opengl.rb", "lib/RubyGL/Native/"
 	}
 end
 
