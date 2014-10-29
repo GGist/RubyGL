@@ -3,21 +3,21 @@ require 'rbconfig'
 
 # OS Detection
 def os
-	@os ||= (
-		host_os = RbConfig::CONFIG['host_os']
-		
-		case host_os
-			when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
-				:windows
-			when /darwin|mac os/
-				:macosx
-			when /linux/
-				:linux
-			when /solaris|bsd/
-				:unix
-			else
-				raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
-		end
+    @os ||= (
+        host_os = RbConfig::CONFIG['host_os']
+        
+        case host_os
+            when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+                :windows
+            when /darwin|mac os/
+                :macosx
+            when /linux/
+                :linux
+            when /solaris|bsd/
+                :unix
+            else
+                raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
+        end
     )
 end
 
@@ -27,10 +27,10 @@ module RubyGL
 end
 
 module RubyGL::Native
-	extend FFI::Library
-	ffi_lib "../ext/#{os.to_s}/SDL2.dll"
-	ffi_lib "../ext/#{os.to_s}/RubyGL.so"
-	
+    extend FFI::Library
+    ffi_lib "../ext/#{os.to_s}/SDL2.dll"
+    ffi_lib "../ext/#{os.to_s}/RubyGL.so"
+    
 end
 
 # Load Module Code

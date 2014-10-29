@@ -11,7 +11,7 @@ SDL_Window* createWindow(const char* title, int x, int y, int w, int h,
                          Uint32 flags);
 
 void destroyWindow(SDL_Window* window);
-						 
+                         
 void hideWindow(SDL_Window* window);
 
 void showWindow(SDL_Window* window);
@@ -23,6 +23,6 @@ int showSimpleMessageBox(Uint32 flags, const char* title, const char* message,
 
 const SDL_WindowFlags FULLSCREEN, OPENGL, SHOWN, HIDDEN, BORDERLESS, RESIZABLE,
                       MINIMIZED, MAXIMIZED, INPUT_GRABBED, INPUT_FOCUS, 
-					  MOUSE_FOCUS, FULLSCREEN_DESKTOP , FOREIGN, ALLOW_HIGHDPI;
-						
+                      MOUSE_FOCUS, FULLSCREEN_DESKTOP , FOREIGN, ALLOW_HIGHDPI;
+                        
 #endif // WINDOW_H

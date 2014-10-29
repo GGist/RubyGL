@@ -681,7 +681,7 @@ module RubyGL::Native
     attach_function :glViewportIndexedfv, [:uint, :pointer], :void
     attach_function :glWaitSync, [:pointer, :uint, :uint64], :void
 
-	
+    
     GL_ACTIVE_ATOMIC_COUNTER_BUFFERS = 0x92D9
     GL_ACTIVE_ATTRIBUTES = 0x8B89
     GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 0x8B8A

@@ -22,17 +22,17 @@ frames = 0
 time = Time.now.strftime("%s").to_i
 
 loop {
-	RubyGL::Native.glClearColor(0.0, 1.0, 0.0, 1.0)
-	RubyGL::Native.glClear(RubyGL::Native::GL_COLOR_BUFFER_BIT)
+    RubyGL::Native.glClearColor(0.0, 1.0, 0.0, 1.0)
+    RubyGL::Native.glClear(RubyGL::Native::GL_COLOR_BUFFER_BIT)
 
-	RubyGL::Native.swapWindow(window)
-	frames += 1
+    RubyGL::Native.swapWindow(window)
+    frames += 1
 
-	if (((Time.now.strftime("%s").to_i - time) * 1000.0).to_i > 1) then
-		puts frames
-		frames = 0
-		time = Time.now.strftime("%s").to_i
-	end
-	
-	RubyGL::Native.pumpEvents()
+    if (((Time.now.strftime("%s").to_i - time) * 1000.0).to_i > 1) then
+        puts frames
+        frames = 0
+        time = Time.now.strftime("%s").to_i
+    end
+    
+    RubyGL::Native.pumpEvents()
 }
