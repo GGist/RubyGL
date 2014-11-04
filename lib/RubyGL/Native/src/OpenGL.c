@@ -2718,6 +2718,50 @@ void glGetProgramiv(GLuint program, GLenum pname, GLint * params) {
   glGetProgramiv_ptr(program, pname, params);
 }
 
+void glGetQueryBufferObjecti64v(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) {
+  typedef void (APIENTRY * GL_GetQueryBufferObjecti64v_Func)(GLuint, GLuint, GLenum, GLintptr);
+  static GL_GetQueryBufferObjecti64v_Func glGetQueryBufferObjecti64v_ptr = NULL;
+
+  if (glGetQueryBufferObjecti64v_ptr == NULL) {
+    glGetQueryBufferObjecti64v_ptr = (GL_GetQueryBufferObjecti64v_Func)SDL_GL_GetProcAddress(__func__);
+  }
+
+  glGetQueryBufferObjecti64v_ptr(id, buffer, pname, offset);
+}
+
+void glGetQueryBufferObjectiv(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) {
+  typedef void (APIENTRY * GL_GetQueryBufferObjectiv_Func)(GLuint, GLuint, GLenum, GLintptr);
+  static GL_GetQueryBufferObjectiv_Func glGetQueryBufferObjectiv_ptr = NULL;
+
+  if (glGetQueryBufferObjectiv_ptr == NULL) {
+    glGetQueryBufferObjectiv_ptr = (GL_GetQueryBufferObjectiv_Func)SDL_GL_GetProcAddress(__func__);
+  }
+
+  glGetQueryBufferObjectiv_ptr(id, buffer, pname, offset);
+}
+
+void glGetQueryBufferObjectui64v(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) {
+  typedef void (APIENTRY * GL_GetQueryBufferObjectui64v_Func)(GLuint, GLuint, GLenum, GLintptr);
+  static GL_GetQueryBufferObjectui64v_Func glGetQueryBufferObjectui64v_ptr = NULL;
+
+  if (glGetQueryBufferObjectui64v_ptr == NULL) {
+    glGetQueryBufferObjectui64v_ptr = (GL_GetQueryBufferObjectui64v_Func)SDL_GL_GetProcAddress(__func__);
+  }
+
+  glGetQueryBufferObjectui64v_ptr(id, buffer, pname, offset);
+}
+
+void glGetQueryBufferObjectuiv(GLuint id, GLuint buffer, GLenum pname, GLintptr offset) {
+  typedef void (APIENTRY * GL_GetQueryBufferObjectuiv_Func)(GLuint, GLuint, GLenum, GLintptr);
+  static GL_GetQueryBufferObjectuiv_Func glGetQueryBufferObjectuiv_ptr = NULL;
+
+  if (glGetQueryBufferObjectuiv_ptr == NULL) {
+    glGetQueryBufferObjectuiv_ptr = (GL_GetQueryBufferObjectuiv_Func)SDL_GL_GetProcAddress(__func__);
+  }
+
+  glGetQueryBufferObjectuiv_ptr(id, buffer, pname, offset);
+}
+
 void glGetQueryIndexediv(GLenum target, GLuint index, GLenum pname, GLint * params) {
   typedef void (APIENTRY * GL_GetQueryIndexediv_Func)(GLenum, GLuint, GLenum, GLint *);
   static GL_GetQueryIndexediv_Func glGetQueryIndexediv_ptr = NULL;

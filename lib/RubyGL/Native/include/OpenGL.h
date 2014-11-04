@@ -314,7 +314,9 @@ typedef GLintptr GLvdpauSurfaceNV;
 #define GL_COPY 0x1503
 #define GL_COPY_INVERTED 0x150C
 #define GL_COPY_READ_BUFFER 0x8F36
+#define GL_COPY_READ_BUFFER_BINDING 0x8F36
 #define GL_COPY_WRITE_BUFFER 0x8F37
+#define GL_COPY_WRITE_BUFFER_BINDING 0x8F37
 #define GL_CULL_FACE 0x0B44
 #define GL_CULL_FACE_MODE 0x0B45
 #define GL_CURRENT_PROGRAM 0x8B8D
@@ -1293,6 +1295,7 @@ typedef GLintptr GLvdpauSurfaceNV;
 #define GL_TOP_LEVEL_ARRAY_SIZE 0x930C
 #define GL_TOP_LEVEL_ARRAY_STRIDE 0x930D
 #define GL_TRANSFORM_FEEDBACK 0x8E22
+#define GL_TRANSFORM_FEEDBACK_ACTIVE 0x8E24
 #define GL_TRANSFORM_FEEDBACK_BARRIER_BIT 0x00000800
 #define GL_TRANSFORM_FEEDBACK_BINDING 0x8E25
 #define GL_TRANSFORM_FEEDBACK_BUFFER 0x8C8E
@@ -1304,6 +1307,7 @@ typedef GLintptr GLvdpauSurfaceNV;
 #define GL_TRANSFORM_FEEDBACK_BUFFER_SIZE 0x8C85
 #define GL_TRANSFORM_FEEDBACK_BUFFER_START 0x8C84
 #define GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE 0x934C
+#define GL_TRANSFORM_FEEDBACK_PAUSED 0x8E23
 #define GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN 0x8C88
 #define GL_TRANSFORM_FEEDBACK_VARYING 0x92F4
 #define GL_TRANSFORM_FEEDBACK_VARYINGS 0x8C83
@@ -1707,6 +1711,10 @@ void glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint in
 void glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum * props, GLsizei bufSize, GLsizei * length, GLint * params);
 void glGetProgramStageiv(GLuint program, GLenum shadertype, GLenum pname, GLint * values);
 void glGetProgramiv(GLuint program, GLenum pname, GLint * params);
+void glGetQueryBufferObjecti64v(GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+void glGetQueryBufferObjectiv(GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+void glGetQueryBufferObjectui64v(GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+void glGetQueryBufferObjectuiv(GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
 void glGetQueryIndexediv(GLenum target, GLuint index, GLenum pname, GLint * params);
 void glGetQueryObjecti64v(GLuint id, GLenum pname, GLint64 * params);
 void glGetQueryObjectiv(GLuint id, GLenum pname, GLint * params);

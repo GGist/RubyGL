@@ -2,9 +2,9 @@ require 'rake/task'
 require 'rake/testtask'
 require 'tmpdir'
 
-SDL_INCLUDE = 'C:\Users\GG\Desktop\SDL2-2.0.3\include'
-SDL_LIB = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\lib'
-SDL_BIN = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\bin'
+SDL_INCLUDE = 'C:\Users\millera9\Desktop\Dev\SDL2-2.0.3\i686-w64-mingw32\include\SDL2'
+SDL_LIB = 'C:\Users\millera9\Desktop\Dev\SDL2-2.0.3\i686-w64-mingw32\lib'
+SDL_BIN = 'C:\Users\millera9\Desktop\Dev\SDL2-2.0.3\i686-w64-mingw32\bin'
 
 MINGW_LIB = ''
 
@@ -55,7 +55,7 @@ task :clean do
     FileUtils.rm Dir.glob(PROJ_SRC + '/*.o')
 end
 
-task :opengl do
+task :bindings do
     shared_lib = "RubyGL.so"
 
     Dir.mktmpdir { |dir|

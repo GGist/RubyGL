@@ -36,7 +36,7 @@ FFI_TYPES = { 'char' => 'char', 'signed char' => 'char',
 'unsigned long int' => 'ulong', 'int64_t' => 'int64', 'uint64_t' => 'uint64', 
 'long long int' => 'long_long', 'unsigned long long int' => 'ulong_long', 
 'float' => 'float', 'double' => 'double' }
-FFI_PTR_TYPES = { /const +(?:unsigned)? +char *\*/ => 'string', /\*/ => 'pointer' }
+FFI_PTR_TYPES = { /\Aconst +(?:unsigned +)?char *\*\Z/ => 'string', /\*/ => 'pointer' }
 
 # Open Pre-Processor(ed) Source File
 source_code = ''
@@ -75,7 +75,7 @@ source_code.scan(/^#define GL_.+?$/i).each { |macro|
 }
 
 # Pull Out OpenGL Function Names From Header
-gl_functions = source_code.scan(/^.+gl.+\(.+\);$/)
+gl_functions = source_code.scan(/^.+?gl.+?\(.*?\);$/)
 
 ffi_template = "require 'ffi'
 
@@ -93,7 +93,9 @@ gl_functions.each { |signature|
         signature[/(gl.*?)\(.*?\);/, 1] + ', ['
 
     # Get Type List
-    param_type_list = signature[/\((.*?);/, 1].split(/ *\w+[,\)] */)
+    param_type_list = signature[/\((.*?)\);/, 1].split(', ').map { |full_param|
+        full_param[/(.+) [[:alnum:]]+/, 1]
+    }
     
     # Type Definition -> Primitive (Actual) Type
     param_type_list.map! { |param_type|

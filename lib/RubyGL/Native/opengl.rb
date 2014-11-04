@@ -8,14 +8,14 @@ module RubyGL::Native
     attach_function :glBeginQuery, [:uint, :uint], :void
     attach_function :glBeginQueryIndexed, [:uint, :uint, :uint], :void
     attach_function :glBeginTransformFeedback, [:uint], :void
-    attach_function :glBindAttribLocation, [:uint, :uint, :pointer], :void
+    attach_function :glBindAttribLocation, [:uint, :uint, :string], :void
     attach_function :glBindBuffer, [:uint, :uint], :void
     attach_function :glBindBufferBase, [:uint, :uint, :uint], :void
     attach_function :glBindBufferRange, [:uint, :uint, :uint, :int, :int], :void
     attach_function :glBindBuffersBase, [:uint, :uint, :int, :pointer], :void
     attach_function :glBindBuffersRange, [:uint, :uint, :int, :pointer, :pointer, :pointer], :void
-    attach_function :glBindFragDataLocation, [:uint, :uint, :pointer], :void
-    attach_function :glBindFragDataLocationIndexed, [:uint, :uint, :uint, :pointer], :void
+    attach_function :glBindFragDataLocation, [:uint, :uint, :string], :void
+    attach_function :glBindFragDataLocationIndexed, [:uint, :uint, :uint, :string], :void
     attach_function :glBindFramebuffer, [:uint, :uint], :void
     attach_function :glBindImageTexture, [:uint, :uint, :int, :uchar, :int, :uint, :uint], :void
     attach_function :glBindImageTextures, [:uint, :int, :pointer], :void
@@ -97,6 +97,7 @@ module RubyGL::Native
     attach_function :glCopyTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :int], :void
     attach_function :glCreateBuffers, [:int, :pointer], :void
     attach_function :glCreateFramebuffers, [:int, :pointer], :void
+    attach_function :glCreateProgram, [], :uint
     attach_function :glCreateProgramPipelines, [:int, :pointer], :void
     attach_function :glCreateQueries, [:uint, :int, :pointer], :void
     attach_function :glCreateRenderbuffers, [:int, :pointer], :void
@@ -109,7 +110,7 @@ module RubyGL::Native
     attach_function :glCullFace, [:uint], :void
     attach_function :glDebugMessageCallback, [:pointer, :pointer], :void
     attach_function :glDebugMessageControl, [:uint, :uint, :uint, :int, :pointer, :uchar], :void
-    attach_function :glDebugMessageInsert, [:uint, :uint, :uint, :uint, :int, :pointer], :void
+    attach_function :glDebugMessageInsert, [:uint, :uint, :uint, :uint, :int, :string], :void
     attach_function :glDeleteBuffers, [:int, :pointer], :void
     attach_function :glDeleteFramebuffers, [:int, :pointer], :void
     attach_function :glDeleteProgram, [:uint], :void
@@ -158,9 +159,13 @@ module RubyGL::Native
     attach_function :glEnableVertexArrayAttrib, [:uint, :uint], :void
     attach_function :glEnableVertexAttribArray, [:uint], :void
     attach_function :glEnablei, [:uint, :uint], :void
+    attach_function :glEndConditionalRender, [], :void
     attach_function :glEndQuery, [:uint], :void
     attach_function :glEndQueryIndexed, [:uint, :uint], :void
+    attach_function :glEndTransformFeedback, [], :void
     attach_function :glFenceSync, [:uint, :uint], :pointer
+    attach_function :glFinish, [], :void
+    attach_function :glFlush, [], :void
     attach_function :glFlushMappedBufferRange, [:uint, :int, :int], :void
     attach_function :glFlushMappedNamedBufferRange, [:uint, :int, :int], :void
     attach_function :glFramebufferParameteri, [:uint, :uint, :int], :void
@@ -193,7 +198,7 @@ module RubyGL::Native
     attach_function :glGetActiveUniformName, [:uint, :uint, :int, :pointer, :pointer], :void
     attach_function :glGetActiveUniformsiv, [:uint, :int, :pointer, :uint, :pointer], :void
     attach_function :glGetAttachedShaders, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetAttribLocation, [:uint, :pointer], :int
+    attach_function :glGetAttribLocation, [:uint, :string], :int
     attach_function :glGetBooleani_v, [:uint, :uint, :pointer], :void
     attach_function :glGetBooleanv, [:uint, :pointer], :void
     attach_function :glGetBufferParameteri64v, [:uint, :uint, :pointer], :void
@@ -206,12 +211,14 @@ module RubyGL::Native
     attach_function :glGetDebugMessageLog, [:uint, :int, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer], :uint
     attach_function :glGetDoublei_v, [:uint, :uint, :pointer], :void
     attach_function :glGetDoublev, [:uint, :pointer], :void
+    attach_function :glGetError, [], :uint
     attach_function :glGetFloati_v, [:uint, :uint, :pointer], :void
     attach_function :glGetFloatv, [:uint, :pointer], :void
-    attach_function :glGetFragDataIndex, [:uint, :pointer], :int
-    attach_function :glGetFragDataLocation, [:uint, :pointer], :int
+    attach_function :glGetFragDataIndex, [:uint, :string], :int
+    attach_function :glGetFragDataLocation, [:uint, :string], :int
     attach_function :glGetFramebufferAttachmentParameteriv, [:uint, :uint, :uint, :pointer], :void
     attach_function :glGetFramebufferParameteriv, [:uint, :uint, :pointer], :void
+    attach_function :glGetGraphicsResetStatus, [], :uint
     attach_function :glGetInteger64i_v, [:uint, :uint, :pointer], :void
     attach_function :glGetInteger64v, [:uint, :pointer], :void
     attach_function :glGetIntegeri_v, [:uint, :uint, :pointer], :void
@@ -234,13 +241,17 @@ module RubyGL::Native
     attach_function :glGetProgramInterfaceiv, [:uint, :uint, :uint, :pointer], :void
     attach_function :glGetProgramPipelineInfoLog, [:uint, :int, :pointer, :pointer], :void
     attach_function :glGetProgramPipelineiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetProgramResourceIndex, [:uint, :uint, :pointer], :uint
-    attach_function :glGetProgramResourceLocation, [:uint, :uint, :pointer], :int
-    attach_function :glGetProgramResourceLocationIndex, [:uint, :uint, :pointer], :int
+    attach_function :glGetProgramResourceIndex, [:uint, :uint, :string], :uint
+    attach_function :glGetProgramResourceLocation, [:uint, :uint, :string], :int
+    attach_function :glGetProgramResourceLocationIndex, [:uint, :uint, :string], :int
     attach_function :glGetProgramResourceName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
     attach_function :glGetProgramResourceiv, [:uint, :uint, :uint, :int, :pointer, :int, :pointer, :pointer], :void
     attach_function :glGetProgramStageiv, [:uint, :uint, :uint, :pointer], :void
     attach_function :glGetProgramiv, [:uint, :uint, :pointer], :void
+    attach_function :glGetQueryBufferObjecti64v, [:uint, :uint, :uint, :int], :void
+    attach_function :glGetQueryBufferObjectiv, [:uint, :uint, :uint, :int], :void
+    attach_function :glGetQueryBufferObjectui64v, [:uint, :uint, :uint, :int], :void
+    attach_function :glGetQueryBufferObjectuiv, [:uint, :uint, :uint, :int], :void
     attach_function :glGetQueryIndexediv, [:uint, :uint, :uint, :pointer], :void
     attach_function :glGetQueryObjecti64v, [:uint, :uint, :pointer], :void
     attach_function :glGetQueryObjectiv, [:uint, :uint, :pointer], :void
@@ -258,8 +269,8 @@ module RubyGL::Native
     attach_function :glGetShaderiv, [:uint, :uint, :pointer], :void
     attach_function :glGetString, [:uint], :string
     attach_function :glGetStringi, [:uint, :uint], :string
-    attach_function :glGetSubroutineIndex, [:uint, :uint, :pointer], :uint
-    attach_function :glGetSubroutineUniformLocation, [:uint, :uint, :pointer], :int
+    attach_function :glGetSubroutineIndex, [:uint, :uint, :string], :uint
+    attach_function :glGetSubroutineUniformLocation, [:uint, :uint, :string], :int
     attach_function :glGetSynciv, [:pointer, :uint, :int, :pointer, :pointer], :void
     attach_function :glGetTexImage, [:uint, :int, :uint, :uint, :pointer], :void
     attach_function :glGetTexLevelParameterfv, [:uint, :int, :uint, :pointer], :void
@@ -280,9 +291,9 @@ module RubyGL::Native
     attach_function :glGetTransformFeedbacki64_v, [:uint, :uint, :uint, :pointer], :void
     attach_function :glGetTransformFeedbacki_v, [:uint, :uint, :uint, :pointer], :void
     attach_function :glGetTransformFeedbackiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetUniformBlockIndex, [:uint, :pointer], :uint
+    attach_function :glGetUniformBlockIndex, [:uint, :string], :uint
     attach_function :glGetUniformIndices, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetUniformLocation, [:uint, :pointer], :int
+    attach_function :glGetUniformLocation, [:uint, :string], :int
     attach_function :glGetUniformSubroutineuiv, [:uint, :int, :pointer], :void
     attach_function :glGetUniformdv, [:uint, :int, :pointer], :void
     attach_function :glGetUniformfv, [:uint, :int, :pointer], :void
@@ -376,10 +387,11 @@ module RubyGL::Native
     attach_function :glNamedRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
     attach_function :glNormalP3ui, [:uint, :uint], :void
     attach_function :glNormalP3uiv, [:uint, :pointer], :void
-    attach_function :glObjectLabel, [:uint, :uint, :int, :pointer], :void
-    attach_function :glObjectPtrLabel, [:pointer, :int, :pointer], :void
+    attach_function :glObjectLabel, [:uint, :uint, :int, :string], :void
+    attach_function :glObjectPtrLabel, [:pointer, :int, :string], :void
     attach_function :glPatchParameterfv, [:uint, :pointer], :void
     attach_function :glPatchParameteri, [:uint, :int], :void
+    attach_function :glPauseTransformFeedback, [], :void
     attach_function :glPixelStoref, [:uint, :float], :void
     attach_function :glPixelStorei, [:uint, :int], :void
     attach_function :glPointParameterf, [:uint, :float], :void
@@ -389,6 +401,7 @@ module RubyGL::Native
     attach_function :glPointSize, [:float], :void
     attach_function :glPolygonMode, [:uint, :uint], :void
     attach_function :glPolygonOffset, [:float, :float], :void
+    attach_function :glPopDebugGroup, [], :void
     attach_function :glPrimitiveRestartIndex, [:uint], :void
     attach_function :glProgramBinary, [:uint, :uint, :pointer, :int], :void
     attach_function :glProgramParameteri, [:uint, :uint, :int], :void
@@ -443,13 +456,15 @@ module RubyGL::Native
     attach_function :glProgramUniformMatrix4x3dv, [:uint, :int, :int, :uchar, :pointer], :void
     attach_function :glProgramUniformMatrix4x3fv, [:uint, :int, :int, :uchar, :pointer], :void
     attach_function :glProvokingVertex, [:uint], :void
-    attach_function :glPushDebugGroup, [:uint, :uint, :int, :pointer], :void
+    attach_function :glPushDebugGroup, [:uint, :uint, :int, :string], :void
     attach_function :glQueryCounter, [:uint, :uint], :void
     attach_function :glReadBuffer, [:uint], :void
     attach_function :glReadPixels, [:int, :int, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glReadnPixels, [:int, :int, :int, :int, :uint, :uint, :int, :pointer], :void
+    attach_function :glReleaseShaderCompiler, [], :void
     attach_function :glRenderbufferStorage, [:uint, :uint, :int, :int], :void
     attach_function :glRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
+    attach_function :glResumeTransformFeedback, [], :void
     attach_function :glSampleCoverage, [:float, :uchar], :void
     attach_function :glSampleMaski, [:uint, :uint], :void
     attach_function :glSamplerParameterIiv, [:uint, :uint, :pointer], :void
@@ -502,6 +517,7 @@ module RubyGL::Native
     attach_function :glTexSubImage1D, [:uint, :int, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    attach_function :glTextureBarrier, [], :void
     attach_function :glTextureBuffer, [:uint, :uint, :uint], :void
     attach_function :glTextureBufferRange, [:uint, :uint, :uint, :int, :int], :void
     attach_function :glTextureParameterIiv, [:uint, :uint, :pointer], :void
@@ -864,7 +880,9 @@ module RubyGL::Native
     GL_COPY = 0x1503
     GL_COPY_INVERTED = 0x150C
     GL_COPY_READ_BUFFER = 0x8F36
+    GL_COPY_READ_BUFFER_BINDING = 0x8F36
     GL_COPY_WRITE_BUFFER = 0x8F37
+    GL_COPY_WRITE_BUFFER_BINDING = 0x8F37
     GL_CULL_FACE = 0x0B44
     GL_CULL_FACE_MODE = 0x0B45
     GL_CURRENT_PROGRAM = 0x8B8D
@@ -1843,6 +1861,7 @@ module RubyGL::Native
     GL_TOP_LEVEL_ARRAY_SIZE = 0x930C
     GL_TOP_LEVEL_ARRAY_STRIDE = 0x930D
     GL_TRANSFORM_FEEDBACK = 0x8E22
+    GL_TRANSFORM_FEEDBACK_ACTIVE = 0x8E24
     GL_TRANSFORM_FEEDBACK_BARRIER_BIT = 0x00000800
     GL_TRANSFORM_FEEDBACK_BINDING = 0x8E25
     GL_TRANSFORM_FEEDBACK_BUFFER = 0x8C8E
@@ -1854,6 +1873,7 @@ module RubyGL::Native
     GL_TRANSFORM_FEEDBACK_BUFFER_SIZE = 0x8C85
     GL_TRANSFORM_FEEDBACK_BUFFER_START = 0x8C84
     GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE = 0x934C
+    GL_TRANSFORM_FEEDBACK_PAUSED = 0x8E23
     GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = 0x8C88
     GL_TRANSFORM_FEEDBACK_VARYING = 0x92F4
     GL_TRANSFORM_FEEDBACK_VARYINGS = 0x8C83
