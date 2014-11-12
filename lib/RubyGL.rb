@@ -23,18 +23,20 @@ end
 
 # Initialize All Modules
 module RubyGL
-
-end
-
-module RubyGL::Native
-    extend FFI::Library
-    ffi_lib "../ext/#{os.to_s}/SDL2.dll"
-    ffi_lib "../ext/#{os.to_s}/RubyGL.so"
-    
+    module Native
+        extend FFI::Library
+        ffi_lib "../ext/#{os.to_s}/SDL2.dll"
+        ffi_lib "../ext/#{os.to_s}/RubyGL.so"
+    end
 end
 
 # Load Module Code
-require './RubyGL/Native/window'
-require './RubyGL/Native/glcontext'
-require './RubyGL/Native/input'
-require './RubyGL/Native/opengl'
+require_relative './RubyGL/shader'
+require_relative './RubyGL/gpu_buffer'
+require_relative './RubyGL/geometry'
+require_relative './RubyGL/math'
+
+require_relative './RubyGL/Native/window'
+require_relative './RubyGL/Native/glcontext'
+require_relative './RubyGL/Native/input'
+require_relative './RubyGL/Native/opengl'
