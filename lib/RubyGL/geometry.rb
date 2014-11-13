@@ -1,4 +1,5 @@
 require_relative './math'
+require_relative './util'
 
 module RubyGL
 
@@ -53,12 +54,12 @@ module RubyGL
         # girdle_facets should be an even number
         def self.gen_diamond(diamond_height, girdle_radius, girdle_facets)
             # Table Y Value Is Equal To diamond_height
-            girdle_y_value = diamond_height * 2.0 / 3.0 # Girdle Upper Ring
+            girdle_y_value = diamond_height * 2.5 / 3.0 # Girdle Upper Ring
             crown_y_midpoint = (diamond_height - girdle_y_value) * 2.0 / 3.0
             
             girdle_thickness = diamond_height / 10.0
             
-            table_radius = girdle_radius / 2.0
+            table_radius = girdle_radius / 1.8
             table_facets = girdle_facets / 2.0
             
             girdle_points = []
@@ -66,7 +67,7 @@ module RubyGL
             # Generate x And z Values For Diamond Girdle
             for i in 0...girdle_facets
                 curr_degree = i.to_f * girdle_point_factor
-                curr_rad = MathHelper::deg_to_rad(curr_degree)
+                curr_rad = Conversion::deg_to_rad(curr_degree)
                 
                 x = Math::cos(curr_rad) * girdle_radius
                 z = Math::sin(curr_rad) * girdle_radius
@@ -79,7 +80,7 @@ module RubyGL
             # Generate x And z Values For Diamond Table
             for i in 0...table_facets
                 curr_degree = i.to_f * table_point_factor
-                curr_rad = MathHelper::deg_to_rad(curr_degree)
+                curr_rad = Conversion::deg_to_rad(curr_degree)
                 
                 x = Math::cos(curr_rad) * table_radius
                 z = Math::sin(curr_rad) * table_radius
@@ -96,10 +97,10 @@ module RubyGL
                 
                 gird_center = girdle_points[center_girdle_index]
                 gird_left = girdle_points[left_girdle_index]
-                gird_right = overflow_wrap(girdle_points, right_girdle_index)
+                gird_right = Util.overflow_wrap(girdle_points, right_girdle_index)
                 
                 tab_left = table_points[left_girdle_index / 2]
-                tab_right = overflow_wrap(table_points, right_girdle_index / 2)
+                tab_right = Util.overflow_wrap(table_points, right_girdle_index / 2)
                 
                 # Crown Triangles
                 # Using 3D Equation Of A Line To Get Central Connection Point For Crown
@@ -140,12 +141,6 @@ module RubyGL
             vertex_array.flatten!
             
             vertex_array
-        end
-        
-        private
-        # Wraps Around Array Overflow; Will Not Work For Underflow.
-        def self.overflow_wrap(array, index)
-            array[index % array.size]
         end
     end
     

@@ -4,9 +4,10 @@ module RubyGL
 
     class Shader
         public
-        
-        
         def initialize(vert_src, frag_src)
+            @v_shader_src = vert_src
+            @f_shader_src = frag_src
+            
             @v_shader_id = Native.glCreateShader(Native::GL_VERTEX_SHADER)
             @f_shader_id = Native.glCreateShader(Native::GL_FRAGMENT_SHADER)
             
@@ -28,6 +29,7 @@ module RubyGL
             Native.glCompileShader(@v_shader_id)
             Native.glCompileShader(@f_shader_id)
             
+            # Throw Exception With Compile Error If Compilation Failed
             Shader.compile_status(@v_shader_id)
             Shader.compile_status(@f_shader_id)
             
@@ -41,8 +43,16 @@ module RubyGL
             Shader.link_status(@program_id)
         end
         
-        def use_shader()
+        def use_program()
             Native.glUseProgram(@program_id)
+        end
+        
+        def vertex_source()
+            @v_shader_src
+        end
+        
+        def fragment_source()
+            @f_shader_src
         end
         
         def attrib_location(var_name)
@@ -50,7 +60,7 @@ module RubyGL
         end
         
         def uniform_location(var_name)
-            Native.glGetAttribLocation(@program_id, var_name)
+            Native.glGetUniformLocation(@program_id, var_name)
         end
         
         private
@@ -83,7 +93,91 @@ module RubyGL
                 raise link_log.read_string_to_null()
             end
         end
+    end
+    
+    class ShaderGenerator
+        def self.faceted_shader()
+            Shader.new('''
+                #version 130
+                in vec3 position;
+                out vec3 vPosition;
+                uniform mat4 modelView;
+                uniform mat4 persp;
+                
+                void main() {
+                    vec4 hPosition = modelView * vec4(position, 1);
+                    vPosition = hPosition.xyz;
+                    gl_Position = persp * hPosition;
+                }
+            ''','''
+                #version 130
+                in vec3 vPosition;
+                out vec4 fColor;
+                uniform vec4 color;
+                uniform vec3 vLight = vec3(-1, -0.5, -1);
+                
+                void main() {
+                    vec3 dx = dFdy(vPosition);
+                    vec3 dy = dFdx(vPosition);
+                    vec3 triangle_norm = normalize(cross(dx, dy));
+                    float factor = clamp(dot(triangle_norm, vLight), 0, 1);
+                    
+                    fColor = vec4(color.xyz * factor, color.w);
+                }
+            ''')
+        end
         
+        def self.color_shader()
+            Shader.new('''
+                #version 130
+                in vec3 position;
+                uniform mat4 modelView;
+                uniform mat4 persp;
+                
+                void main() {
+                    gl_Position = persp * modelView * vec4(position, 1);
+                }
+            ''','''
+                #version 130
+                out vec4 fColor;
+                uniform vec4 color;
+                
+                void main() {
+                    fColor = color;
+                }
+            ''')
+        end
+        
+        def self.phong_shader()
+            Shader.new('''
+                #version 130
+                in vec3 position;
+                out vec3 vPosition;
+                uniform mat4 modelView;
+                uniform mat4 persp;
+                
+                void main() {
+                    vec4 hPosition = modelView * vec4(position, 1);
+                    vPosition = hPosition;
+                    gl_Position = persp * hPosition;
+                }
+            ''','''
+                #version 130
+                in vec3 vPosition;
+                out vec4 fColor;
+                uniform vec4 color;
+                uniform vec3 vLight = vec3(-1, -0.5, -1);
+                
+                void main() {
+                    vec3 dx = dFdy(vPosition);
+                    vec3 dy = dFdx(vPosition);
+                    vec3 triangle_norm = normalize(cross(dx, dy));
+                    float factor = clamp(dot(triangle_norm, vLight), 0, 1);
+                    
+                    fColor = vec4(color.xyz * factor, color.w);
+                }
+            ''')
+        end
     end
 
 end

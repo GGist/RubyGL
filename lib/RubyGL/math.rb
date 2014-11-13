@@ -1,6 +1,19 @@
 
 module RubyGL
 
+    class Conversion
+        @@PI_DIV = Math::PI / 180.0
+        @@DIV_PI = 180.0 / Math::PI
+        
+        def self.deg_to_rad(degrees)
+            degrees * @@PI_DIV
+        end
+        
+        def self.rad_to_deg(radians)
+            radians * @@DIV_PI
+        end
+    end
+
     class Vector
         def initialize(size = 4)
             @vector = Array.new(size, 0.0)
@@ -44,63 +57,61 @@ module RubyGL
         def self.translation(x, y, z)
             matrix = Matrix.new(1.0, 4)
             
-            matrix[0][3] = x
-            matrix[1][3] = y
-            matrix[2][3] = z
+            matrix[3][0] = x
+            matrix[3][1] = y
+            matrix[3][2] = z
             
             matrix
         end
         
+        # The axis value should be 0 if that axis should not be rotated around;
+        # any other value indicates its priority (higher priority axis is rotated
+        # around before the lower priority axis).
         def self.rotation(x_axis, y_axis, z_axis, theta)
-            rad_angle = MathHelper::deg_to_rad(theta)
+            rad_angle = Conversion::deg_to_rad(theta)
             sin_angle = Math::sin(rad_angle)
             cos_angle = Math::cos(rad_angle)
             
+            # Multiply Lower -> Higher To Get Ordering Correct
+            axis_priority = [[:x, x_axis], [:y, y_axis], [:z, z_axis]]
+            axis_priority.delete_if { |(_, val)| 
+                val == 0 
+            }.sort!.reverse!
+            
             rot_matrix = Matrix.new(1.0, 4)
+            axis_priority.each { |(axis, _)|
+                mat = Matrix.new(1.0, 4)
             
-            if x_axis then
-                x_mat = Matrix.new(1.0, 4)
+                if axis == :x then
+                    mat[1][1] = mat[2][2] = cos_angle
+                    mat[1][2] = sin_angle
+                    mat[2][1] = -sin_angle
+                elsif axis == :y then
+                    mat[0][0] = mat[2][2] = cos_angle
+                    mat[0][2] = -sin_angle
+                    mat[2][0] = sin_angle
+                else
+                    mat[0][0] = mat[1][1] = cos_angle
+                    mat[0][1] = sin_angle
+                    mat[1][0] = -sin_angle
+                end
                 
-                x_mat[2][2] = x_mat[1][1] = cos_angle
-                x_mat[2][1] = sin_angle
-                x_mat[1][2] = -x_mat[2][1]
-                
-                rot_matrix *= x_mat
-            end
-            
-            if y_axis then
-                y_mat = Matrix.new(1.0, 4)
-                
-                y_mat[2][2] = y_mat[0][0] = cos_angle
-                y_mat[0][2] = sin_angle
-                y_mat[2][0] = -y_mat[0][2]
-                
-                rot_matrix *= y_mat
-            end
-            
-            if z_axis then
-                z_mat = Matrix.new(1.0, 4)
-                
-                z_mat[0][0] = z_mat[1][1] = cos_angle
-                z_mat[1][0] = sin_angle
-                z_mat[0][1] = -z_mat[1][0]
-                
-                rot_matrix *= z_mat
-            end
+                rot_matrix *= mat
+            }
             
             rot_matrix
         end
         
         def self.perspective(fov, aspect, z_near, z_far)
-            top = Math::tan(MathHelper::deg_to_rad(fov) / 2) * z_near
+            top = Math::tan(Conversion::deg_to_rad(fov) / 2) * z_near
             right = top * aspect
             
             mat = Matrix.new(1.0, 4)
             mat[0][0] = z_near / right
             mat[1][1] = z_near / top
             mat[2][2] = -(z_far + z_near) / (z_far - z_near)
-            mat[2][3] = -2.0 * z_far * z_near / (z_far - z_near)
-            mat[3][2] = -1.0
+            mat[3][2] = -2.0 * z_far * z_near / (z_far - z_near)
+            mat[2][3] = -1.0
             
             mat
         end
@@ -111,9 +122,9 @@ module RubyGL
             mat[1][1] = 2.0 / (top - bottom)
             mat[2][2] = 2.0 / (z_near - z_far)
             mat[3][3] = 1.0
-            mat[0][3] = -(right + left) / (right - left)
-            mat[1][3] = -(top + bottom) / (top - bottom)
-            mat[2][3] = -(z_far + z_near) / (z_far - z_near)
+            mat[3][0] = -(right + left) / (right - left)
+            mat[3][1] = -(top + bottom) / (top - bottom)
+            mat[3][2] = -(z_far + z_near) / (z_far - z_near)
             
             mat
         end
@@ -139,7 +150,7 @@ module RubyGL
             for i in 0...self.dim
                 for j in 0...self.dim
                     for k in 0...self.dim
-                        new_matrix[i][j] += self[i][k] * other_matrix[k][j]
+                        new_matrix[j][i] += self[k][i] * other_matrix[j][k]
                     end
                 end
             end
@@ -155,19 +166,6 @@ module RubyGL
         
         def to_a
             self.to_ary
-        end
-    end
-
-    class MathHelper
-        @@PI_DIV = Math::PI / 180.0
-        @@DIV_PI = 180.0 / Math::PI
-        
-        def self.deg_to_rad(degrees)
-            degrees * @@PI_DIV
-        end
-        
-        def self.rad_to_deg(radians)
-            radians * @@DIV_PI
         end
     end
     

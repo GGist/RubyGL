@@ -31,10 +31,11 @@ module RubyGL
 end
 
 # Load Module Code
-require_relative './RubyGL/shader'
-require_relative './RubyGL/gpu_buffer'
 require_relative './RubyGL/geometry'
 require_relative './RubyGL/math'
+require_relative './RubyGL/memory'
+require_relative './RubyGL/shader'
+require_relative './RubyGL/util'
 
 require_relative './RubyGL/Native/window'
 require_relative './RubyGL/Native/glcontext'
