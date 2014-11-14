@@ -34,6 +34,7 @@ end
 require_relative './RubyGL/geometry'
 require_relative './RubyGL/math'
 require_relative './RubyGL/memory'
+require_relative './RubyGL/setup'
 require_relative './RubyGL/shader'
 require_relative './RubyGL/util'
 

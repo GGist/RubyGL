@@ -19,7 +19,31 @@ module RubyGL
             @vector = Array.new(size, 0.0)
         end
         
-        def dim
+        def norm()
+            new_vector = @vector.dup.norm!
+            
+            new_vector
+        end
+        
+        def norm!()
+            length = self.len
+            
+            for i in 0...@vector.size
+                @vector[i] /= length
+            end
+        end
+        
+        def len()
+            sum = 0
+            
+            for i in 0...@vector.size
+                sum += @vector[i] * @vector[i]
+            end
+            
+            Math::sqrt(sum)
+        end
+        
+        def dim()
             @vector.size
         end
         
@@ -31,11 +55,11 @@ module RubyGL
             @vector[index] = value
         end
         
-        def to_ary
+        def to_ary()
             Array.new(@vector)
         end
         
-        def to_a
+        def to_a()
             self.to_ary
         end
     end
@@ -129,7 +153,7 @@ module RubyGL
             mat
         end
         
-        def dim
+        def dim()
             @matrix.size
         end
         
@@ -158,13 +182,13 @@ module RubyGL
             new_matrix
         end
         
-        def to_ary
+        def to_ary()
             @matrix.collect { |vec|
                 vec.to_ary
             }.flatten!
         end
         
-        def to_a
+        def to_a()
             self.to_ary
         end
     end

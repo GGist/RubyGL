@@ -3,13 +3,11 @@ require_relative './Native/opengl'
 module RubyGL
 
     class Shader
-        public
+    
         def initialize(vert_src, frag_src)
-            @v_shader_src = vert_src
-            @f_shader_src = frag_src
-            
             @v_shader_id = Native.glCreateShader(Native::GL_VERTEX_SHADER)
             @f_shader_id = Native.glCreateShader(Native::GL_FRAGMENT_SHADER)
+            @attrib_locs, @uniform_locs = {}, {}
             
             # Pointer Used To Point To The String Of Our Source Code
             shader_src_ptr = FFI::MemoryPointer.new(:pointer)
@@ -47,23 +45,31 @@ module RubyGL
             Native.glUseProgram(@program_id)
         end
         
-        def vertex_source()
-            @v_shader_src
-        end
-        
-        def fragment_source()
-            @f_shader_src
-        end
-        
-        def attrib_location(var_name)
-            Native.glGetAttribLocation(@program_id, var_name)
+        # Splat Operator Will Gather All Parameters
+        # Using It In A Call Will Pull Out All Parameters
+        def send_uniform(method_sym, var_name, data = nil, *args)
+            loc = @uniform_locs[var_name] ||= uniform_location(var_name)
+            
+            if data != nil then
+                data_ptr = FFI::MemoryPointer.new(:float, data.size)
+                data_ptr.write_array_of_float(data)
+                
+                RubyGL::Native.send(method_sym, loc, *args, data_ptr)
+            else
+                RubyGL::Native.send(method_sym, loc, *args)
+            end
         end
         
         def uniform_location(var_name)
             Native.glGetUniformLocation(@program_id, var_name)
         end
         
+        def attrib_location(var_name)
+            Native.glGetAttribLocation(@program_id, var_name)
+        end
+
         private
+        
         def self.compile_status(shader_id)
             result = FFI::MemoryPointer.new(:int)
             Native.glGetShaderiv(shader_id, Native::GL_COMPILE_STATUS, result)
@@ -107,6 +113,7 @@ module RubyGL
                 void main() {
                     vec4 hPosition = modelView * vec4(position, 1);
                     vPosition = hPosition.xyz;
+                    
                     gl_Position = persp * hPosition;
                 }
             ''','''
@@ -114,7 +121,7 @@ module RubyGL
                 in vec3 vPosition;
                 out vec4 fColor;
                 uniform vec4 color;
-                uniform vec3 vLight = vec3(-1, -0.5, -1);
+                uniform vec3 vLight = vec3(-1, -0.5, -0.5);
                 
                 void main() {
                     vec3 dx = dFdy(vPosition);
@@ -152,29 +159,43 @@ module RubyGL
             Shader.new('''
                 #version 130
                 in vec3 position;
+                in vec3 normal;
                 out vec3 vPosition;
+                out vec3 vNormal;
                 uniform mat4 modelView;
                 uniform mat4 persp;
                 
                 void main() {
                     vec4 hPosition = modelView * vec4(position, 1);
-                    vPosition = hPosition;
+                    vPosition = hPosition.xyz;
+                    vNormal = (modelView * vec4(normal, 1)).xyz;
+                    
                     gl_Position = persp * hPosition;
                 }
             ''','''
                 #version 130
                 in vec3 vPosition;
+                in vec3 vNormal;
                 out vec4 fColor;
                 uniform vec4 color;
                 uniform vec3 vLight = vec3(-1, -0.5, -1);
                 
-                void main() {
-                    vec3 dx = dFdy(vPosition);
-                    vec3 dy = dFdx(vPosition);
-                    vec3 triangle_norm = normalize(cross(dx, dy));
-                    float factor = clamp(dot(triangle_norm, vLight), 0, 1);
+                float PhongIntensity(vec3 pos, vec3 norm) {
+                    vec3 N = normalize(norm);
+                    vec3 L = normalize(light - pos);
+                    vec3 E = nromalize(pos);
+                    vec3 R = reflect(L, N);
                     
-                    fColor = vec4(color.xyz * factor, color.w);
+                    float diffuse = abs(dot(N, L));
+                    float specular = abs(dot(R, E));
+                    
+                    return clamp(pow(specular, 10) + diffuse, 0, 1);
+                }
+                
+                void main() {
+                    float intensity = PhongIntensity(vPosition, vNormal);
+                    
+                    fColor = vec4(intensity * color.xyz, color.w);
                 }
             ''')
         end

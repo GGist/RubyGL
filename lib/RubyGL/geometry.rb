@@ -55,7 +55,7 @@ module RubyGL
         def self.gen_diamond(diamond_height, girdle_radius, girdle_facets)
             # Table Y Value Is Equal To diamond_height
             girdle_y_value = diamond_height * 2.5 / 3.0 # Girdle Upper Ring
-            crown_y_midpoint = (diamond_height - girdle_y_value) * 2.0 / 3.0
+            crown_y_midpoint = 2.0 / 3.0
             
             girdle_thickness = diamond_height / 10.0
             

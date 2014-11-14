@@ -1,69 +1,70 @@
 require './rubygl'
 
-# Setup Code
-RubyGL::Native.initWindow
-RubyGL::Native.initInput
-RubyGL::Native.loadLibrary(FFI::Pointer::NULL)
-
-RubyGL::Native.setAttribute(:context_major_version, 4)
-RubyGL::Native.setAttribute(:context_minor_version, 2)
-RubyGL::Native.setAttribute(:context_profile_mask, RubyGL::Native.CONTEXT_PROFILE_COMPATIBILITY)
-RubyGL::Native.setAttribute(:depth_size, 24)
-RubyGL::Native.setAttribute(:doublebuffer, 1)
-
-window = RubyGL::Native.createWindow("RubyGL Test Window", 50, 50, 500, 500, RubyGL::Native.OPENGL)
-context = RubyGL::Native.createContext(window)
-RubyGL::Native.makeCurrent(window, context)
-RubyGL::Native.setSwapInterval(0)
-
-# User Code
-persp_matrix = RubyGL::Matrix.perspective(90, 500.0 / 500.0, -0.001, -500)
-diamond_buff = RubyGL::VertexArray.new(RubyGL::ComplexShape.gen_diamond(0.5, 0.5, 14))
-color_shader = RubyGL::ShaderGenerator.faceted_shader()
-color_shader.use_program()
-
-pos_loc = color_shader.attrib_location("position")
-mv_mat_loc = color_shader.uniform_location("modelView")
-persp_mat_loc = color_shader.uniform_location("persp")
-color_loc = color_shader.uniform_location("color")
-
-t = FFI::MemoryPointer.new(:float, 16)
-t.write_array_of_float(persp_matrix.to_a)
-RubyGL::Native.glUniformMatrix4fv(persp_mat_loc, 1, 0, t)
-
-t = FFI::MemoryPointer.new(:float, 4)
-t.write_array_of_float([1.0, 0.0, 0.0, 1.0])
-RubyGL::Native.glUniform4fv(color_loc, 1, t)
-t = FFI::MemoryPointer.new(:float, 16)
-diamond_buff.bind()
-diamond_buff.vertex_attrib_ptr(pos_loc, 3)
-
-RubyGL::Native.glEnable(RubyGL::Native::GL_DEPTH_TEST)
+# Get A Default Setup, All OpenGL Calls Are Valid After A Setup Is Created
+config = RubyGL::Setup.new
 puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 
-counter = 0
-frames = 0
+# Generate Vertices For A Diamond And Push Them To GPU Memory
+diamond_data = RubyGL::ComplexShape.gen_diamond(0.5, 0.5, 14)
+diamond_buff = RubyGL::VertexArray.new(diamond_data)
+
+# Setup Our Perspective Matrix And Pre-Programmed Shader
+persp_mat = RubyGL::Matrix.perspective(90, 500.0 / 500.0, -0.001, -500)
+shader = RubyGL::ShaderGenerator.faceted_shader()
+shader.use_program()
+
+# Get The Locations Of Our Input "Attribute" Variables To The Shader
+position_loc = shader.attrib_location("position")
+mv_loc = shader.uniform_location("modelView")
+
+# Associate Our position Variable With Our Diamond GPU Buffer (3 Components Per Vertex)
+diamond_buff.bind() # Always Has To Be Bound Before Associating Attribute Pointers
+diamond_buff.vertex_attrib_ptr(position_loc, 3)
+
+# Powerful Shorthand For Specifying An OpenGL Uniform Function, Uniform Variable 
+# Name, Input Data, And Any Extra Parameters Required By The Given Function Symbol 
+shader.send_uniform(:glUniformMatrix4fv, "persp", persp_mat.to_a, 1, RubyGL::Native::GL_FALSE)
+shader.send_uniform(:glUniform4fv, "vLight", [1.0, 0.0, 0.0, 1.0], 1)
+shader.send_uniform(:glUniform4fv, "color", [1.0, 0.0, 0.0, 1.0], 1)
+
+# Standard Depth Test So That Z-Buffer Testing Is Used
+RubyGL::Native.glEnable(RubyGL::Native::GL_DEPTH_TEST)
+
+# Track The Frame Time And Get A Counter For Rotation
+frames, counter = 0, 0
 time = Time.now.strftime("%s").to_i
+
+# Main Program Loop
 loop {
     RubyGL::Native.glClearColor(1.0, 1.0, 1.0, 1.0)
     RubyGL::Native.glClear(RubyGL::Native::GL_COLOR_BUFFER_BIT | RubyGL::Native::GL_DEPTH_BUFFER_BIT)
 
-    rotation = RubyGL::Matrix.rotation(1.8, 0.0, 1.5, counter)
-    translation = RubyGL::Matrix.translation(0, 0, -0.5)
-    translation *= rotation
-    t.write_array_of_float(translation.to_a)
-    RubyGL::Native.glUniformMatrix4fv(mv_mat_loc, 1, 0, t)
+    # Matrix Operations Are Applied To The Object In Reverse Order They Were Multiplied
+    t1 = RubyGL::Matrix.translation(0.0, -0.25, -0.15) # Translate Fourth
+    r1 = RubyGL::Matrix.rotation(0.0, 1.0, 0.0, counter)
+    r2 = RubyGL::Matrix.rotation(0.0, 0.0, 1.0, 45)
+    r3 = RubyGL::Matrix.rotation(0.0, 1.0, 0.0, -counter)
+    t1 *= r1 # Spin Third
+    t1 *= r2 # Tilt (45 Degrees) Second
+    t1 *= r3 # Roll First
+    shader.send_uniform(:glUniformMatrix4fv, "modelView", t1.to_a, 1, RubyGL::Native::GL_FALSE)
     
     frames += 1
     counter += 0.05
     
+    # Draw Our Diamond (3 Components Per Vertex)
     diamond_buff.draw(3)
     
+    # Calculate Frame Time
     if (((Time.now.strftime("%s").to_i - time) * 1000.0).to_i > 1) then
         puts frames
         frames = 0
         time = Time.now.strftime("%s").to_i
     end
-    RubyGL::Native.swapWindow(window)
+    
+    # Any Updates That Our Default Setup Needs To Perform
+    config.update_window()
+    
+    # Run Any Input Callbacks That Have Been Triggered
     RubyGL::Native.pumpEvents()
 }

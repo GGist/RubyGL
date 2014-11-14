@@ -30,6 +30,7 @@ module RubyGL
         
         def vertex_attrib_ptr(location, components)
             Native.glEnableVertexAttribArray(location)
+            
             Native.glVertexAttribPointer(location, components, Native::GL_FLOAT, Native::GL_FALSE, 0, FFI::MemoryPointer::NULL)
         end
         
