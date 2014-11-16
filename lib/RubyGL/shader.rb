@@ -3,7 +3,6 @@ require_relative './Native/opengl'
 module RubyGL
 
     class Shader
-    
         def initialize(vert_src, frag_src)
             @v_shader_id = Native.glCreateShader(Native::GL_VERTEX_SHADER)
             @f_shader_id = Native.glCreateShader(Native::GL_FRAGMENT_SHADER)
@@ -45,8 +44,9 @@ module RubyGL
             Native.glUseProgram(@program_id)
         end
         
-        # Splat Operator Will Gather All Parameters
-        # Using It In A Call Will Pull Out All Parameters
+        # Splat Operator Aggregates Incoming Parameters And Expands Outgoing Parameters
+        # If method_sym Does Not Accept A Pointer To The Data, Pass nil For data And
+        # Pass In The Normal Parameters Required For The Specific Method.
         def send_uniform(method_sym, var_name, data = nil, *args)
             loc = @uniform_locs[var_name] ||= uniform_location(var_name)
             
@@ -60,15 +60,14 @@ module RubyGL
             end
         end
         
-        def uniform_location(var_name)
-            Native.glGetUniformLocation(@program_id, var_name)
-        end
-        
         def attrib_location(var_name)
             Native.glGetAttribLocation(@program_id, var_name)
         end
 
         private
+        def uniform_location(var_name)
+            Native.glGetUniformLocation(@program_id, var_name)
+        end
         
         def self.compile_status(shader_id)
             result = FFI::MemoryPointer.new(:int)

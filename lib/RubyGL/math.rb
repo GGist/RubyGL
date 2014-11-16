@@ -14,72 +14,175 @@ module RubyGL
         end
     end
 
-    class Vector
-        def initialize(size = 4)
-            @vector = Array.new(size, 0.0)
-        end
-        
-        def norm()
-            new_vector = @vector.dup.norm!
-            
-            new_vector
+    class Vec2
+        def initialize()
+            @data = Array.new(2, 0)
         end
         
         def norm!()
-            length = self.len
+            curr_len = self.len()
             
-            for i in 0...@vector.size
-                @vector[i] /= length
+            for i in 0...@data.size
+                @data /= curr_len
             end
+        end
+        
+        def norm()
+            new_vector = Vec2.new()
+            
+            for i in 0...@data.size
+                new_vector[i] = @data[i]
+            end
+            new_vector.norm!
+            
+            new_vector
         end
         
         def len()
             sum = 0
             
-            for i in 0...@vector.size
-                sum += @vector[i] * @vector[i]
+            for i in 0...@data.size
+                sum += @data[i] * @data[i]
             end
             
             Math::sqrt(sum)
         end
         
-        def dim()
-            @vector.size
-        end
-        
         def [](index)
-            @vector[index]
+            @data[index]
         end
         
         def []=(index, value)
-            @vector[index] = value
+            @data[index] = value
         end
         
         def to_ary()
-            Array.new(@vector)
+            Array.new(@data)
         end
         
         def to_a()
             self.to_ary
         end
     end
-
+    
+    class Vec3
+        def initialize()
+            @data = Array.new(3, 0)
+        end
+        
+        def norm!()
+            curr_len = self.len()
+            
+            for i in 0...@data.size
+                @data /= curr_len
+            end
+        end
+        
+        def norm()
+            new_vector = Vec2.new()
+            
+            for i in 0...@data.size
+                new_vector[i] = @data[i]
+            end
+            new_vector.norm!
+            
+            new_vector
+        end
+        
+        def len()
+            sum = 0
+            
+            for i in 0...@data.size
+                sum += @data[i] * @data[i]
+            end
+            
+            Math::sqrt(sum)
+        end
+        
+        def [](index)
+            @data[index]
+        end
+        
+        def []=(index, value)
+            @data[index] = value
+        end
+        
+        def to_ary()
+            Array.new(@data)
+        end
+        
+        def to_a()
+            self.to_ary
+        end
+    end
+    
+    class Vec4
+        def initialize()
+            @data = Array.new(4, 0)
+        end
+        
+        def norm!()
+            curr_len = self.len()
+            
+            for i in 0...@data.size
+                @data /= curr_len
+            end
+        end
+        
+        def norm()
+            new_vector = Vec2.new()
+            
+            for i in 0...@data.size
+                new_vector[i] = @data[i]
+            end
+            new_vector.norm!
+            
+            new_vector
+        end
+        
+        def len()
+            sum = 0
+            
+            for i in 0...@data.size
+                sum += @data[i] * @data[i]
+            end
+            
+            Math::sqrt(sum)
+        end
+        
+        def [](index)
+            @data[index]
+        end
+        
+        def []=(index, value)
+            @data[index] = value
+        end
+        
+        def to_ary()
+            Array.new(@data)
+        end
+        
+        def to_a()
+            self.to_ary
+        end
+    end
+    
     # Stored In Column Order For Interoperability With OpenGL. Subscript Operator
     # Will Return A Vector That Represents A Column Within The Matrix. This Matrix
     # Class Only Supports Matrices Where The Number Of Rows Equals The Number Of
     # Columns; Operations Are Constrained As Such.
-    class Matrix
-        def initialize(diag = 1.0, dim = 4)
-            @matrix = Array.new(dim) { |index|
-                column = Vector.new(dim)
-                column[index] = diag
+    class Mat4
+        def initialize(diagonal = 1.0)
+            @data = Array.new(4) { |index|
+                column = Vec4.new
+                column[index] = diagonal
                 
                 column
             }
         end
         
         def self.translation(x, y, z)
-            matrix = Matrix.new(1.0, 4)
+            matrix = Mat4.new(1.0)
             
             matrix[3][0] = x
             matrix[3][1] = y
@@ -102,9 +205,9 @@ module RubyGL
                 val == 0 
             }.sort!.reverse!
             
-            rot_matrix = Matrix.new(1.0, 4)
+            rot_matrix = Mat4.new(1.0)
             axis_priority.each { |(axis, _)|
-                mat = Matrix.new(1.0, 4)
+                mat = Mat4.new(1.0)
             
                 if axis == :x then
                     mat[1][1] = mat[2][2] = cos_angle
@@ -130,7 +233,7 @@ module RubyGL
             top = Math::tan(Conversion::deg_to_rad(fov) / 2) * z_near
             right = top * aspect
             
-            mat = Matrix.new(1.0, 4)
+            mat = Mat4.new(1.0)
             mat[0][0] = z_near / right
             mat[1][1] = z_near / top
             mat[2][2] = -(z_far + z_near) / (z_far - z_near)
@@ -141,7 +244,7 @@ module RubyGL
         end
         
         def self.orthogonal(left, right, bottom, top, z_near = -1.0, z_far = 1.0)
-            mat = Matrix.new(1.0, 4)
+            mat = Mat4.new(1.0)
             mat[0][0] = 2.0 / (right - left)
             mat[1][1] = 2.0 / (top - bottom)
             mat[2][2] = 2.0 / (z_near - z_far)
@@ -153,24 +256,9 @@ module RubyGL
             mat
         end
         
-        def dim()
-            @matrix.size
-        end
-        
-        def [](column)
-            @matrix[column]
-        end
-        
-        def []=(column, value)
-            @matrix[column] = value
-        end
-        
         def *(other_matrix)
-            if (self.dim != other_matrix.dim) then
-                raise "Cannot Multiply Matrices Together: Matrices Have Different Dimensions"
-            end
-        
-            new_matrix = Matrix.new(0, self.dim)
+            new_matrix = Mat4.new(0)
+            
             for i in 0...self.dim
                 for j in 0...self.dim
                     for k in 0...self.dim
@@ -182,8 +270,20 @@ module RubyGL
             new_matrix
         end
         
+        def dim()
+            @data.size()
+        end
+        
+        def [](index)
+            @data[index]
+        end
+        
+        def []=(index, value)
+            @data[index] = value
+        end
+        
         def to_ary()
-            @matrix.collect { |vec|
+            @data.collect { |vec|
                 vec.to_ary
             }.flatten!
         end

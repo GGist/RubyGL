@@ -31,14 +31,10 @@ module RubyGL
         def vertex_attrib_ptr(location, components)
             Native.glEnableVertexAttribArray(location)
             
-            Native.glVertexAttribPointer(location, components, Native::GL_FLOAT, Native::GL_FALSE, 0, FFI::MemoryPointer::NULL)
-        end
-        
-        def bind()
             Native.glBindBuffer(Native::GL_ARRAY_BUFFER, @buffer_id)
-        end
+            
+            Native.glVertexAttribPointer(location, components, Native::GL_FLOAT, Native::GL_FALSE, 0, FFI::MemoryPointer::NULL)
         
-        def unbind()
             Native.glBindBuffer(Native::GL_ARRAY_BUFFER, 0)
         end
     end
@@ -47,6 +43,10 @@ module RubyGL
         def initialize(index_array)
         
         end
+    end
+    
+    class MemPtrCache
+        
     end
 
 end

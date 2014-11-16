@@ -3,8 +3,7 @@ require_relative './Native/window'
 
 module RubyGL
 
-    class Setup
-    
+    class DefaultSetup
         def initialize(x = 50, y = 50, width = 500, height = 500)
             RubyGL::Native.initWindow
             RubyGL::Native.initInput
@@ -24,12 +23,23 @@ module RubyGL
             RubyGL::Native.setSwapInterval(0)
         end
         
-        def update_window()
-            RubyGL::Native.swapWindow(@window)
+        def show_dialog(title, message)
+            RubyGL::Native.showSimpleMessageBox(0, title, message, @window)
         end
         
-        def self.teardown()
+        def apply()
+            RubyGL::Native.swapWindow(@window)
+            
+            RubyGL::Native.pumpEvents()
+        end
         
+        def teardown()
+            RubyGL::Native.deleteContext(@context)
+            RubyGL::Native.destroyWindow(@window)
+        
+            RubyGL::Native.unloadLibrary()
+            RubyGL::Native.quitWindow()
+            RubyGL::Native.quitInput()
         end
     end
 

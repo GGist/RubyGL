@@ -1,24 +1,22 @@
 require './rubygl'
 
-# Get A Default Setup, All OpenGL Calls Are Valid After A Setup Is Created
-config = RubyGL::Setup.new
+# Default Setup (Window + OpenGL Context), OpenGL Calls Are Valid After This Is Created
+config = RubyGL::DefaultSetup.new
 puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 
 # Generate Vertices For A Diamond And Push Them To GPU Memory
-diamond_data = RubyGL::ComplexShape.gen_diamond(0.5, 0.5, 14)
-diamond_buff = RubyGL::VertexArray.new(diamond_data)
+diamond_vertices = RubyGL::ComplexShape.gen_diamond(0.5, 0.5, 14)
+diamond_buff = RubyGL::VertexArray.new(diamond_vertices)
 
-# Setup Our Perspective Matrix And Pre-Programmed Shader
-persp_mat = RubyGL::Matrix.perspective(90, 500.0 / 500.0, -0.001, -500)
+# Set Up Our Perspective Matrix And Pre-Programmed Shader
+persp_mat = RubyGL::Mat4.perspective(90, 500.0 / 500.0, -0.001, -500)
 shader = RubyGL::ShaderGenerator.faceted_shader()
 shader.use_program()
 
 # Get The Locations Of Our Input "Attribute" Variables To The Shader
 position_loc = shader.attrib_location("position")
-mv_loc = shader.uniform_location("modelView")
 
 # Associate Our position Variable With Our Diamond GPU Buffer (3 Components Per Vertex)
-diamond_buff.bind() # Always Has To Be Bound Before Associating Attribute Pointers
 diamond_buff.vertex_attrib_ptr(position_loc, 3)
 
 # Powerful Shorthand For Specifying An OpenGL Uniform Function, Uniform Variable 
@@ -38,15 +36,15 @@ time = Time.now.strftime("%s").to_i
 loop {
     RubyGL::Native.glClearColor(1.0, 1.0, 1.0, 1.0)
     RubyGL::Native.glClear(RubyGL::Native::GL_COLOR_BUFFER_BIT | RubyGL::Native::GL_DEPTH_BUFFER_BIT)
-
-    # Matrix Operations Are Applied To The Object In Reverse Order They Were Multiplied
-    t1 = RubyGL::Matrix.translation(0.0, -0.25, -0.15) # Translate Fourth
-    r1 = RubyGL::Matrix.rotation(0.0, 1.0, 0.0, counter)
-    r2 = RubyGL::Matrix.rotation(0.0, 0.0, 1.0, 45)
-    r3 = RubyGL::Matrix.rotation(0.0, 1.0, 0.0, -counter)
-    t1 *= r1 # Spin Third
-    t1 *= r2 # Tilt (45 Degrees) Second
-    t1 *= r3 # Roll First
+    
+    # Matrix Operations Are Always Applied In Reverse Order They Were Multiplied
+    t1 = RubyGL::Mat4.translation(0.0, -0.25, -0.15) # 4: Translate
+    r1 = RubyGL::Mat4.rotation(0.0, 1.0, 0.0, counter)
+    r2 = RubyGL::Mat4.rotation(0.0, 0.0, 1.0, 45)
+    r3 = RubyGL::Mat4.rotation(0.0, 1.0, 0.0, -counter)
+    t1 *= r1 # 3: Spin Around New Y Axis
+    t1 *= r2 # 2: Tilt (45 Degrees)
+    t1 *= r3 # 1: Spin Around Initial Y Axis
     shader.send_uniform(:glUniformMatrix4fv, "modelView", t1.to_a, 1, RubyGL::Native::GL_FALSE)
     
     frames += 1
@@ -62,9 +60,6 @@ loop {
         time = Time.now.strftime("%s").to_i
     end
     
-    # Any Updates That Our Default Setup Needs To Perform
-    config.update_window()
-    
-    # Run Any Input Callbacks That Have Been Triggered
-    RubyGL::Native.pumpEvents()
+    # Updates Screen And Executes Input Callbacks
+    config.apply()
 }
