@@ -106,27 +106,27 @@ module RubyGL
                 #version 130
                 in vec3 position;
                 out vec3 vPosition;
-                uniform mat4 modelView;
-                uniform mat4 persp;
+                uniform mat4 modelview;
+                uniform mat4 perspective;
                 
                 void main() {
-                    vec4 hPosition = modelView * vec4(position, 1);
+                    vec4 hPosition = modelview * vec4(position, 1);
                     vPosition = hPosition.xyz;
                     
-                    gl_Position = persp * hPosition;
+                    gl_Position = perspective * hPosition;
                 }
             ''','''
                 #version 130
                 in vec3 vPosition;
                 out vec4 fColor;
                 uniform vec4 color;
-                uniform vec3 vLight = vec3(-1, -0.5, -0.5);
+                uniform vec3 light;
                 
                 void main() {
                     vec3 dx = dFdy(vPosition);
                     vec3 dy = dFdx(vPosition);
                     vec3 triangle_norm = normalize(cross(dx, dy));
-                    float factor = clamp(dot(triangle_norm, vLight), 0, 1);
+                    float factor = clamp(dot(triangle_norm, light), 0, 1);
                     
                     fColor = vec4(color.xyz * factor, color.w);
                 }
@@ -137,11 +137,11 @@ module RubyGL
             Shader.new('''
                 #version 130
                 in vec3 position;
-                uniform mat4 modelView;
-                uniform mat4 persp;
+                uniform mat4 modelview;
+                uniform mat4 perspective;
                 
                 void main() {
-                    gl_Position = persp * modelView * vec4(position, 1);
+                    gl_Position = perspective * modelView * vec4(position, 1);
                 }
             ''','''
                 #version 130
@@ -161,15 +161,15 @@ module RubyGL
                 in vec3 normal;
                 out vec3 vPosition;
                 out vec3 vNormal;
-                uniform mat4 modelView;
-                uniform mat4 persp;
+                uniform mat4 modelview;
+                uniform mat4 perspective;
                 
                 void main() {
-                    vec4 hPosition = modelView * vec4(position, 1);
+                    vec4 hPosition = modelview * vec4(position, 1);
                     vPosition = hPosition.xyz;
-                    vNormal = (modelView * vec4(normal, 1)).xyz;
+                    vNormal = (modelview * vec4(normal, 1)).xyz;
                     
-                    gl_Position = persp * hPosition;
+                    gl_Position = perspective * hPosition;
                 }
             ''','''
                 #version 130
@@ -177,12 +177,12 @@ module RubyGL
                 in vec3 vNormal;
                 out vec4 fColor;
                 uniform vec4 color;
-                uniform vec3 vLight = vec3(-1, -0.5, -1);
+                uniform vec3 light;
                 
                 float PhongIntensity(vec3 pos, vec3 norm) {
                     vec3 N = normalize(norm);
                     vec3 L = normalize(light - pos);
-                    vec3 E = nromalize(pos);
+                    vec3 E = normalize(pos);
                     vec3 R = reflect(L, N);
                     
                     float diffuse = abs(dot(N, L));

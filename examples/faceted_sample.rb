@@ -1,4 +1,4 @@
-require './rubygl'
+require '../lib/rubygl'
 
 # Default Setup (Window + OpenGL Context), OpenGL Calls Are Valid After This Is Created
 config = RubyGL::DefaultSetup.new
@@ -21,9 +21,9 @@ diamond_buff.vertex_attrib_ptr(position_loc, 3)
 
 # Powerful Shorthand For Specifying An OpenGL Uniform Function, Uniform Variable 
 # Name, Input Data, And Any Extra Parameters Required By The Given Function Symbol 
-shader.send_uniform(:glUniformMatrix4fv, "persp", persp_mat.to_a, 1, RubyGL::Native::GL_FALSE)
-shader.send_uniform(:glUniform4fv, "vLight", [1.0, 0.0, 0.0, 1.0], 1)
-shader.send_uniform(:glUniform4fv, "color", [1.0, 0.0, 0.0, 1.0], 1)
+shader.send_uniform(:glUniformMatrix4fv, "perspective", persp_mat.to_a, 1, RubyGL::Native::GL_FALSE)
+shader.send_uniform(:glUniform3fv, "light", [1.0, 0.2, 0.5], 1)
+shader.send_uniform(:glUniform4fv, "color", [1.0, 0.0, 0.0, 0.2], 1)
 
 # Standard Depth Test So That Z-Buffer Testing Is Used
 RubyGL::Native.glEnable(RubyGL::Native::GL_DEPTH_TEST)
@@ -45,7 +45,7 @@ loop {
     t1 *= r1 # 3: Spin Around New Y Axis
     t1 *= r2 # 2: Tilt (45 Degrees)
     t1 *= r3 # 1: Spin Around Initial Y Axis
-    shader.send_uniform(:glUniformMatrix4fv, "modelView", t1.to_a, 1, RubyGL::Native::GL_FALSE)
+    shader.send_uniform(:glUniformMatrix4fv, "modelview", t1.to_a, 1, RubyGL::Native::GL_FALSE)
     
     frames += 1
     counter += 0.05
@@ -61,5 +61,5 @@ loop {
     end
     
     # Updates Screen And Executes Input Callbacks
-    config.apply()
+    config.end_frame()
 }

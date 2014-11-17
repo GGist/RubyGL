@@ -4,7 +4,9 @@ require_relative './Native/window'
 module RubyGL
 
     class DefaultSetup
-        def initialize(x = 50, y = 50, width = 500, height = 500)
+        # The args hash accepts position and size values to be applied to the window.
+        # :x, :y, :width, :height
+        def initialize(args = {})
             RubyGL::Native.initWindow
             RubyGL::Native.initInput
             RubyGL::Native.loadLibrary(FFI::Pointer::NULL)
@@ -16,7 +18,10 @@ module RubyGL
             RubyGL::Native.setAttribute(:depth_size, 24)
             RubyGL::Native.setAttribute(:doublebuffer, 1)
             
-            @window = RubyGL::Native.createWindow("RubyGL Window", x, y, width, height, RubyGL::Native.OPENGL)
+            @window = RubyGL::Native.createWindow("RubyGL Window", 
+                args[:x] || 50, args[:y] || 50, 
+                args[:width] || 500, args[:height] || 500, 
+                RubyGL::Native.OPENGL)
             @context = RubyGL::Native.createContext(@window)
             
             RubyGL::Native.makeCurrent(@window, @context)
@@ -27,7 +32,7 @@ module RubyGL
             RubyGL::Native.showSimpleMessageBox(0, title, message, @window)
         end
         
-        def apply()
+        def end_frame()
             RubyGL::Native.swapWindow(@window)
             
             RubyGL::Native.pumpEvents()

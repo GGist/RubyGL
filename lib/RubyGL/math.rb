@@ -13,68 +13,53 @@ module RubyGL
             radians * @@DIV_PI
         end
     end
-
-    class Vec2
-        def initialize()
-            @data = Array.new(2, 0)
-        end
-        
-        def norm!()
-            curr_len = self.len()
+    
+    class Vec3
+        def initialize(array = nil)
+            @data = Array.new(3, 0)
             
-            for i in 0...@data.size
-                @data /= curr_len
+            if array then
+                for i in 0...@data.size
+                    @data[i] = array[i]
+                end
             end
         end
         
-        def norm()
-            new_vector = Vec2.new()
+        def +(other_vector)
+            new_vector = Vec3.new()
             
             for i in 0...@data.size
-                new_vector[i] = @data[i]
+                new_vector[i] = @data[i] + other_vector[i]
             end
-            new_vector.norm!
             
             new_vector
         end
         
-        def len()
-            sum = 0
+        def -(other_vector)
+            new_vector = Vec3.new()
             
             for i in 0...@data.size
-                sum += @data[i] * @data[i]
+                new_vector[i] = @data[i] - other_vector[i]
             end
             
-            Math::sqrt(sum)
+            new_vector
         end
         
-        def [](index)
-            @data[index]
-        end
-        
-        def []=(index, value)
-            @data[index] = value
-        end
-        
-        def to_ary()
-            Array.new(@data)
-        end
-        
-        def to_a()
-            self.to_ary
-        end
-    end
-    
-    class Vec3
-        def initialize()
-            @data = Array.new(3, 0)
+        def cross(other_vector)
+            new_vector = Vec3.new()
+            
+            new_vector[0] = (@data[1] * other_vector[2]) - (@data[2] * other_vector[1])
+            new_vector[1] = (@data[0] * other_vector[2]) - (@data[2] * other_vector[0])
+            new_vector[2] = (@data[0] * other_vector[1]) - (@data[1] * other_vector[0])
+            
+            new_vector
         end
         
         def norm!()
-            curr_len = self.len()
+            curr_len = self.len().abs()
             
             for i in 0...@data.size
-                @data /= curr_len
+                @data[i] /= curr_len
             end
         end
         
@@ -119,6 +104,26 @@ module RubyGL
     class Vec4
         def initialize()
             @data = Array.new(4, 0)
+        end
+        
+        def +(other_vector)
+            new_vector = Vec4.new()
+            
+            for i in 0..@data.size
+                new_vector[i] = @data[i] + other_vector[i]
+            end
+            
+            new_vector
+        end
+        
+        def -(other_vector)
+            new_vector = Vec4.new()
+            
+            for i in 0..@data.size
+                new_vector[i] = @data[i] - other_vector[i]
+            end
+            
+            new_vector
         end
         
         def norm!()
@@ -174,7 +179,7 @@ module RubyGL
     class Mat4
         def initialize(diagonal = 1.0)
             @data = Array.new(4) { |index|
-                column = Vec4.new
+                column = Vec4.new()
                 column[index] = diagonal
                 
                 column

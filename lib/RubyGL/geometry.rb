@@ -51,7 +51,9 @@ module RubyGL
     
     # Class For Generating 3-D Shapes
     class ComplexShape
-        # girdle_facets should be an even number
+        # Generates an array of 3 component vertices in counter-clockwise triangle
+        # configuration. This is the vertex data for a 3 dimensional diamond. The 
+        #$ girdle_facets parameters should always be an even number.
         def self.gen_diamond(diamond_height, girdle_radius, girdle_facets)
             # Table Y Value Is Equal To diamond_height
             girdle_y_value = diamond_height * 2.5 / 3.0 # Girdle Upper Ring
