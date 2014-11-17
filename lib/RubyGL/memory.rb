@@ -3,8 +3,11 @@ require_relative './Native/opengl'
 module RubyGL
 
     class VertexArray
+        # Allocates a GPU buffer for vertex_array and transfers the data as a vertex
+        # attribute array. This allows you to access the given data from within any
+        # shader as long as it is bound beforehand.
         def initialize(vertex_array)
-            buff_ptr = FFI::MemoryPointer.new(:pointer)
+            buff_ptr = FFI::MemoryPointer.new(:uint)
             Native.glGenBuffers(1, buff_ptr)
             
             @buffer_id = buff_ptr.get_int(0)
@@ -25,10 +28,15 @@ module RubyGL
         end
         
         def draw(components)
+            raise "Call To VertexArray#draw On Frozen Object" if self.frozen?
+        
             Native.glDrawArrays(Native::GL_TRIANGLES, 0, @buffer_elements / components)
         end
         
+        # Binds the VertexArray to the attribute at location within a shader.
         def vertex_attrib_ptr(location, components)
+            raise "Call To VertexArray#vertex_attrib_ptr On Frozen Object" if self.frozen?
+        
             # TODO: Move This To Constructor In The Future
             Native.glEnableVertexAttribArray(location)
             
@@ -37,6 +45,18 @@ module RubyGL
             Native.glVertexAttribPointer(location, components, Native::GL_FLOAT, Native::GL_FALSE, 0, FFI::MemoryPointer::NULL)
         
             Native.glBindBuffer(Native::GL_ARRAY_BUFFER, 0)
+        end
+        
+        # This frees the currently allocated GPU buffer for this VertexArray and
+        # freezes this VertexArray object. Any calls to this object after calling
+        # this method will throw a runtime error.
+        def release()
+            buff_ptr = FFI::MemoryPointer.new(:uint)
+            buff_ptr.write_uint(@buffer_id)
+            
+            Native.glDeleteBuffers(1, buff_ptr)
+            
+            self.freeze()
         end
     end
     
@@ -63,11 +83,25 @@ module RubyGL
         end
         
         def draw(components)
+            raise "Call To IndexArray#draw On Frozen Object" if self.frozen?
+        
             Native.glBindBuffer(Native::GL_ELEMENT_ARRAY_BUFFER, @buffer_id)
         
             Native.glDrawElements(Native::GL_TRIANGLES, @buffer_elements, Native::GL_UNSIGNED_INT, FFI::MemoryPointer::NULL)
         
             Native.glBindBuffer(Native::GL_ELEMENT_ARRAY_BUFFER, 0)
+        end
+        
+        # This frees the currently allocated GPU buffer for this IndexArray and
+        # freezes this IndexArray object. Any calls to this object after calling
+        # this method will throw a runtime error.
+        def release()
+            buff_ptr = FFI::MemoryPointer.new(:uint)
+            buff_ptr.put_int(@buffer_id)
+            
+            Native.glDeleteBuffers(1, buff_ptr)
+            
+            self.freeze()
         end
     end
 
