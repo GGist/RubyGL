@@ -1,4 +1,4 @@
-require_relative './Native/opengl'
+require_relative './native/opengl'
 
 module RubyGL
 
@@ -12,6 +12,7 @@ module RubyGL
             
             @buffer_id = buff_ptr.get_int(0)
             @buffer_elements = vertex_array.size
+            @buffer_valid = true
             
             if @buffer_id <= 0 then
                 raise "Could Not Allocate A GPU Buffer For The VertexArray Object"
@@ -28,14 +29,26 @@ module RubyGL
         end
         
         def draw(components)
-            raise "Call To VertexArray#draw On Frozen Object" if self.frozen?
+            raise "Call To VertexArray#draw On Invalid Object" unless @buffer_valid
         
             Native.glDrawArrays(Native::GL_TRIANGLES, 0, @buffer_elements / components)
         end
         
+        def draw_instanced(components, iterations)
+            raise "Call To VertexArray#draw_instanced On Invalid Object" unless @buffer_valid
+            
+            Native.glDrawArraysInstanced(Native::GL_TRIANGLES, 0, @buffer_elements / components, iterations)
+        end
+        
+        def vertex_attrib_div(location, instances_per_change)
+            raise "Call To VertexArray#vertex_attrib_div On Invalid Object" unless @buffer_valid
+            
+            Native.glVertexAttribDivisor(location, instances_per_change)
+        end
+        
         # Binds the VertexArray to the attribute at location within a shader.
         def vertex_attrib_ptr(location, components)
-            raise "Call To VertexArray#vertex_attrib_ptr On Frozen Object" if self.frozen?
+            raise "Call To VertexArray#vertex_attrib_ptr On Invalid Object" unless @buffer_valid
         
             # TODO: Move This To Constructor In The Future
             Native.glEnableVertexAttribArray(location)
@@ -48,7 +61,7 @@ module RubyGL
         end
         
         # This frees the currently allocated GPU buffer for this VertexArray and
-        # freezes this VertexArray object. Any calls to this object after calling
+        # invalidates this VertexArray object. Any calls to this object after calling
         # this method will throw a runtime error.
         def release()
             buff_ptr = FFI::MemoryPointer.new(:uint)
@@ -56,7 +69,7 @@ module RubyGL
             
             Native.glDeleteBuffers(1, buff_ptr)
             
-            self.freeze()
+            @buffer_valid = false
         end
     end
     
@@ -67,6 +80,7 @@ module RubyGL
             
             @buffer_id = buff_ptr.get_int(0)
             @buffer_elements = index_array.size
+            @buffer_valid = true
             
             if @buffer_id <= 0 then
                 raise "Could Not Allocate A GPU Buffer For The IndexArray Object"
@@ -83,7 +97,7 @@ module RubyGL
         end
         
         def draw(components)
-            raise "Call To IndexArray#draw On Frozen Object" if self.frozen?
+            raise "Call To IndexArray#draw On Frozen Object" unless @buffer_valid
         
             Native.glBindBuffer(Native::GL_ELEMENT_ARRAY_BUFFER, @buffer_id)
         
@@ -93,7 +107,7 @@ module RubyGL
         end
         
         # This frees the currently allocated GPU buffer for this IndexArray and
-        # freezes this IndexArray object. Any calls to this object after calling
+        # invalidates this IndexArray object. Any calls to this object after calling
         # this method will throw a runtime error.
         def release()
             buff_ptr = FFI::MemoryPointer.new(:uint)
@@ -101,7 +115,7 @@ module RubyGL
             
             Native.glDeleteBuffers(1, buff_ptr)
             
-            self.freeze()
+            @buffer_valid = false
         end
     end
 

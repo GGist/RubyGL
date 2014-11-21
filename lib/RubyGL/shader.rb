@@ -1,4 +1,4 @@
-require_relative './Native/opengl'
+require_relative './native/opengl'
 
 module RubyGL
 

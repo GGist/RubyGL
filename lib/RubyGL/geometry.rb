@@ -51,9 +51,72 @@ module RubyGL
     
     # Class For Generating 3-D Shapes
     class ComplexShape
+		# Generates an array of 3 component vertices in counter-clockwise triangle
+		# configuration. This is the vertex data for a 3 dimensional sphere. The 
+		# num_rings parameter should always be 0 or a positive even number.
+		def self.gen_sphere(radius, num_rings)
+			points_per_ring = num_rings * 2 + 4
+			rings_per_half = num_rings / 2 + 1 # Count The Center Ring For Both Sides
+
+			# Generate Points From Bottom Of Sphere To The Top
+			points = []
+			for i in 1..num_rings + 1
+				ring_y_factor = (i - rings_per_half).to_f / rings_per_half
+				ring_y_value = ring_y_factor * radius
+				ring_radius = Math::cos(Math::asin(ring_y_value / radius)) * radius
+                
+				for i in 0..points_per_ring
+					radians = Conversion.deg_to_rad(i.to_f / points_per_ring * 360)
+					
+					x = Math::cos(radians) * ring_radius
+					z = Math::sin(radians) * ring_radius
+					
+					points.push(Point.new(x, ring_y_value, z))
+				end
+			end
+            
+			vertex_array, previous_points = [], []
+			
+			# Build Bottom End-Cap
+			bottom_point = [0, -radius, 0]
+			for i in 0...points_per_ring
+				curr_vert = points[i]
+				next_vert = Util.overflow_wrap(points, i + 1)
+				
+				vertex_array.push([curr_vert.to_a, next_vert.to_a, bottom_point])
+				previous_points.push(curr_vert)
+			end
+            
+            # Build Intermediate Mesh
+            for i in points_per_ring...points.size
+                curr_vert = points[i]
+                next_vert = Util.overflow_wrap(points, i + 1)
+                
+                last_curr_vert = previous_points[i % points_per_ring]
+                last_next_vert = Util.overflow_wrap(previous_points, (i % points_per_ring) + 1)
+                
+                vertex_array.push([curr_vert.to_a, next_vert.to_a, last_curr_vert.to_a])
+                vertex_array.push([next_vert.to_a, last_next_vert.to_a, last_curr_vert.to_a])
+                previous_points[i % points_per_ring] = curr_vert
+            end
+            
+            # Build Top End-Cap
+			top_point = [0, radius, 0]
+            for i in 0...previous_points.size()
+                curr_vert = previous_points[i]
+                next_vert = Util.overflow_wrap(previous_points, i + 1)
+                
+                vertex_array.push([curr_vert.to_a, next_vert.to_a, top_point.to_a])
+            end
+            
+			vertex_array.flatten!
+			
+			vertex_array
+		end
+	
         # Generates an array of 3 component vertices in counter-clockwise triangle
         # configuration. This is the vertex data for a 3 dimensional diamond. The 
-        #$ girdle_facets parameters should always be an even number.
+        # girdle_facets parameters should always be an even number.
         def self.gen_diamond(diamond_height, girdle_radius, girdle_facets)
             # Table Y Value Is Equal To diamond_height
             girdle_y_value = diamond_height * 2.5 / 3.0 # Girdle Upper Ring

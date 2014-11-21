@@ -1,5 +1,5 @@
-require_relative './Native/glcontext'
-require_relative './Native/window'
+require_relative './native/glcontext'
+require_relative './native/window'
 
 module RubyGL
 
@@ -25,7 +25,7 @@ module RubyGL
             @context = RubyGL::Native.createContext(@window)
             
             RubyGL::Native.makeCurrent(@window, @context)
-            RubyGL::Native.setSwapInterval(0)
+            RubyGL::Native.setSwapInterval(1)
         end
         
         def show_dialog(title, message)

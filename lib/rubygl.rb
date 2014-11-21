@@ -21,24 +21,28 @@ def os
     )
 end
 
+def relative_path(resource_path)
+    File.join(File.dirname(File.expand_path(__FILE__)), resource_path)
+end
+
 # Initialize All Modules
 module RubyGL
     module Native
         extend FFI::Library
-        ffi_lib "../ext/#{os.to_s}/SDL2.dll"
-        ffi_lib "../ext/#{os.to_s}/RubyGL.so"
+        ffi_lib relative_path("../ext/#{os.to_s}/SDL2.dll")
+        ffi_lib relative_path("../ext/#{os.to_s}/RubyGL.so")
     end
 end
 
 # Load Module Code
-require_relative './RubyGL/geometry'
-require_relative './RubyGL/math'
-require_relative './RubyGL/memory'
-require_relative './RubyGL/setup'
-require_relative './RubyGL/shader'
-require_relative './RubyGL/util'
+require_relative './rubygl/geometry'
+require_relative './rubygl/math'
+require_relative './rubygl/memory'
+require_relative './rubygl/setup'
+require_relative './rubygl/shader'
+require_relative './rubygl/util'
 
-require_relative './RubyGL/Native/window'
-require_relative './RubyGL/Native/glcontext'
-require_relative './RubyGL/Native/input'
-require_relative './RubyGL/Native/opengl'
+require_relative './rubygl/native/window'
+require_relative './rubygl/native/glcontext'
+require_relative './rubygl/native/input'
+require_relative './rubygl/native/opengl'
