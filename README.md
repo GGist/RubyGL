@@ -16,11 +16,21 @@ Examples Gallery
 Frequently Asked Questions
 --------------------------
 **Q: Why are my shaders not working?**  
-A: You probably have an older version of GLSL (1.2 or earler) so your shader may not support the ```in``` and ```out``` 
+A: You probably have an older version of GLSL (1.2 or earler) so your version of GLSL may not support the ```in``` and ```out``` 
 variables (the shaders in ShaderGenerator use these). To work around this, you can change the ```in``` qualifiers in the 
 vertex shader to ```attribute``` qualifiers and the ```out``` qualifiers to ```varying``` qualifiers. In the fragment 
 shader change the ```in``` qualifiers to ```varying``` qualifiers and remove any ```out``` variables; you should use the 
-built-in ```gl_FragColor``` variable to assign the output fragment color.
+built-in ```gl_FragColor``` variable to assign the output fragment color. Lastly, make sure to update the ```#version XXX```
+tag for the version of GLSL your GPU can support (Ex: ```#version 120``` if running GLSL 1.2). You can check your
+GLSL version by running ```puts RubyGL::Native::glGetString(RubyGL::Native::GL_SHADING_LANGUAGE_VERSION)```.
+
+**Q: Why is my program giving a segmentation fault?**  
+A: You are most likely trying to call an OpenGL function that does not exist in your GPUs version of OpenGL. The offending
+function should be given to you in the stack trace. I have compiled the rubygl shared library for the latest version of OpenGL
+in compatibility mode to let users call any function that their version of OpenGL may support; the library will assume
+that any OpenGL function you are calling is valid (I should probably change this), hence the segmentation fault. Go to 
+https://www.opengl.org/sdk/docs/man/ to see which functions are supported by each OpenGL version. You can run 
+```puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)``` to see what version of OpenGL you have.
 
 Known Issues
 ------------

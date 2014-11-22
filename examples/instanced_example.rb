@@ -1,7 +1,7 @@
 require '../lib/rubygl'
 
 # Default Setup (Window + OpenGL Context), OpenGL Calls Are Valid After This Is Created
-config = RubyGL::DefaultSetup.new({:width => 400, :height => 400})
+config = RubyGL::DefaultSetup.new({:width => 360, :height => 360})
 puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 
 # Create A Custom Faceted Shader
@@ -30,7 +30,7 @@ shader = RubyGL::Shader.new('''
         vec3 dx = dFdy(vPosition);
         vec3 dy = dFdx(vPosition);
         vec3 triangle_norm = normalize(cross(dx, dy));
-        float factor = clamp(dot(triangle_norm, light), 0, 1);
+        float factor = clamp(dot(triangle_norm, light), 0.3, 1);
         
         fColor = vec4(color.xyz * factor, color.w);
     }
@@ -74,7 +74,7 @@ RubyGL::Native.glEnable(RubyGL::Native::GL_DEPTH_TEST)
 
 # Used To Reduce Graininess Between Clustered Fragments On The Screen
 RubyGL::Native.glEnable(RubyGL::Native::GL_BLEND)
-RubyGL::Native.glBlendFunc(RubyGL::Native::GL_ONE, RubyGL::Native::GL_SRC_COLOR)
+RubyGL::Native.glBlendFunc(RubyGL::Native::GL_ONE, RubyGL::Native::GL_ZERO)
 
 # Track The Frame Rate And Get A Counter For Rotation
 frames, counter = 0, 0
@@ -93,7 +93,7 @@ loop {
     r1 = nil
     if !focused then
         r1 = RubyGL::Mat4.rotation(0.0, 1.0, 0.0, angle)
-        angle -= 0.7
+        angle -= 1.0
         
         if angle <= 0 then
             focused = true
@@ -105,7 +105,7 @@ loop {
         
         r1 *= t1
         
-        t1[3][2] += 0.3
+        t1[3][2] += 0.28
         counter += 0.3
     end
     
