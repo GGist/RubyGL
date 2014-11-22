@@ -55,7 +55,7 @@ loop {
     shader.send_uniform(:glUniformMatrix4fv, "modelview", t1.to_a, 1, RubyGL::Native::GL_FALSE)
     
     frames += 1
-    counter += 2.0
+    counter += 0.8
     
     # Draw Our Diamond (3 Components Per Vertex)
     index_buff.draw(3)

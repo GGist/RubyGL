@@ -93,7 +93,7 @@ loop {
     r1 = nil
     if !focused then
         r1 = RubyGL::Mat4.rotation(0.0, 1.0, 0.0, angle)
-        angle -= 0.5
+        angle -= 0.7
         
         if angle <= 0 then
             focused = true
@@ -105,7 +105,7 @@ loop {
         
         r1 *= t1
         
-        t1[3][2] += 0.1
+        t1[3][2] += 0.3
         counter += 0.3
     end
     
