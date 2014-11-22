@@ -83,7 +83,7 @@ module RubyGL
                 curr_vert = points[i]
                 next_vert = Util.overflow_wrap(points, i + 1)
                 
-                vertex_array.push([curr_vert.to_a, next_vert.to_a, bottom_point])
+                vertex_array.push([next_vert.to_a, curr_vert.to_a, bottom_point])
                 previous_points.push(curr_vert)
             end
             
@@ -95,8 +95,8 @@ module RubyGL
                 last_curr_vert = previous_points[i % points_per_ring]
                 last_next_vert = Util.overflow_wrap(previous_points, (i % points_per_ring) + 1)
                 
-                vertex_array.push([curr_vert.to_a, next_vert.to_a, last_curr_vert.to_a])
-                vertex_array.push([next_vert.to_a, last_next_vert.to_a, last_curr_vert.to_a])
+                vertex_array.push([next_vert.to_a, curr_vert.to_a, last_curr_vert.to_a])
+                vertex_array.push([last_next_vert.to_a, next_vert.to_a, last_curr_vert.to_a])
                 previous_points[i % points_per_ring] = curr_vert
             end
             

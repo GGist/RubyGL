@@ -1,7 +1,7 @@
 require '../lib/rubygl'
 
 # Default Setup (Window + OpenGL Context), OpenGL Calls Are Valid After This Is Created
-config = RubyGL::DefaultSetup.new({:width => 365, :height => 365})
+config = RubyGL::DefaultSetup.new({:width => 400, :height => 400})
 puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 
 # Generate Vertices For A Diamond And Push Them To GPU Memory

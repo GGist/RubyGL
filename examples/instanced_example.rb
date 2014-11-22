@@ -1,26 +1,10 @@
 require '../lib/rubygl'
 
 # Default Setup (Window + OpenGL Context), OpenGL Calls Are Valid After This Is Created
-config = RubyGL::DefaultSetup.new
+config = RubyGL::DefaultSetup.new({:width => 400, :height => 400})
 puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 
-class Particle
-    #GLOBAL_MASS = (density of fluid * total volume) / total particles
-
-    attr_accessor :mass, :velocity, :position, :force, :density, :pressure, 
-                  :color
-    
-    def initialize()
-        
-    end
-    
-    def accelerate!(a_pressure, a_viscosity, a_interactive, a_gravity)
-        # a = acceleration, d = derivative, a = F / m
-        d_velocity  = a_pressure + a_viscosity + a_interactive + a_gravity
-        
-    end
-end
-
+# Create A Custom Faceted Shader
 shader = RubyGL::Shader.new('''
     #version 130
 	uniform mat4 perspective;
@@ -30,7 +14,7 @@ shader = RubyGL::Shader.new('''
     out vec3 vPosition;
 	
     void main() {
-		vec4 hPosition = modelview * (vec4(offset, 1) + vec4(position, 1));
+		vec4 hPosition = modelview * vec4(offset + position, 1);
         vPosition = hPosition.xyz;
         
 		gl_Position = perspective * hPosition;
@@ -39,7 +23,7 @@ shader = RubyGL::Shader.new('''
     #version 130
     in vec3 vPosition;
     uniform vec4 color;
-    uniform vec3 light = vec3(-1, -0.5, -0.5);
+    uniform vec3 light;
     out vec4 fColor;
 
     void main() {
@@ -53,26 +37,34 @@ shader = RubyGL::Shader.new('''
 ''')
 shader.use_program()
 
+# Generate A Sphere With Radius 0.2 And 0 Extra Rings (Double Tetrahedron)
 sphere = RubyGL::ComplexShape.gen_sphere(0.2, 0)
-pos = []
 
-for i in 1..90
-    for j in 1..90
-        for k in 5..50
-            pos.push([i - 5, j - 5, -k])
+# Generate Positions For Multiple Copies Of Our Shape
+pos = []
+for x in 1..60
+    for y in 1..60
+        for z in 1..60
+            pos.push([x * 2, y * 2, -z * 2])
         end
     end
 end
 pos.flatten!
 puts pos.size / 3
+# Allocate Vertex Attribute Arrays
 vertices = RubyGL::VertexArray.new(sphere)
 positions = RubyGL::VertexArray.new(pos)
+
 persp_mat = RubyGL::Mat4.perspective(90, 500.0 / 500.0, -0.001, -500)
 
-positions.vertex_attrib_ptr(shader.attrib_location("offset"), 3)
-positions.vertex_attrib_div(shader.attrib_location("offset"), 1)
+# Associate in Values With Our Attribute Arrays
 vertices.vertex_attrib_ptr(shader.attrib_location("position"), 3)
+positions.vertex_attrib_ptr(shader.attrib_location("offset"), 3)
 
+# Increment Our Position Vector Once Every Instance
+positions.vertex_attrib_div(shader.attrib_location("offset"), 1)
+
+# Send Uniforms To Their Respective Shaders
 shader.send_uniform(:glUniformMatrix4fv, "perspective", persp_mat.to_a, 1, RubyGL::Native::GL_FALSE)
 shader.send_uniform(:glUniform3fv, "light", [-1.0, -1.0, -1.0], 1)
 shader.send_uniform(:glUniform4fv, "color", [1.0, 0.0, 0.0, 1.0], 1)
@@ -80,38 +72,48 @@ shader.send_uniform(:glUniform4fv, "color", [1.0, 0.0, 0.0, 1.0], 1)
 # Standard Depth Test So That Z-Buffer Testing Is Used
 RubyGL::Native.glEnable(RubyGL::Native::GL_DEPTH_TEST)
 
+# Used To Reduce Graininess Between Clustered Fragments On The Screen
+RubyGL::Native.glEnable(RubyGL::Native::GL_BLEND)
+RubyGL::Native.glBlendFunc(RubyGL::Native::GL_ONE, RubyGL::Native::GL_SRC_COLOR)
+
 # Track The Frame Rate And Get A Counter For Rotation
 frames, counter = 0, 0
 time = Time.now.strftime("%s").to_i
 
+# Center Our Grid Of Shapes
+t1 = RubyGL::Mat4.translation(-61, -60, -40)
+focused, angle = false, 150
+
 # Main Program Loop
-t1 = RubyGL::Mat4.translation(-21, -20, 0.0)
-decreasing = false
 loop {
     RubyGL::Native.glClearColor(1.0, 1.0, 1.0, 1.0)
     RubyGL::Native.glClear(RubyGL::Native::GL_COLOR_BUFFER_BIT | RubyGL::Native::GL_DEPTH_BUFFER_BIT)
     
-    if decreasing then
-        if t1[3][2] <= -25 then
-            decreasing = false
+    # Cube Is Rotated Into Place And Zoomed In To In A Spiral
+    r1 = nil
+    if !focused then
+        r1 = RubyGL::Mat4.rotation(0.0, 1.0, 0.0, angle)
+        angle -= 0.5
+        
+        if angle <= 0 then
+            focused = true
         end
         
-        t1[3][2] -= 0.08
+        r1 *= t1
     else
-        if t1[3][2] >= 25 then
-            decreasing = true
-        end
+        r1 = RubyGL::Mat4.rotation(0.0, 0.0, 1.0, counter)
         
-        t1[3][2] += 0.08
+        r1 *= t1
+        
+        t1[3][2] += 0.1
+        counter += 0.3
     end
-    r1 = RubyGL::Mat4.rotation(0.0, 0.0, 1.0, counter)
-    r1 *= t1
+    
     shader.send_uniform(:glUniformMatrix4fv, "modelview", r1.to_a, 1, RubyGL::Native::GL_FALSE)
 	
     frames += 1
-    counter += 0.5
     
-    # Draw Our Diamond (3 Components Per Vertex)
+    # Draw Shapes (3 Components Per Vertex & (pos.size / 3) Number Of Instances)
     vertices.draw_instanced(3, pos.size / 3)
     
     # Calculate Frame Rate

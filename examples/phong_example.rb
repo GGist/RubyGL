@@ -1,7 +1,7 @@
 require '../lib/rubygl'
 
 # Default Setup (Window + OpenGL Context), OpenGL Calls Are Valid After This Is Created
-config = RubyGL::DefaultSetup.new({:width => 365, :height => 365})
+config = RubyGL::DefaultSetup.new({:width => 400, :height => 400})
 puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 
 # Generate Indices, Vertices, And Vertex Normals For A Diamond
@@ -29,7 +29,7 @@ normal_buff.vertex_attrib_ptr(normal_loc, 3)
 # Powerful Shorthand For Specifying An OpenGL Uniform Function, Uniform Variable 
 # Name, Input Data, And Any Extra Parameters Required By The Given Function Symbol 
 shader.send_uniform(:glUniformMatrix4fv, "perspective", persp_mat.to_a, 1, RubyGL::Native::GL_FALSE)
-shader.send_uniform(:glUniform3fv, "light", [-1.0, -0.2, -0.5], 1)
+shader.send_uniform(:glUniform3fv, "light", [-1.0, -1.0, -5.0], 1)
 shader.send_uniform(:glUniform4fv, "color", [1.0, 0.0, 0.0, 1.0], 1)
 
 # Standard Depth Test So That Z-Buffer Testing Is Used
@@ -55,7 +55,7 @@ loop {
     shader.send_uniform(:glUniformMatrix4fv, "modelview", t1.to_a, 1, RubyGL::Native::GL_FALSE)
     
     frames += 1
-    counter += 0.8
+    counter += 2.0
     
     # Draw Our Diamond (3 Components Per Vertex)
     index_buff.draw(3)
