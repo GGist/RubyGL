@@ -10,8 +10,8 @@ gem install rubygl
 
 Examples Gallery
 ----------------
-<img src="https://cloud.githubusercontent.com/assets/5248583/5153451/f474fb5a-71de-11e4-9e9f-5e0940e9e605.gif">
-<img src="https://cloud.githubusercontent.com/assets/5248583/5153380/ba4e8134-71da-11e4-9aa6-c56540748355.gif">
+<img src="https://cloud.githubusercontent.com/assets/5248583/5156041/53eeb3ce-725b-11e4-908b-0b5aa7b37e2e.gif">
+<img align="right" src="https://cloud.githubusercontent.com/assets/5248583/5156042/55d1ee0e-725b-11e4-9edf-b240051a41b7.gif">
 
 Frequently Asked Questions
 --------------------------
