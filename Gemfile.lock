@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ffi (1.9.5-x86-mingw32)
+    rake (0.9.6)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  ffi
+  rake

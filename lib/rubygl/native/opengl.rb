@@ -1,9 +1,14 @@
 require 'ffi'
 
 module RubyGL::Native
+    attach_function :glAccum, [:uint, :float], :void
     attach_function :glActiveShaderProgram, [:uint, :uint], :void
     attach_function :glActiveTexture, [:uint], :void
+    attach_function :glAlphaFunc, [:uint, :float], :void
+    attach_function :glAreTexturesResident, [:int, :pointer, :pointer], :uchar
+    attach_function :glArrayElement, [:int], :void
     attach_function :glAttachShader, [:uint, :uint], :void
+    attach_function :glBegin, [:uint], :void
     attach_function :glBeginConditionalRender, [:uint, :uint], :void
     attach_function :glBeginQuery, [:uint, :uint], :void
     attach_function :glBeginQueryIndexed, [:uint, :uint, :uint], :void
@@ -30,6 +35,7 @@ module RubyGL::Native
     attach_function :glBindVertexArray, [:uint], :void
     attach_function :glBindVertexBuffer, [:uint, :uint, :int, :int], :void
     attach_function :glBindVertexBuffers, [:uint, :int, :pointer, :pointer, :pointer], :void
+    attach_function :glBitmap, [:int, :int, :float, :float, :float, :float, :string], :void
     attach_function :glBlendColor, [:float, :float, :float, :float], :void
     attach_function :glBlendEquation, [:uint], :void
     attach_function :glBlendEquationSeparate, [:uint, :uint], :void
@@ -44,10 +50,13 @@ module RubyGL::Native
     attach_function :glBufferData, [:uint, :int, :pointer, :uint], :void
     attach_function :glBufferStorage, [:uint, :int, :pointer, :uint], :void
     attach_function :glBufferSubData, [:uint, :int, :int, :pointer], :void
+    attach_function :glCallList, [:uint], :void
+    attach_function :glCallLists, [:int, :uint, :pointer], :void
     attach_function :glCheckFramebufferStatus, [:uint], :uint
     attach_function :glCheckNamedFramebufferStatus, [:uint, :uint], :uint
     attach_function :glClampColor, [:uint, :uint], :void
     attach_function :glClear, [:uint], :void
+    attach_function :glClearAccum, [:float, :float, :float, :float], :void
     attach_function :glClearBufferData, [:uint, :uint, :uint, :uint, :pointer], :void
     attach_function :glClearBufferSubData, [:uint, :uint, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glClearBufferfi, [:uint, :int, :float, :int], :void
@@ -57,6 +66,7 @@ module RubyGL::Native
     attach_function :glClearColor, [:float, :float, :float, :float], :void
     attach_function :glClearDepth, [:double], :void
     attach_function :glClearDepthf, [:float], :void
+    attach_function :glClearIndex, [:float], :void
     attach_function :glClearNamedBufferData, [:uint, :uint, :uint, :uint, :pointer], :void
     attach_function :glClearNamedBufferSubData, [:uint, :uint, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glClearNamedFramebufferfi, [:uint, :uint, :float, :int], :void
@@ -66,14 +76,50 @@ module RubyGL::Native
     attach_function :glClearStencil, [:int], :void
     attach_function :glClearTexImage, [:uint, :int, :uint, :uint, :pointer], :void
     attach_function :glClearTexSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    attach_function :glClientActiveTexture, [:uint], :void
     attach_function :glClientWaitSync, [:pointer, :uint, :uint64], :uint
     attach_function :glClipControl, [:uint, :uint], :void
+    attach_function :glClipPlane, [:uint, :pointer], :void
+    attach_function :glColor3b, [:char, :char, :char], :void
+    attach_function :glColor3bv, [:pointer], :void
+    attach_function :glColor3d, [:double, :double, :double], :void
+    attach_function :glColor3dv, [:pointer], :void
+    attach_function :glColor3f, [:float, :float, :float], :void
+    attach_function :glColor3fv, [:pointer], :void
+    attach_function :glColor3i, [:int, :int, :int], :void
+    attach_function :glColor3iv, [:pointer], :void
+    attach_function :glColor3s, [:short, :short, :short], :void
+    attach_function :glColor3sv, [:pointer], :void
+    attach_function :glColor3ub, [:uchar, :uchar, :uchar], :void
+    attach_function :glColor3ubv, [:string], :void
+    attach_function :glColor3ui, [:uint, :uint, :uint], :void
+    attach_function :glColor3uiv, [:pointer], :void
+    attach_function :glColor3us, [:ushort, :ushort, :ushort], :void
+    attach_function :glColor3usv, [:pointer], :void
+    attach_function :glColor4b, [:char, :char, :char, :char], :void
+    attach_function :glColor4bv, [:pointer], :void
+    attach_function :glColor4d, [:double, :double, :double, :double], :void
+    attach_function :glColor4dv, [:pointer], :void
+    attach_function :glColor4f, [:float, :float, :float, :float], :void
+    attach_function :glColor4fv, [:pointer], :void
+    attach_function :glColor4i, [:int, :int, :int, :int], :void
+    attach_function :glColor4iv, [:pointer], :void
+    attach_function :glColor4s, [:short, :short, :short, :short], :void
+    attach_function :glColor4sv, [:pointer], :void
+    attach_function :glColor4ub, [:uchar, :uchar, :uchar, :uchar], :void
+    attach_function :glColor4ubv, [:string], :void
+    attach_function :glColor4ui, [:uint, :uint, :uint, :uint], :void
+    attach_function :glColor4uiv, [:pointer], :void
+    attach_function :glColor4us, [:ushort, :ushort, :ushort, :ushort], :void
+    attach_function :glColor4usv, [:pointer], :void
     attach_function :glColorMask, [:uchar, :uchar, :uchar, :uchar], :void
     attach_function :glColorMaski, [:uint, :uchar, :uchar, :uchar, :uchar], :void
+    attach_function :glColorMaterial, [:uint, :uint], :void
     attach_function :glColorP3ui, [:uint, :uint], :void
     attach_function :glColorP3uiv, [:uint, :pointer], :void
     attach_function :glColorP4ui, [:uint, :uint], :void
     attach_function :glColorP4uiv, [:uint, :pointer], :void
+    attach_function :glColorPointer, [:int, :uint, :int, :pointer], :void
     attach_function :glCompileShader, [:uint], :void
     attach_function :glCompressedTexImage1D, [:uint, :int, :uint, :int, :int, :int, :pointer], :void
     attach_function :glCompressedTexImage2D, [:uint, :int, :uint, :int, :int, :int, :int, :pointer], :void
@@ -87,6 +133,7 @@ module RubyGL::Native
     attach_function :glCopyBufferSubData, [:uint, :uint, :int, :int, :int], :void
     attach_function :glCopyImageSubData, [:uint, :uint, :int, :int, :int, :int, :uint, :uint, :int, :int, :int, :int, :int, :int, :int], :void
     attach_function :glCopyNamedBufferSubData, [:uint, :uint, :int, :int, :int], :void
+    attach_function :glCopyPixels, [:int, :int, :int, :int, :uint], :void
     attach_function :glCopyTexImage1D, [:uint, :int, :uint, :int, :int, :int, :int], :void
     attach_function :glCopyTexImage2D, [:uint, :int, :uint, :int, :int, :int, :int, :int], :void
     attach_function :glCopyTexSubImage1D, [:uint, :int, :int, :int, :int, :int], :void
@@ -113,6 +160,7 @@ module RubyGL::Native
     attach_function :glDebugMessageInsert, [:uint, :uint, :uint, :uint, :int, :string], :void
     attach_function :glDeleteBuffers, [:int, :pointer], :void
     attach_function :glDeleteFramebuffers, [:int, :pointer], :void
+    attach_function :glDeleteLists, [:uint, :int], :void
     attach_function :glDeleteProgram, [:uint], :void
     attach_function :glDeleteProgramPipelines, [:int, :pointer], :void
     attach_function :glDeleteQueries, [:int, :pointer], :void
@@ -131,6 +179,7 @@ module RubyGL::Native
     attach_function :glDepthRangef, [:float, :float], :void
     attach_function :glDetachShader, [:uint, :uint], :void
     attach_function :glDisable, [:uint], :void
+    attach_function :glDisableClientState, [:uint], :void
     attach_function :glDisableVertexArrayAttrib, [:uint, :uint], :void
     attach_function :glDisableVertexAttribArray, [:uint], :void
     attach_function :glDisablei, [:uint, :uint], :void
@@ -149,25 +198,54 @@ module RubyGL::Native
     attach_function :glDrawElementsInstancedBaseInstance, [:uint, :int, :uint, :pointer, :int, :uint], :void
     attach_function :glDrawElementsInstancedBaseVertex, [:uint, :int, :uint, :pointer, :int, :int], :void
     attach_function :glDrawElementsInstancedBaseVertexBaseInstance, [:uint, :int, :uint, :pointer, :int, :int, :uint], :void
+    attach_function :glDrawPixels, [:int, :int, :uint, :uint, :pointer], :void
     attach_function :glDrawRangeElements, [:uint, :uint, :uint, :int, :uint, :pointer], :void
     attach_function :glDrawRangeElementsBaseVertex, [:uint, :uint, :uint, :int, :uint, :pointer, :int], :void
     attach_function :glDrawTransformFeedback, [:uint, :uint], :void
     attach_function :glDrawTransformFeedbackInstanced, [:uint, :uint, :int], :void
     attach_function :glDrawTransformFeedbackStream, [:uint, :uint, :uint], :void
     attach_function :glDrawTransformFeedbackStreamInstanced, [:uint, :uint, :uint, :int], :void
+    attach_function :glEdgeFlag, [:uchar], :void
+    attach_function :glEdgeFlagPointer, [:int, :pointer], :void
+    attach_function :glEdgeFlagv, [:string], :void
     attach_function :glEnable, [:uint], :void
+    attach_function :glEnableClientState, [:uint], :void
     attach_function :glEnableVertexArrayAttrib, [:uint, :uint], :void
     attach_function :glEnableVertexAttribArray, [:uint], :void
     attach_function :glEnablei, [:uint, :uint], :void
+    attach_function :glEnd, [], :void
     attach_function :glEndConditionalRender, [], :void
+    attach_function :glEndList, [], :void
     attach_function :glEndQuery, [:uint], :void
     attach_function :glEndQueryIndexed, [:uint, :uint], :void
     attach_function :glEndTransformFeedback, [], :void
+    attach_function :glEvalCoord1d, [:double], :void
+    attach_function :glEvalCoord1dv, [:pointer], :void
+    attach_function :glEvalCoord1f, [:float], :void
+    attach_function :glEvalCoord1fv, [:pointer], :void
+    attach_function :glEvalCoord2d, [:double, :double], :void
+    attach_function :glEvalCoord2dv, [:pointer], :void
+    attach_function :glEvalCoord2f, [:float, :float], :void
+    attach_function :glEvalCoord2fv, [:pointer], :void
+    attach_function :glEvalMesh1, [:uint, :int, :int], :void
+    attach_function :glEvalMesh2, [:uint, :int, :int, :int, :int], :void
+    attach_function :glEvalPoint1, [:int], :void
+    attach_function :glEvalPoint2, [:int, :int], :void
+    attach_function :glFeedbackBuffer, [:int, :uint, :pointer], :void
     attach_function :glFenceSync, [:uint, :uint], :pointer
     attach_function :glFinish, [], :void
     attach_function :glFlush, [], :void
     attach_function :glFlushMappedBufferRange, [:uint, :int, :int], :void
     attach_function :glFlushMappedNamedBufferRange, [:uint, :int, :int], :void
+    attach_function :glFogCoordPointer, [:uint, :int, :pointer], :void
+    attach_function :glFogCoordd, [:double], :void
+    attach_function :glFogCoorddv, [:pointer], :void
+    attach_function :glFogCoordf, [:float], :void
+    attach_function :glFogCoordfv, [:pointer], :void
+    attach_function :glFogf, [:uint, :float], :void
+    attach_function :glFogfv, [:uint, :pointer], :void
+    attach_function :glFogi, [:uint, :int], :void
+    attach_function :glFogiv, [:uint, :pointer], :void
     attach_function :glFramebufferParameteri, [:uint, :uint, :int], :void
     attach_function :glFramebufferRenderbuffer, [:uint, :uint, :uint, :uint], :void
     attach_function :glFramebufferTexture, [:uint, :uint, :uint, :int], :void
@@ -176,8 +254,10 @@ module RubyGL::Native
     attach_function :glFramebufferTexture3D, [:uint, :uint, :uint, :uint, :int, :int], :void
     attach_function :glFramebufferTextureLayer, [:uint, :uint, :uint, :int, :int], :void
     attach_function :glFrontFace, [:uint], :void
+    attach_function :glFrustum, [:double, :double, :double, :double, :double, :double], :void
     attach_function :glGenBuffers, [:int, :pointer], :void
     attach_function :glGenFramebuffers, [:int, :pointer], :void
+    attach_function :glGenLists, [:int], :uint
     attach_function :glGenProgramPipelines, [:int, :pointer], :void
     attach_function :glGenQueries, [:int, :pointer], :void
     attach_function :glGenRenderbuffers, [:int, :pointer], :void
@@ -205,6 +285,7 @@ module RubyGL::Native
     attach_function :glGetBufferParameteriv, [:uint, :uint, :pointer], :void
     attach_function :glGetBufferPointerv, [:uint, :uint, :pointer], :void
     attach_function :glGetBufferSubData, [:uint, :int, :int, :pointer], :void
+    attach_function :glGetClipPlane, [:uint, :pointer], :void
     attach_function :glGetCompressedTexImage, [:uint, :int, :pointer], :void
     attach_function :glGetCompressedTextureImage, [:uint, :int, :int, :pointer], :void
     attach_function :glGetCompressedTextureSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :int, :pointer], :void
@@ -225,6 +306,13 @@ module RubyGL::Native
     attach_function :glGetIntegerv, [:uint, :pointer], :void
     attach_function :glGetInternalformati64v, [:uint, :uint, :uint, :int, :pointer], :void
     attach_function :glGetInternalformativ, [:uint, :uint, :uint, :int, :pointer], :void
+    attach_function :glGetLightfv, [:uint, :uint, :pointer], :void
+    attach_function :glGetLightiv, [:uint, :uint, :pointer], :void
+    attach_function :glGetMapdv, [:uint, :uint, :pointer], :void
+    attach_function :glGetMapfv, [:uint, :uint, :pointer], :void
+    attach_function :glGetMapiv, [:uint, :uint, :pointer], :void
+    attach_function :glGetMaterialfv, [:uint, :uint, :pointer], :void
+    attach_function :glGetMaterialiv, [:uint, :uint, :pointer], :void
     attach_function :glGetMultisamplefv, [:uint, :uint, :pointer], :void
     attach_function :glGetNamedBufferParameteri64v, [:uint, :uint, :pointer], :void
     attach_function :glGetNamedBufferParameteriv, [:uint, :uint, :pointer], :void
@@ -235,7 +323,11 @@ module RubyGL::Native
     attach_function :glGetNamedRenderbufferParameteriv, [:uint, :uint, :pointer], :void
     attach_function :glGetObjectLabel, [:uint, :uint, :int, :pointer, :pointer], :void
     attach_function :glGetObjectPtrLabel, [:pointer, :int, :pointer, :pointer], :void
+    attach_function :glGetPixelMapfv, [:uint, :pointer], :void
+    attach_function :glGetPixelMapuiv, [:uint, :pointer], :void
+    attach_function :glGetPixelMapusv, [:uint, :pointer], :void
     attach_function :glGetPointerv, [:uint, :pointer], :void
+    attach_function :glGetPolygonStipple, [:pointer], :void
     attach_function :glGetProgramBinary, [:uint, :int, :pointer, :pointer, :pointer], :void
     attach_function :glGetProgramInfoLog, [:uint, :int, :pointer, :pointer], :void
     attach_function :glGetProgramInterfaceiv, [:uint, :uint, :uint, :pointer], :void
@@ -272,6 +364,11 @@ module RubyGL::Native
     attach_function :glGetSubroutineIndex, [:uint, :uint, :string], :uint
     attach_function :glGetSubroutineUniformLocation, [:uint, :uint, :string], :int
     attach_function :glGetSynciv, [:pointer, :uint, :int, :pointer, :pointer], :void
+    attach_function :glGetTexEnvfv, [:uint, :uint, :pointer], :void
+    attach_function :glGetTexEnviv, [:uint, :uint, :pointer], :void
+    attach_function :glGetTexGendv, [:uint, :uint, :pointer], :void
+    attach_function :glGetTexGenfv, [:uint, :uint, :pointer], :void
+    attach_function :glGetTexGeniv, [:uint, :uint, :pointer], :void
     attach_function :glGetTexImage, [:uint, :int, :uint, :uint, :pointer], :void
     attach_function :glGetTexLevelParameterfv, [:uint, :int, :uint, :pointer], :void
     attach_function :glGetTexLevelParameteriv, [:uint, :int, :uint, :pointer], :void
@@ -328,6 +425,20 @@ module RubyGL::Native
     attach_function :glGetnUniformiv, [:uint, :int, :int, :pointer], :void
     attach_function :glGetnUniformuiv, [:uint, :int, :int, :pointer], :void
     attach_function :glHint, [:uint, :uint], :void
+    attach_function :glIndexMask, [:uint], :void
+    attach_function :glIndexPointer, [:uint, :int, :pointer], :void
+    attach_function :glIndexd, [:double], :void
+    attach_function :glIndexdv, [:pointer], :void
+    attach_function :glIndexf, [:float], :void
+    attach_function :glIndexfv, [:pointer], :void
+    attach_function :glIndexi, [:int], :void
+    attach_function :glIndexiv, [:pointer], :void
+    attach_function :glIndexs, [:short], :void
+    attach_function :glIndexsv, [:pointer], :void
+    attach_function :glIndexub, [:uchar], :void
+    attach_function :glIndexubv, [:string], :void
+    attach_function :glInitNames, [], :void
+    attach_function :glInterleavedArrays, [:uint, :int, :pointer], :void
     attach_function :glInvalidateBufferData, [:uint], :void
     attach_function :glInvalidateBufferSubData, [:uint, :int, :int], :void
     attach_function :glInvalidateFramebuffer, [:uint, :int, :pointer], :void
@@ -340,6 +451,7 @@ module RubyGL::Native
     attach_function :glIsEnabled, [:uint], :uchar
     attach_function :glIsEnabledi, [:uint, :uint], :uchar
     attach_function :glIsFramebuffer, [:uint], :uchar
+    attach_function :glIsList, [:uint], :uchar
     attach_function :glIsProgram, [:uint], :uchar
     attach_function :glIsProgramPipeline, [:uint], :uchar
     attach_function :glIsQuery, [:uint], :uchar
@@ -350,21 +462,86 @@ module RubyGL::Native
     attach_function :glIsTexture, [:uint], :uchar
     attach_function :glIsTransformFeedback, [:uint], :uchar
     attach_function :glIsVertexArray, [:uint], :uchar
+    attach_function :glLightModelf, [:uint, :float], :void
+    attach_function :glLightModelfv, [:uint, :pointer], :void
+    attach_function :glLightModeli, [:uint, :int], :void
+    attach_function :glLightModeliv, [:uint, :pointer], :void
+    attach_function :glLightf, [:uint, :uint, :float], :void
+    attach_function :glLightfv, [:uint, :uint, :pointer], :void
+    attach_function :glLighti, [:uint, :uint, :int], :void
+    attach_function :glLightiv, [:uint, :uint, :pointer], :void
+    attach_function :glLineStipple, [:int, :ushort], :void
     attach_function :glLineWidth, [:float], :void
     attach_function :glLinkProgram, [:uint], :void
+    attach_function :glListBase, [:uint], :void
+    attach_function :glLoadIdentity, [], :void
+    attach_function :glLoadMatrixd, [:pointer], :void
+    attach_function :glLoadMatrixf, [:pointer], :void
+    attach_function :glLoadName, [:uint], :void
+    attach_function :glLoadTransposeMatrixd, [:pointer], :void
+    attach_function :glLoadTransposeMatrixf, [:pointer], :void
     attach_function :glLogicOp, [:uint], :void
+    attach_function :glMap1d, [:uint, :double, :double, :int, :int, :pointer], :void
+    attach_function :glMap1f, [:uint, :float, :float, :int, :int, :pointer], :void
+    attach_function :glMap2d, [:uint, :double, :double, :int, :int, :double, :double, :int, :int, :pointer], :void
+    attach_function :glMap2f, [:uint, :float, :float, :int, :int, :float, :float, :int, :int, :pointer], :void
     attach_function :glMapBuffer, [:uint, :uint], :pointer
     attach_function :glMapBufferRange, [:uint, :int, :int, :uint], :pointer
+    attach_function :glMapGrid1d, [:int, :double, :double], :void
+    attach_function :glMapGrid1f, [:int, :float, :float], :void
+    attach_function :glMapGrid2d, [:int, :double, :double, :int, :double, :double], :void
+    attach_function :glMapGrid2f, [:int, :float, :float, :int, :float, :float], :void
     attach_function :glMapNamedBuffer, [:uint, :uint], :pointer
     attach_function :glMapNamedBufferRange, [:uint, :int, :int, :uint], :pointer
+    attach_function :glMaterialf, [:uint, :uint, :float], :void
+    attach_function :glMaterialfv, [:uint, :uint, :pointer], :void
+    attach_function :glMateriali, [:uint, :uint, :int], :void
+    attach_function :glMaterialiv, [:uint, :uint, :pointer], :void
+    attach_function :glMatrixMode, [:uint], :void
     attach_function :glMemoryBarrier, [:uint], :void
     attach_function :glMemoryBarrierByRegion, [:uint], :void
     attach_function :glMinSampleShading, [:float], :void
+    attach_function :glMultMatrixd, [:pointer], :void
+    attach_function :glMultMatrixf, [:pointer], :void
+    attach_function :glMultTransposeMatrixd, [:pointer], :void
+    attach_function :glMultTransposeMatrixf, [:pointer], :void
     attach_function :glMultiDrawArrays, [:uint, :pointer, :pointer, :int], :void
     attach_function :glMultiDrawArraysIndirect, [:uint, :pointer, :int, :int], :void
     attach_function :glMultiDrawElements, [:uint, :pointer, :uint, :pointer, :int], :void
     attach_function :glMultiDrawElementsBaseVertex, [:uint, :pointer, :uint, :pointer, :int, :pointer], :void
     attach_function :glMultiDrawElementsIndirect, [:uint, :uint, :pointer, :int, :int], :void
+    attach_function :glMultiTexCoord1d, [:uint, :double], :void
+    attach_function :glMultiTexCoord1dv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord1f, [:uint, :float], :void
+    attach_function :glMultiTexCoord1fv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord1i, [:uint, :int], :void
+    attach_function :glMultiTexCoord1iv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord1s, [:uint, :short], :void
+    attach_function :glMultiTexCoord1sv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord2d, [:uint, :double, :double], :void
+    attach_function :glMultiTexCoord2dv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord2f, [:uint, :float, :float], :void
+    attach_function :glMultiTexCoord2fv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord2i, [:uint, :int, :int], :void
+    attach_function :glMultiTexCoord2iv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord2s, [:uint, :short, :short], :void
+    attach_function :glMultiTexCoord2sv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord3d, [:uint, :double, :double, :double], :void
+    attach_function :glMultiTexCoord3dv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord3f, [:uint, :float, :float, :float], :void
+    attach_function :glMultiTexCoord3fv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord3i, [:uint, :int, :int, :int], :void
+    attach_function :glMultiTexCoord3iv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord3s, [:uint, :short, :short, :short], :void
+    attach_function :glMultiTexCoord3sv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord4d, [:uint, :double, :double, :double, :double], :void
+    attach_function :glMultiTexCoord4dv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord4f, [:uint, :float, :float, :float, :float], :void
+    attach_function :glMultiTexCoord4fv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord4i, [:uint, :int, :int, :int, :int], :void
+    attach_function :glMultiTexCoord4iv, [:uint, :pointer], :void
+    attach_function :glMultiTexCoord4s, [:uint, :short, :short, :short, :short], :void
+    attach_function :glMultiTexCoord4sv, [:uint, :pointer], :void
     attach_function :glMultiTexCoordP1ui, [:uint, :uint, :uint], :void
     attach_function :glMultiTexCoordP1uiv, [:uint, :uint, :pointer], :void
     attach_function :glMultiTexCoordP2ui, [:uint, :uint, :uint], :void
@@ -385,15 +562,35 @@ module RubyGL::Native
     attach_function :glNamedFramebufferTextureLayer, [:uint, :uint, :uint, :int, :int], :void
     attach_function :glNamedRenderbufferStorage, [:uint, :uint, :int, :int], :void
     attach_function :glNamedRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
+    attach_function :glNewList, [:uint, :uint], :void
+    attach_function :glNormal3b, [:char, :char, :char], :void
+    attach_function :glNormal3bv, [:pointer], :void
+    attach_function :glNormal3d, [:double, :double, :double], :void
+    attach_function :glNormal3dv, [:pointer], :void
+    attach_function :glNormal3f, [:float, :float, :float], :void
+    attach_function :glNormal3fv, [:pointer], :void
+    attach_function :glNormal3i, [:int, :int, :int], :void
+    attach_function :glNormal3iv, [:pointer], :void
+    attach_function :glNormal3s, [:short, :short, :short], :void
+    attach_function :glNormal3sv, [:pointer], :void
     attach_function :glNormalP3ui, [:uint, :uint], :void
     attach_function :glNormalP3uiv, [:uint, :pointer], :void
+    attach_function :glNormalPointer, [:uint, :int, :pointer], :void
     attach_function :glObjectLabel, [:uint, :uint, :int, :string], :void
     attach_function :glObjectPtrLabel, [:pointer, :int, :string], :void
+    attach_function :glOrtho, [:double, :double, :double, :double, :double, :double], :void
+    attach_function :glPassThrough, [:float], :void
     attach_function :glPatchParameterfv, [:uint, :pointer], :void
     attach_function :glPatchParameteri, [:uint, :int], :void
     attach_function :glPauseTransformFeedback, [], :void
+    attach_function :glPixelMapfv, [:uint, :int, :pointer], :void
+    attach_function :glPixelMapuiv, [:uint, :int, :pointer], :void
+    attach_function :glPixelMapusv, [:uint, :int, :pointer], :void
     attach_function :glPixelStoref, [:uint, :float], :void
     attach_function :glPixelStorei, [:uint, :int], :void
+    attach_function :glPixelTransferf, [:uint, :float], :void
+    attach_function :glPixelTransferi, [:uint, :int], :void
+    attach_function :glPixelZoom, [:float, :float], :void
     attach_function :glPointParameterf, [:uint, :float], :void
     attach_function :glPointParameterfv, [:uint, :pointer], :void
     attach_function :glPointParameteri, [:uint, :int], :void
@@ -401,8 +598,14 @@ module RubyGL::Native
     attach_function :glPointSize, [:float], :void
     attach_function :glPolygonMode, [:uint, :uint], :void
     attach_function :glPolygonOffset, [:float, :float], :void
+    attach_function :glPolygonStipple, [:string], :void
+    attach_function :glPopAttrib, [], :void
+    attach_function :glPopClientAttrib, [], :void
     attach_function :glPopDebugGroup, [], :void
+    attach_function :glPopMatrix, [], :void
+    attach_function :glPopName, [], :void
     attach_function :glPrimitiveRestartIndex, [:uint], :void
+    attach_function :glPrioritizeTextures, [:int, :pointer, :pointer], :void
     attach_function :glProgramBinary, [:uint, :uint, :pointer, :int], :void
     attach_function :glProgramParameteri, [:uint, :uint, :int], :void
     attach_function :glProgramUniform1d, [:uint, :int, :double], :void
@@ -456,15 +659,54 @@ module RubyGL::Native
     attach_function :glProgramUniformMatrix4x3dv, [:uint, :int, :int, :uchar, :pointer], :void
     attach_function :glProgramUniformMatrix4x3fv, [:uint, :int, :int, :uchar, :pointer], :void
     attach_function :glProvokingVertex, [:uint], :void
+    attach_function :glPushAttrib, [:uint], :void
+    attach_function :glPushClientAttrib, [:uint], :void
     attach_function :glPushDebugGroup, [:uint, :uint, :int, :string], :void
+    attach_function :glPushMatrix, [], :void
+    attach_function :glPushName, [:uint], :void
     attach_function :glQueryCounter, [:uint, :uint], :void
+    attach_function :glRasterPos2d, [:double, :double], :void
+    attach_function :glRasterPos2dv, [:pointer], :void
+    attach_function :glRasterPos2f, [:float, :float], :void
+    attach_function :glRasterPos2fv, [:pointer], :void
+    attach_function :glRasterPos2i, [:int, :int], :void
+    attach_function :glRasterPos2iv, [:pointer], :void
+    attach_function :glRasterPos2s, [:short, :short], :void
+    attach_function :glRasterPos2sv, [:pointer], :void
+    attach_function :glRasterPos3d, [:double, :double, :double], :void
+    attach_function :glRasterPos3dv, [:pointer], :void
+    attach_function :glRasterPos3f, [:float, :float, :float], :void
+    attach_function :glRasterPos3fv, [:pointer], :void
+    attach_function :glRasterPos3i, [:int, :int, :int], :void
+    attach_function :glRasterPos3iv, [:pointer], :void
+    attach_function :glRasterPos3s, [:short, :short, :short], :void
+    attach_function :glRasterPos3sv, [:pointer], :void
+    attach_function :glRasterPos4d, [:double, :double, :double, :double], :void
+    attach_function :glRasterPos4dv, [:pointer], :void
+    attach_function :glRasterPos4f, [:float, :float, :float, :float], :void
+    attach_function :glRasterPos4fv, [:pointer], :void
+    attach_function :glRasterPos4i, [:int, :int, :int, :int], :void
+    attach_function :glRasterPos4iv, [:pointer], :void
+    attach_function :glRasterPos4s, [:short, :short, :short, :short], :void
+    attach_function :glRasterPos4sv, [:pointer], :void
     attach_function :glReadBuffer, [:uint], :void
     attach_function :glReadPixels, [:int, :int, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glReadnPixels, [:int, :int, :int, :int, :uint, :uint, :int, :pointer], :void
+    attach_function :glRectd, [:double, :double, :double, :double], :void
+    attach_function :glRectdv, [:pointer, :pointer], :void
+    attach_function :glRectf, [:float, :float, :float, :float], :void
+    attach_function :glRectfv, [:pointer, :pointer], :void
+    attach_function :glRecti, [:int, :int, :int, :int], :void
+    attach_function :glRectiv, [:pointer, :pointer], :void
+    attach_function :glRects, [:short, :short, :short, :short], :void
+    attach_function :glRectsv, [:pointer, :pointer], :void
     attach_function :glReleaseShaderCompiler, [], :void
+    attach_function :glRenderMode, [:uint], :int
     attach_function :glRenderbufferStorage, [:uint, :uint, :int, :int], :void
     attach_function :glRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
     attach_function :glResumeTransformFeedback, [], :void
+    attach_function :glRotated, [:double, :double, :double, :double], :void
+    attach_function :glRotatef, [:float, :float, :float, :float], :void
     attach_function :glSampleCoverage, [:float, :uchar], :void
     attach_function :glSampleMaski, [:uint, :uint], :void
     attach_function :glSamplerParameterIiv, [:uint, :uint, :pointer], :void
@@ -473,12 +715,33 @@ module RubyGL::Native
     attach_function :glSamplerParameterfv, [:uint, :uint, :pointer], :void
     attach_function :glSamplerParameteri, [:uint, :uint, :int], :void
     attach_function :glSamplerParameteriv, [:uint, :uint, :pointer], :void
+    attach_function :glScaled, [:double, :double, :double], :void
+    attach_function :glScalef, [:float, :float, :float], :void
     attach_function :glScissor, [:int, :int, :int, :int], :void
     attach_function :glScissorArrayv, [:uint, :int, :pointer], :void
     attach_function :glScissorIndexed, [:uint, :int, :int, :int, :int], :void
     attach_function :glScissorIndexedv, [:uint, :pointer], :void
+    attach_function :glSecondaryColor3b, [:char, :char, :char], :void
+    attach_function :glSecondaryColor3bv, [:pointer], :void
+    attach_function :glSecondaryColor3d, [:double, :double, :double], :void
+    attach_function :glSecondaryColor3dv, [:pointer], :void
+    attach_function :glSecondaryColor3f, [:float, :float, :float], :void
+    attach_function :glSecondaryColor3fv, [:pointer], :void
+    attach_function :glSecondaryColor3i, [:int, :int, :int], :void
+    attach_function :glSecondaryColor3iv, [:pointer], :void
+    attach_function :glSecondaryColor3s, [:short, :short, :short], :void
+    attach_function :glSecondaryColor3sv, [:pointer], :void
+    attach_function :glSecondaryColor3ub, [:uchar, :uchar, :uchar], :void
+    attach_function :glSecondaryColor3ubv, [:string], :void
+    attach_function :glSecondaryColor3ui, [:uint, :uint, :uint], :void
+    attach_function :glSecondaryColor3uiv, [:pointer], :void
+    attach_function :glSecondaryColor3us, [:ushort, :ushort, :ushort], :void
+    attach_function :glSecondaryColor3usv, [:pointer], :void
     attach_function :glSecondaryColorP3ui, [:uint, :uint], :void
     attach_function :glSecondaryColorP3uiv, [:uint, :pointer], :void
+    attach_function :glSecondaryColorPointer, [:int, :uint, :int, :pointer], :void
+    attach_function :glSelectBuffer, [:int, :pointer], :void
+    attach_function :glShadeModel, [:uint], :void
     attach_function :glShaderBinary, [:int, :pointer, :uint, :pointer, :int], :void
     attach_function :glShaderSource, [:uint, :int, :pointer, :pointer], :void
     attach_function :glShaderStorageBlockBinding, [:uint, :uint, :uint], :void
@@ -490,6 +753,38 @@ module RubyGL::Native
     attach_function :glStencilOpSeparate, [:uint, :uint, :uint, :uint], :void
     attach_function :glTexBuffer, [:uint, :uint, :uint], :void
     attach_function :glTexBufferRange, [:uint, :uint, :uint, :int, :int], :void
+    attach_function :glTexCoord1d, [:double], :void
+    attach_function :glTexCoord1dv, [:pointer], :void
+    attach_function :glTexCoord1f, [:float], :void
+    attach_function :glTexCoord1fv, [:pointer], :void
+    attach_function :glTexCoord1i, [:int], :void
+    attach_function :glTexCoord1iv, [:pointer], :void
+    attach_function :glTexCoord1s, [:short], :void
+    attach_function :glTexCoord1sv, [:pointer], :void
+    attach_function :glTexCoord2d, [:double, :double], :void
+    attach_function :glTexCoord2dv, [:pointer], :void
+    attach_function :glTexCoord2f, [:float, :float], :void
+    attach_function :glTexCoord2fv, [:pointer], :void
+    attach_function :glTexCoord2i, [:int, :int], :void
+    attach_function :glTexCoord2iv, [:pointer], :void
+    attach_function :glTexCoord2s, [:short, :short], :void
+    attach_function :glTexCoord2sv, [:pointer], :void
+    attach_function :glTexCoord3d, [:double, :double, :double], :void
+    attach_function :glTexCoord3dv, [:pointer], :void
+    attach_function :glTexCoord3f, [:float, :float, :float], :void
+    attach_function :glTexCoord3fv, [:pointer], :void
+    attach_function :glTexCoord3i, [:int, :int, :int], :void
+    attach_function :glTexCoord3iv, [:pointer], :void
+    attach_function :glTexCoord3s, [:short, :short, :short], :void
+    attach_function :glTexCoord3sv, [:pointer], :void
+    attach_function :glTexCoord4d, [:double, :double, :double, :double], :void
+    attach_function :glTexCoord4dv, [:pointer], :void
+    attach_function :glTexCoord4f, [:float, :float, :float, :float], :void
+    attach_function :glTexCoord4fv, [:pointer], :void
+    attach_function :glTexCoord4i, [:int, :int, :int, :int], :void
+    attach_function :glTexCoord4iv, [:pointer], :void
+    attach_function :glTexCoord4s, [:short, :short, :short, :short], :void
+    attach_function :glTexCoord4sv, [:pointer], :void
     attach_function :glTexCoordP1ui, [:uint, :uint], :void
     attach_function :glTexCoordP1uiv, [:uint, :pointer], :void
     attach_function :glTexCoordP2ui, [:uint, :uint], :void
@@ -498,6 +793,17 @@ module RubyGL::Native
     attach_function :glTexCoordP3uiv, [:uint, :pointer], :void
     attach_function :glTexCoordP4ui, [:uint, :uint], :void
     attach_function :glTexCoordP4uiv, [:uint, :pointer], :void
+    attach_function :glTexCoordPointer, [:int, :uint, :int, :pointer], :void
+    attach_function :glTexEnvf, [:uint, :uint, :float], :void
+    attach_function :glTexEnvfv, [:uint, :uint, :pointer], :void
+    attach_function :glTexEnvi, [:uint, :uint, :int], :void
+    attach_function :glTexEnviv, [:uint, :uint, :pointer], :void
+    attach_function :glTexGend, [:uint, :uint, :double], :void
+    attach_function :glTexGendv, [:uint, :uint, :pointer], :void
+    attach_function :glTexGenf, [:uint, :uint, :float], :void
+    attach_function :glTexGenfv, [:uint, :uint, :pointer], :void
+    attach_function :glTexGeni, [:uint, :uint, :int], :void
+    attach_function :glTexGeniv, [:uint, :uint, :pointer], :void
     attach_function :glTexImage1D, [:uint, :int, :int, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glTexImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
     attach_function :glTexImage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
@@ -538,6 +844,8 @@ module RubyGL::Native
     attach_function :glTransformFeedbackBufferBase, [:uint, :uint, :uint], :void
     attach_function :glTransformFeedbackBufferRange, [:uint, :uint, :uint, :int, :int], :void
     attach_function :glTransformFeedbackVaryings, [:uint, :int, :pointer, :uint], :void
+    attach_function :glTranslated, [:double, :double, :double], :void
+    attach_function :glTranslatef, [:float, :float, :float], :void
     attach_function :glUniform1d, [:int, :double], :void
     attach_function :glUniform1dv, [:int, :int, :pointer], :void
     attach_function :glUniform1f, [:int, :float], :void
@@ -596,6 +904,30 @@ module RubyGL::Native
     attach_function :glUseProgramStages, [:uint, :uint, :uint], :void
     attach_function :glValidateProgram, [:uint], :void
     attach_function :glValidateProgramPipeline, [:uint], :void
+    attach_function :glVertex2d, [:double, :double], :void
+    attach_function :glVertex2dv, [:pointer], :void
+    attach_function :glVertex2f, [:float, :float], :void
+    attach_function :glVertex2fv, [:pointer], :void
+    attach_function :glVertex2i, [:int, :int], :void
+    attach_function :glVertex2iv, [:pointer], :void
+    attach_function :glVertex2s, [:short, :short], :void
+    attach_function :glVertex2sv, [:pointer], :void
+    attach_function :glVertex3d, [:double, :double, :double], :void
+    attach_function :glVertex3dv, [:pointer], :void
+    attach_function :glVertex3f, [:float, :float, :float], :void
+    attach_function :glVertex3fv, [:pointer], :void
+    attach_function :glVertex3i, [:int, :int, :int], :void
+    attach_function :glVertex3iv, [:pointer], :void
+    attach_function :glVertex3s, [:short, :short, :short], :void
+    attach_function :glVertex3sv, [:pointer], :void
+    attach_function :glVertex4d, [:double, :double, :double, :double], :void
+    attach_function :glVertex4dv, [:pointer], :void
+    attach_function :glVertex4f, [:float, :float, :float, :float], :void
+    attach_function :glVertex4fv, [:pointer], :void
+    attach_function :glVertex4i, [:int, :int, :int, :int], :void
+    attach_function :glVertex4iv, [:pointer], :void
+    attach_function :glVertex4s, [:short, :short, :short, :short], :void
+    attach_function :glVertex4sv, [:pointer], :void
     attach_function :glVertexArrayAttribBinding, [:uint, :uint, :uint], :void
     attach_function :glVertexArrayAttribFormat, [:uint, :uint, :int, :uint, :uchar, :uint], :void
     attach_function :glVertexArrayAttribIFormat, [:uint, :uint, :int, :uint, :uint], :void
@@ -691,13 +1023,45 @@ module RubyGL::Native
     attach_function :glVertexP3uiv, [:uint, :pointer], :void
     attach_function :glVertexP4ui, [:uint, :uint], :void
     attach_function :glVertexP4uiv, [:uint, :pointer], :void
+    attach_function :glVertexPointer, [:int, :uint, :int, :pointer], :void
     attach_function :glViewport, [:int, :int, :int, :int], :void
     attach_function :glViewportArrayv, [:uint, :int, :pointer], :void
     attach_function :glViewportIndexedf, [:uint, :float, :float, :float, :float], :void
     attach_function :glViewportIndexedfv, [:uint, :pointer], :void
     attach_function :glWaitSync, [:pointer, :uint, :uint64], :void
+    attach_function :glWindowPos2d, [:double, :double], :void
+    attach_function :glWindowPos2dv, [:pointer], :void
+    attach_function :glWindowPos2f, [:float, :float], :void
+    attach_function :glWindowPos2fv, [:pointer], :void
+    attach_function :glWindowPos2i, [:int, :int], :void
+    attach_function :glWindowPos2iv, [:pointer], :void
+    attach_function :glWindowPos2s, [:short, :short], :void
+    attach_function :glWindowPos2sv, [:pointer], :void
+    attach_function :glWindowPos3d, [:double, :double, :double], :void
+    attach_function :glWindowPos3dv, [:pointer], :void
+    attach_function :glWindowPos3f, [:float, :float, :float], :void
+    attach_function :glWindowPos3fv, [:pointer], :void
+    attach_function :glWindowPos3i, [:int, :int, :int], :void
+    attach_function :glWindowPos3iv, [:pointer], :void
+    attach_function :glWindowPos3s, [:short, :short, :short], :void
+    attach_function :glWindowPos3sv, [:pointer], :void
 
     
+    GL_2D = 0x0600
+    GL_2_BYTES = 0x1407
+    GL_3D = 0x0601
+    GL_3D_COLOR = 0x0602
+    GL_3D_COLOR_TEXTURE = 0x0603
+    GL_3_BYTES = 0x1408
+    GL_4D_COLOR_TEXTURE = 0x0604
+    GL_4_BYTES = 0x1409
+    GL_ACCUM = 0x0100
+    GL_ACCUM_ALPHA_BITS = 0x0D5B
+    GL_ACCUM_BLUE_BITS = 0x0D5A
+    GL_ACCUM_BUFFER_BIT = 0x00000200
+    GL_ACCUM_CLEAR_VALUE = 0x0B80
+    GL_ACCUM_GREEN_BITS = 0x0D59
+    GL_ACCUM_RED_BITS = 0x0D58
     GL_ACTIVE_ATOMIC_COUNTER_BUFFERS = 0x92D9
     GL_ACTIVE_ATTRIBUTES = 0x8B89
     GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 0x8B8A
@@ -714,12 +1078,29 @@ module RubyGL::Native
     GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH = 0x8A35
     GL_ACTIVE_UNIFORM_MAX_LENGTH = 0x8B87
     GL_ACTIVE_VARIABLES = 0x9305
+    GL_ADD = 0x0104
+    GL_ADD_SIGNED = 0x8574
     GL_ALIASED_LINE_WIDTH_RANGE = 0x846E
+    GL_ALIASED_POINT_SIZE_RANGE = 0x846D
+    GL_ALL_ATTRIB_BITS = 0xFFFFFFFF
     GL_ALL_BARRIER_BITS = 0xFFFFFFFF
     GL_ALL_SHADER_BITS = 0xFFFFFFFF
     GL_ALPHA = 0x1906
+    GL_ALPHA12 = 0x803D
+    GL_ALPHA16 = 0x803E
+    GL_ALPHA4 = 0x803B
+    GL_ALPHA8 = 0x803C
+    GL_ALPHA_BIAS = 0x0D1D
+    GL_ALPHA_BITS = 0x0D55
+    GL_ALPHA_INTEGER = 0x8D97
+    GL_ALPHA_SCALE = 0x0D1C
+    GL_ALPHA_TEST = 0x0BC0
+    GL_ALPHA_TEST_FUNC = 0x0BC1
+    GL_ALPHA_TEST_REF = 0x0BC2
     GL_ALREADY_SIGNALED = 0x911A
     GL_ALWAYS = 0x0207
+    GL_AMBIENT = 0x1200
+    GL_AMBIENT_AND_DIFFUSE = 0x1602
     GL_AND = 0x1501
     GL_AND_INVERTED = 0x1504
     GL_AND_REVERSE = 0x1502
@@ -745,7 +1126,14 @@ module RubyGL::Native
     GL_ATOMIC_COUNTER_BUFFER_SIZE = 0x92C3
     GL_ATOMIC_COUNTER_BUFFER_START = 0x92C2
     GL_ATTACHED_SHADERS = 0x8B85
+    GL_ATTRIB_STACK_DEPTH = 0x0BB0
     GL_AUTO_GENERATE_MIPMAP = 0x8295
+    GL_AUTO_NORMAL = 0x0D80
+    GL_AUX0 = 0x0409
+    GL_AUX1 = 0x040A
+    GL_AUX2 = 0x040B
+    GL_AUX3 = 0x040C
+    GL_AUX_BUFFERS = 0x0C00
     GL_BACK = 0x0405
     GL_BACK_LEFT = 0x0402
     GL_BACK_RIGHT = 0x0403
@@ -753,6 +1141,8 @@ module RubyGL::Native
     GL_BGRA = 0x80E1
     GL_BGRA_INTEGER = 0x8D9B
     GL_BGR_INTEGER = 0x8D9A
+    GL_BITMAP = 0x1A00
+    GL_BITMAP_TOKEN = 0x0704
     GL_BLEND = 0x0BE2
     GL_BLEND_DST = 0x0BE0
     GL_BLEND_DST_ALPHA = 0x80CA
@@ -764,7 +1154,10 @@ module RubyGL::Native
     GL_BLEND_SRC_RGB = 0x80C9
     GL_BLOCK_INDEX = 0x92FD
     GL_BLUE = 0x1905
+    GL_BLUE_BIAS = 0x0D1B
+    GL_BLUE_BITS = 0x0D54
     GL_BLUE_INTEGER = 0x8D96
+    GL_BLUE_SCALE = 0x0D1A
     GL_BOOL = 0x8B56
     GL_BOOL_VEC2 = 0x8B57
     GL_BOOL_VEC3 = 0x8B58
@@ -785,16 +1178,28 @@ module RubyGL::Native
     GL_BUFFER_USAGE = 0x8765
     GL_BUFFER_VARIABLE = 0x92E5
     GL_BYTE = 0x1400
+    GL_C3F_V3F = 0x2A24
+    GL_C4F_N3F_V3F = 0x2A26
+    GL_C4UB_V2F = 0x2A22
+    GL_C4UB_V3F = 0x2A23
     GL_CAVEAT_SUPPORT = 0x82B8
     GL_CCW = 0x0901
+    GL_CLAMP = 0x2900
+    GL_CLAMP_FRAGMENT_COLOR = 0x891B
     GL_CLAMP_READ_COLOR = 0x891C
     GL_CLAMP_TO_BORDER = 0x812D
     GL_CLAMP_TO_EDGE = 0x812F
+    GL_CLAMP_VERTEX_COLOR = 0x891A
     GL_CLEAR = 0x1500
     GL_CLEAR_BUFFER = 0x82B4
     GL_CLEAR_TEXTURE = 0x9365
+    GL_CLIENT_ACTIVE_TEXTURE = 0x84E1
+    GL_CLIENT_ALL_ATTRIB_BITS = 0xFFFFFFFF
+    GL_CLIENT_ATTRIB_STACK_DEPTH = 0x0BB1
     GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT = 0x00004000
+    GL_CLIENT_PIXEL_STORE_BIT = 0x00000001
     GL_CLIENT_STORAGE_BIT = 0x0200
+    GL_CLIENT_VERTEX_ARRAY_BIT = 0x00000002
     GL_CLIP_DEPTH_MODE = 0x935D
     GL_CLIP_DISTANCE0 = 0x3000
     GL_CLIP_DISTANCE1 = 0x3001
@@ -805,7 +1210,20 @@ module RubyGL::Native
     GL_CLIP_DISTANCE6 = 0x3006
     GL_CLIP_DISTANCE7 = 0x3007
     GL_CLIP_ORIGIN = 0x935C
+    GL_CLIP_PLANE0 = 0x3000
+    GL_CLIP_PLANE1 = 0x3001
+    GL_CLIP_PLANE2 = 0x3002
+    GL_CLIP_PLANE3 = 0x3003
+    GL_CLIP_PLANE4 = 0x3004
+    GL_CLIP_PLANE5 = 0x3005
+    GL_COEFF = 0x0A00
     GL_COLOR = 0x1800
+    GL_COLOR_ARRAY = 0x8076
+    GL_COLOR_ARRAY_BUFFER_BINDING = 0x8898
+    GL_COLOR_ARRAY_POINTER = 0x8090
+    GL_COLOR_ARRAY_SIZE = 0x8081
+    GL_COLOR_ARRAY_STRIDE = 0x8083
+    GL_COLOR_ARRAY_TYPE = 0x8082
     GL_COLOR_ATTACHMENT0 = 0x8CE0
     GL_COLOR_ATTACHMENT1 = 0x8CE1
     GL_COLOR_ATTACHMENT10 = 0x8CEA
@@ -826,13 +1244,29 @@ module RubyGL::Native
     GL_COLOR_CLEAR_VALUE = 0x0C22
     GL_COLOR_COMPONENTS = 0x8283
     GL_COLOR_ENCODING = 0x8296
+    GL_COLOR_INDEX = 0x1900
+    GL_COLOR_INDEXES = 0x1603
     GL_COLOR_LOGIC_OP = 0x0BF2
+    GL_COLOR_MATERIAL = 0x0B57
+    GL_COLOR_MATERIAL_FACE = 0x0B55
+    GL_COLOR_MATERIAL_PARAMETER = 0x0B56
     GL_COLOR_RENDERABLE = 0x8286
+    GL_COLOR_SUM = 0x8458
     GL_COLOR_WRITEMASK = 0x0C23
+    GL_COMBINE = 0x8570
+    GL_COMBINE_ALPHA = 0x8572
+    GL_COMBINE_RGB = 0x8571
     GL_COMMAND_BARRIER_BIT = 0x00000040
     GL_COMPARE_REF_TO_TEXTURE = 0x884E
+    GL_COMPARE_R_TO_TEXTURE = 0x884E
     GL_COMPATIBLE_SUBROUTINES = 0x8E4B
+    GL_COMPILE = 0x1300
+    GL_COMPILE_AND_EXECUTE = 0x1301
     GL_COMPILE_STATUS = 0x8B81
+    GL_COMPRESSED_ALPHA = 0x84E9
+    GL_COMPRESSED_INTENSITY = 0x84EC
+    GL_COMPRESSED_LUMINANCE = 0x84EA
+    GL_COMPRESSED_LUMINANCE_ALPHA = 0x84EB
     GL_COMPRESSED_R11_EAC = 0x9270
     GL_COMPRESSED_RED = 0x8225
     GL_COMPRESSED_RED_RGTC1 = 0x8DBB
@@ -851,6 +1285,8 @@ module RubyGL::Native
     GL_COMPRESSED_SIGNED_RED_RGTC1 = 0x8DBC
     GL_COMPRESSED_SIGNED_RG11_EAC = 0x9273
     GL_COMPRESSED_SIGNED_RG_RGTC2 = 0x8DBE
+    GL_COMPRESSED_SLUMINANCE = 0x8C4A
+    GL_COMPRESSED_SLUMINANCE_ALPHA = 0x8C4B
     GL_COMPRESSED_SRGB = 0x8C48
     GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC = 0x9279
     GL_COMPRESSED_SRGB8_ETC2 = 0x9275
@@ -865,7 +1301,9 @@ module RubyGL::Native
     GL_COMPUTE_TEXTURE = 0x82A0
     GL_COMPUTE_WORK_GROUP_SIZE = 0x8267
     GL_CONDITION_SATISFIED = 0x911C
+    GL_CONSTANT = 0x8576
     GL_CONSTANT_ALPHA = 0x8003
+    GL_CONSTANT_ATTENUATION = 0x1207
     GL_CONSTANT_COLOR = 0x8001
     GL_CONTEXT_COMPATIBILITY_PROFILE_BIT = 0x00000002
     GL_CONTEXT_CORE_PROFILE_BIT = 0x00000001
@@ -877,16 +1315,33 @@ module RubyGL::Native
     GL_CONTEXT_PROFILE_MASK = 0x9126
     GL_CONTEXT_RELEASE_BEHAVIOR = 0x82FB
     GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x82FC
+    GL_COORD_REPLACE = 0x8862
     GL_COPY = 0x1503
     GL_COPY_INVERTED = 0x150C
+    GL_COPY_PIXEL_TOKEN = 0x0706
     GL_COPY_READ_BUFFER = 0x8F36
     GL_COPY_READ_BUFFER_BINDING = 0x8F36
     GL_COPY_WRITE_BUFFER = 0x8F37
     GL_COPY_WRITE_BUFFER_BINDING = 0x8F37
     GL_CULL_FACE = 0x0B44
     GL_CULL_FACE_MODE = 0x0B45
+    GL_CURRENT_BIT = 0x00000001
+    GL_CURRENT_COLOR = 0x0B00
+    GL_CURRENT_FOG_COORD = 0x8453
+    GL_CURRENT_FOG_COORDINATE = 0x8453
+    GL_CURRENT_INDEX = 0x0B01
+    GL_CURRENT_NORMAL = 0x0B02
     GL_CURRENT_PROGRAM = 0x8B8D
     GL_CURRENT_QUERY = 0x8865
+    GL_CURRENT_RASTER_COLOR = 0x0B04
+    GL_CURRENT_RASTER_DISTANCE = 0x0B09
+    GL_CURRENT_RASTER_INDEX = 0x0B05
+    GL_CURRENT_RASTER_POSITION = 0x0B07
+    GL_CURRENT_RASTER_POSITION_VALID = 0x0B08
+    GL_CURRENT_RASTER_SECONDARY_COLOR = 0x845F
+    GL_CURRENT_RASTER_TEXTURE_COORDS = 0x0B06
+    GL_CURRENT_SECONDARY_COLOR = 0x8459
+    GL_CURRENT_TEXTURE_COORDS = 0x0B03
     GL_CURRENT_VERTEX_ATTRIB = 0x8626
     GL_CW = 0x0900
     GL_DEBUG_CALLBACK_FUNCTION = 0x8244
@@ -915,6 +1370,7 @@ module RubyGL::Native
     GL_DEBUG_TYPE_PORTABILITY = 0x824F
     GL_DEBUG_TYPE_PUSH_GROUP = 0x8269
     GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR = 0x824E
+    GL_DECAL = 0x2101
     GL_DECR = 0x1E03
     GL_DECR_WRAP = 0x8508
     GL_DELETE_STATUS = 0x8B80
@@ -922,6 +1378,8 @@ module RubyGL::Native
     GL_DEPTH24_STENCIL8 = 0x88F0
     GL_DEPTH32F_STENCIL8 = 0x8CAD
     GL_DEPTH_ATTACHMENT = 0x8D00
+    GL_DEPTH_BIAS = 0x0D1F
+    GL_DEPTH_BITS = 0x0D56
     GL_DEPTH_BUFFER_BIT = 0x00000100
     GL_DEPTH_CLAMP = 0x864F
     GL_DEPTH_CLEAR_VALUE = 0x0B73
@@ -934,16 +1392,22 @@ module RubyGL::Native
     GL_DEPTH_FUNC = 0x0B74
     GL_DEPTH_RANGE = 0x0B70
     GL_DEPTH_RENDERABLE = 0x8287
+    GL_DEPTH_SCALE = 0x0D1E
     GL_DEPTH_STENCIL = 0x84F9
     GL_DEPTH_STENCIL_ATTACHMENT = 0x821A
     GL_DEPTH_STENCIL_TEXTURE_MODE = 0x90EA
     GL_DEPTH_TEST = 0x0B71
+    GL_DEPTH_TEXTURE_MODE = 0x884B
     GL_DEPTH_WRITEMASK = 0x0B72
+    GL_DIFFUSE = 0x1201
     GL_DISPATCH_INDIRECT_BUFFER = 0x90EE
     GL_DISPATCH_INDIRECT_BUFFER_BINDING = 0x90EF
     GL_DISPLAY_LIST = 0x82E7
     GL_DITHER = 0x0BD0
+    GL_DOMAIN = 0x0A02
     GL_DONT_CARE = 0x1100
+    GL_DOT3_RGB = 0x86AE
+    GL_DOT3_RGBA = 0x86AF
     GL_DOUBLE = 0x140A
     GL_DOUBLEBUFFER = 0x0C32
     GL_DOUBLE_MAT2 = 0x8F46
@@ -979,25 +1443,43 @@ module RubyGL::Native
     GL_DRAW_FRAMEBUFFER_BINDING = 0x8CA6
     GL_DRAW_INDIRECT_BUFFER = 0x8F3F
     GL_DRAW_INDIRECT_BUFFER_BINDING = 0x8F43
+    GL_DRAW_PIXEL_TOKEN = 0x0705
     GL_DST_ALPHA = 0x0304
     GL_DST_COLOR = 0x0306
     GL_DYNAMIC_COPY = 0x88EA
     GL_DYNAMIC_DRAW = 0x88E8
     GL_DYNAMIC_READ = 0x88E9
     GL_DYNAMIC_STORAGE_BIT = 0x0100
+    GL_EDGE_FLAG = 0x0B43
+    GL_EDGE_FLAG_ARRAY = 0x8079
+    GL_EDGE_FLAG_ARRAY_BUFFER_BINDING = 0x889B
+    GL_EDGE_FLAG_ARRAY_POINTER = 0x8093
+    GL_EDGE_FLAG_ARRAY_STRIDE = 0x808C
     GL_ELEMENT_ARRAY_BARRIER_BIT = 0x00000002
     GL_ELEMENT_ARRAY_BUFFER = 0x8893
     GL_ELEMENT_ARRAY_BUFFER_BINDING = 0x8895
+    GL_EMISSION = 0x1600
+    GL_ENABLE_BIT = 0x00002000
     GL_EQUAL = 0x0202
     GL_EQUIV = 0x1509
+    GL_EVAL_BIT = 0x00010000
+    GL_EXP = 0x0800
+    GL_EXP2 = 0x0801
     GL_EXTENSIONS = 0x1F03
+    GL_EYE_LINEAR = 0x2400
+    GL_EYE_PLANE = 0x2502
     GL_FALSE = 0
     GL_FASTEST = 0x1101
+    GL_FEEDBACK = 0x1C01
+    GL_FEEDBACK_BUFFER_POINTER = 0x0DF0
+    GL_FEEDBACK_BUFFER_SIZE = 0x0DF1
+    GL_FEEDBACK_BUFFER_TYPE = 0x0DF2
     GL_FILL = 0x1B02
     GL_FILTER = 0x829A
     GL_FIRST_VERTEX_CONVENTION = 0x8E4D
     GL_FIXED = 0x140C
     GL_FIXED_ONLY = 0x891D
+    GL_FLAT = 0x1D00
     GL_FLOAT = 0x1406
     GL_FLOAT_32_UNSIGNED_INT_24_8_REV = 0x8DAD
     GL_FLOAT_MAT2 = 0x8B5A
@@ -1012,8 +1494,32 @@ module RubyGL::Native
     GL_FLOAT_VEC2 = 0x8B50
     GL_FLOAT_VEC3 = 0x8B51
     GL_FLOAT_VEC4 = 0x8B52
+    GL_FOG = 0x0B60
+    GL_FOG_BIT = 0x00000080
+    GL_FOG_COLOR = 0x0B66
+    GL_FOG_COORD = 0x8451
+    GL_FOG_COORDINATE = 0x8451
+    GL_FOG_COORDINATE_ARRAY = 0x8457
+    GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING = 0x889D
+    GL_FOG_COORDINATE_ARRAY_POINTER = 0x8456
+    GL_FOG_COORDINATE_ARRAY_STRIDE = 0x8455
+    GL_FOG_COORDINATE_ARRAY_TYPE = 0x8454
+    GL_FOG_COORDINATE_SOURCE = 0x8450
+    GL_FOG_COORD_ARRAY = 0x8457
+    GL_FOG_COORD_ARRAY_BUFFER_BINDING = 0x889D
+    GL_FOG_COORD_ARRAY_POINTER = 0x8456
+    GL_FOG_COORD_ARRAY_STRIDE = 0x8455
+    GL_FOG_COORD_ARRAY_TYPE = 0x8454
+    GL_FOG_COORD_SRC = 0x8450
+    GL_FOG_DENSITY = 0x0B62
+    GL_FOG_END = 0x0B64
+    GL_FOG_HINT = 0x0C54
+    GL_FOG_INDEX = 0x0B61
+    GL_FOG_MODE = 0x0B65
+    GL_FOG_START = 0x0B63
     GL_FRACTIONAL_EVEN = 0x8E7C
     GL_FRACTIONAL_ODD = 0x8E7B
+    GL_FRAGMENT_DEPTH = 0x8452
     GL_FRAGMENT_INTERPOLATION_OFFSET_BITS = 0x8E5D
     GL_FRAGMENT_SHADER = 0x8B30
     GL_FRAGMENT_SHADER_BIT = 0x00000002
@@ -1066,6 +1572,8 @@ module RubyGL::Native
     GL_FUNC_ADD = 0x8006
     GL_FUNC_REVERSE_SUBTRACT = 0x800B
     GL_FUNC_SUBTRACT = 0x800A
+    GL_GENERATE_MIPMAP = 0x8191
+    GL_GENERATE_MIPMAP_HINT = 0x8192
     GL_GEOMETRY_INPUT_TYPE = 0x8917
     GL_GEOMETRY_OUTPUT_TYPE = 0x8918
     GL_GEOMETRY_SHADER = 0x8DD9
@@ -1080,11 +1588,15 @@ module RubyGL::Native
     GL_GET_TEXTURE_IMAGE_TYPE = 0x8292
     GL_GREATER = 0x0204
     GL_GREEN = 0x1904
+    GL_GREEN_BIAS = 0x0D19
+    GL_GREEN_BITS = 0x0D53
     GL_GREEN_INTEGER = 0x8D95
+    GL_GREEN_SCALE = 0x0D18
     GL_GUILTY_CONTEXT_RESET = 0x8253
     GL_HALF_FLOAT = 0x140B
     GL_HIGH_FLOAT = 0x8DF2
     GL_HIGH_INT = 0x8DF5
+    GL_HINT_BIT = 0x00008000
     GL_IMAGE_1D = 0x904C
     GL_IMAGE_1D_ARRAY = 0x9052
     GL_IMAGE_2D = 0x904D
@@ -1125,9 +1637,26 @@ module RubyGL::Native
     GL_INCR = 0x1E02
     GL_INCR_WRAP = 0x8507
     GL_INDEX = 0x8222
+    GL_INDEX_ARRAY = 0x8077
+    GL_INDEX_ARRAY_BUFFER_BINDING = 0x8899
+    GL_INDEX_ARRAY_POINTER = 0x8091
+    GL_INDEX_ARRAY_STRIDE = 0x8086
+    GL_INDEX_ARRAY_TYPE = 0x8085
+    GL_INDEX_BITS = 0x0D51
+    GL_INDEX_CLEAR_VALUE = 0x0C20
+    GL_INDEX_LOGIC_OP = 0x0BF1
+    GL_INDEX_MODE = 0x0C30
+    GL_INDEX_OFFSET = 0x0D13
+    GL_INDEX_SHIFT = 0x0D12
+    GL_INDEX_WRITEMASK = 0x0C21
     GL_INFO_LOG_LENGTH = 0x8B84
     GL_INNOCENT_CONTEXT_RESET = 0x8254
     GL_INT = 0x1404
+    GL_INTENSITY = 0x8049
+    GL_INTENSITY12 = 0x804C
+    GL_INTENSITY16 = 0x804D
+    GL_INTENSITY4 = 0x804A
+    GL_INTENSITY8 = 0x804B
     GL_INTERLEAVED_ATTRIBS = 0x8C8C
     GL_INTERNALFORMAT_ALPHA_SIZE = 0x8274
     GL_INTERNALFORMAT_ALPHA_TYPE = 0x827B
@@ -1144,6 +1673,7 @@ module RubyGL::Native
     GL_INTERNALFORMAT_STENCIL_SIZE = 0x8276
     GL_INTERNALFORMAT_STENCIL_TYPE = 0x827D
     GL_INTERNALFORMAT_SUPPORTED = 0x826F
+    GL_INTERPOLATE = 0x8575
     GL_INT_2_10_10_10_REV = 0x8D9F
     GL_INT_IMAGE_1D = 0x9057
     GL_INT_IMAGE_1D_ARRAY = 0x905D
@@ -1185,46 +1715,113 @@ module RubyGL::Native
     GL_LEFT = 0x0406
     GL_LEQUAL = 0x0203
     GL_LESS = 0x0201
+    GL_LIGHT0 = 0x4000
+    GL_LIGHT1 = 0x4001
+    GL_LIGHT2 = 0x4002
+    GL_LIGHT3 = 0x4003
+    GL_LIGHT4 = 0x4004
+    GL_LIGHT5 = 0x4005
+    GL_LIGHT6 = 0x4006
+    GL_LIGHT7 = 0x4007
+    GL_LIGHTING = 0x0B50
+    GL_LIGHTING_BIT = 0x00000040
+    GL_LIGHT_MODEL_AMBIENT = 0x0B53
+    GL_LIGHT_MODEL_COLOR_CONTROL = 0x81F8
+    GL_LIGHT_MODEL_LOCAL_VIEWER = 0x0B51
+    GL_LIGHT_MODEL_TWO_SIDE = 0x0B52
     GL_LINE = 0x1B01
     GL_LINEAR = 0x2601
+    GL_LINEAR_ATTENUATION = 0x1208
     GL_LINEAR_MIPMAP_LINEAR = 0x2703
     GL_LINEAR_MIPMAP_NEAREST = 0x2701
     GL_LINES = 0x0001
     GL_LINES_ADJACENCY = 0x000A
+    GL_LINE_BIT = 0x00000004
     GL_LINE_LOOP = 0x0002
+    GL_LINE_RESET_TOKEN = 0x0707
     GL_LINE_SMOOTH = 0x0B20
     GL_LINE_SMOOTH_HINT = 0x0C52
+    GL_LINE_STIPPLE = 0x0B24
+    GL_LINE_STIPPLE_PATTERN = 0x0B25
+    GL_LINE_STIPPLE_REPEAT = 0x0B26
     GL_LINE_STRIP = 0x0003
     GL_LINE_STRIP_ADJACENCY = 0x000B
+    GL_LINE_TOKEN = 0x0702
     GL_LINE_WIDTH = 0x0B21
     GL_LINE_WIDTH_GRANULARITY = 0x0B23
     GL_LINE_WIDTH_RANGE = 0x0B22
     GL_LINK_STATUS = 0x8B82
+    GL_LIST_BASE = 0x0B32
+    GL_LIST_BIT = 0x00020000
+    GL_LIST_INDEX = 0x0B33
+    GL_LIST_MODE = 0x0B30
+    GL_LOAD = 0x0101
     GL_LOCATION = 0x930E
     GL_LOCATION_COMPONENT = 0x934A
     GL_LOCATION_INDEX = 0x930F
+    GL_LOGIC_OP = 0x0BF1
     GL_LOGIC_OP_MODE = 0x0BF0
     GL_LOSE_CONTEXT_ON_RESET = 0x8252
     GL_LOWER_LEFT = 0x8CA1
     GL_LOW_FLOAT = 0x8DF0
     GL_LOW_INT = 0x8DF3
+    GL_LUMINANCE = 0x1909
+    GL_LUMINANCE12 = 0x8041
+    GL_LUMINANCE12_ALPHA12 = 0x8047
+    GL_LUMINANCE12_ALPHA4 = 0x8046
+    GL_LUMINANCE16 = 0x8042
+    GL_LUMINANCE16_ALPHA16 = 0x8048
+    GL_LUMINANCE4 = 0x803F
+    GL_LUMINANCE4_ALPHA4 = 0x8043
+    GL_LUMINANCE6_ALPHA2 = 0x8044
+    GL_LUMINANCE8 = 0x8040
+    GL_LUMINANCE8_ALPHA8 = 0x8045
+    GL_LUMINANCE_ALPHA = 0x190A
     GL_MAJOR_VERSION = 0x821B
     GL_MANUAL_GENERATE_MIPMAP = 0x8294
+    GL_MAP1_COLOR_4 = 0x0D90
+    GL_MAP1_GRID_DOMAIN = 0x0DD0
+    GL_MAP1_GRID_SEGMENTS = 0x0DD1
+    GL_MAP1_INDEX = 0x0D91
+    GL_MAP1_NORMAL = 0x0D92
+    GL_MAP1_TEXTURE_COORD_1 = 0x0D93
+    GL_MAP1_TEXTURE_COORD_2 = 0x0D94
+    GL_MAP1_TEXTURE_COORD_3 = 0x0D95
+    GL_MAP1_TEXTURE_COORD_4 = 0x0D96
+    GL_MAP1_VERTEX_3 = 0x0D97
+    GL_MAP1_VERTEX_4 = 0x0D98
+    GL_MAP2_COLOR_4 = 0x0DB0
+    GL_MAP2_GRID_DOMAIN = 0x0DD2
+    GL_MAP2_GRID_SEGMENTS = 0x0DD3
+    GL_MAP2_INDEX = 0x0DB1
+    GL_MAP2_NORMAL = 0x0DB2
+    GL_MAP2_TEXTURE_COORD_1 = 0x0DB3
+    GL_MAP2_TEXTURE_COORD_2 = 0x0DB4
+    GL_MAP2_TEXTURE_COORD_3 = 0x0DB5
+    GL_MAP2_TEXTURE_COORD_4 = 0x0DB6
+    GL_MAP2_VERTEX_3 = 0x0DB7
+    GL_MAP2_VERTEX_4 = 0x0DB8
     GL_MAP_COHERENT_BIT = 0x0080
+    GL_MAP_COLOR = 0x0D10
     GL_MAP_FLUSH_EXPLICIT_BIT = 0x0010
     GL_MAP_INVALIDATE_BUFFER_BIT = 0x0008
     GL_MAP_INVALIDATE_RANGE_BIT = 0x0004
     GL_MAP_PERSISTENT_BIT = 0x0040
     GL_MAP_READ_BIT = 0x0001
+    GL_MAP_STENCIL = 0x0D11
     GL_MAP_UNSYNCHRONIZED_BIT = 0x0020
     GL_MAP_WRITE_BIT = 0x0002
+    GL_MATRIX_MODE = 0x0BA0
     GL_MATRIX_STRIDE = 0x92FF
     GL_MAX = 0x8008
     GL_MAX_3D_TEXTURE_SIZE = 0x8073
     GL_MAX_ARRAY_TEXTURE_LAYERS = 0x88FF
     GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS = 0x92DC
     GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE = 0x92D8
+    GL_MAX_ATTRIB_STACK_DEPTH = 0x0D35
+    GL_MAX_CLIENT_ATTRIB_STACK_DEPTH = 0x0D3B
     GL_MAX_CLIP_DISTANCES = 0x0D32
+    GL_MAX_CLIP_PLANES = 0x0D32
     GL_MAX_COLOR_ATTACHMENTS = 0x8CDF
     GL_MAX_COLOR_TEXTURE_SAMPLES = 0x910E
     GL_MAX_COMBINED_ATOMIC_COUNTERS = 0x92D7
@@ -1266,6 +1863,7 @@ module RubyGL::Native
     GL_MAX_ELEMENTS_INDICES = 0x80E9
     GL_MAX_ELEMENTS_VERTICES = 0x80E8
     GL_MAX_ELEMENT_INDEX = 0x8D6B
+    GL_MAX_EVAL_ORDER = 0x0D30
     GL_MAX_FRAGMENT_ATOMIC_COUNTERS = 0x92D6
     GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS = 0x92D0
     GL_MAX_FRAGMENT_IMAGE_UNIFORMS = 0x90CE
@@ -1297,12 +1895,18 @@ module RubyGL::Native
     GL_MAX_INTEGER_SAMPLES = 0x9110
     GL_MAX_LABEL_LENGTH = 0x82E8
     GL_MAX_LAYERS = 0x8281
+    GL_MAX_LIGHTS = 0x0D31
+    GL_MAX_LIST_NESTING = 0x0B31
+    GL_MAX_MODELVIEW_STACK_DEPTH = 0x0D36
     GL_MAX_NAME_LENGTH = 0x92F6
+    GL_MAX_NAME_STACK_DEPTH = 0x0D37
     GL_MAX_NUM_ACTIVE_VARIABLES = 0x92F7
     GL_MAX_NUM_COMPATIBLE_SUBROUTINES = 0x92F8
     GL_MAX_PATCH_VERTICES = 0x8E7D
+    GL_MAX_PIXEL_MAP_TABLE = 0x0D34
     GL_MAX_PROGRAM_TEXEL_OFFSET = 0x8905
     GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET = 0x8E5F
+    GL_MAX_PROJECTION_STACK_DEPTH = 0x0D38
     GL_MAX_RECTANGLE_TEXTURE_SIZE = 0x84F8
     GL_MAX_RENDERBUFFER_SIZE = 0x84E8
     GL_MAX_SAMPLES = 0x8D57
@@ -1334,9 +1938,12 @@ module RubyGL::Native
     GL_MAX_TESS_GEN_LEVEL = 0x8E7E
     GL_MAX_TESS_PATCH_COMPONENTS = 0x8E84
     GL_MAX_TEXTURE_BUFFER_SIZE = 0x8C2B
+    GL_MAX_TEXTURE_COORDS = 0x8871
     GL_MAX_TEXTURE_IMAGE_UNITS = 0x8872
     GL_MAX_TEXTURE_LOD_BIAS = 0x84FD
     GL_MAX_TEXTURE_SIZE = 0x0D33
+    GL_MAX_TEXTURE_STACK_DEPTH = 0x0D39
+    GL_MAX_TEXTURE_UNITS = 0x84E2
     GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = 0x8E70
     GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS = 0x8C8A
     GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS = 0x8C8B
@@ -1376,8 +1983,16 @@ module RubyGL::Native
     GL_MIPMAP = 0x8293
     GL_MIRRORED_REPEAT = 0x8370
     GL_MIRROR_CLAMP_TO_EDGE = 0x8743
+    GL_MODELVIEW = 0x1700
+    GL_MODELVIEW_MATRIX = 0x0BA6
+    GL_MODELVIEW_STACK_DEPTH = 0x0BA3
+    GL_MODULATE = 0x2100
+    GL_MULT = 0x0103
     GL_MULTISAMPLE = 0x809D
+    GL_MULTISAMPLE_BIT = 0x20000000
+    GL_N3F_V3F = 0x2A25
     GL_NAME_LENGTH = 0x92F9
+    GL_NAME_STACK_DEPTH = 0x0D70
     GL_NAND = 0x150E
     GL_NEAREST = 0x2600
     GL_NEAREST_MIPMAP_LINEAR = 0x2702
@@ -1388,6 +2003,13 @@ module RubyGL::Native
     GL_NONE = 0
     GL_NOOP = 0x1505
     GL_NOR = 0x1508
+    GL_NORMALIZE = 0x0BA1
+    GL_NORMAL_ARRAY = 0x8075
+    GL_NORMAL_ARRAY_BUFFER_BINDING = 0x8897
+    GL_NORMAL_ARRAY_POINTER = 0x808F
+    GL_NORMAL_ARRAY_STRIDE = 0x807F
+    GL_NORMAL_ARRAY_TYPE = 0x807E
+    GL_NORMAL_MAP = 0x8511
     GL_NOTEQUAL = 0x0205
     GL_NO_ERROR = 0
     GL_NO_RESET_NOTIFICATION = 0x8261
@@ -1399,6 +2021,8 @@ module RubyGL::Native
     GL_NUM_SAMPLE_COUNTS = 0x9380
     GL_NUM_SHADER_BINARY_FORMATS = 0x8DF9
     GL_NUM_SHADING_LANGUAGE_VERSIONS = 0x82E9
+    GL_OBJECT_LINEAR = 0x2401
+    GL_OBJECT_PLANE = 0x2501
     GL_OBJECT_TYPE = 0x9112
     GL_OFFSET = 0x92FC
     GL_ONE = 1
@@ -1410,7 +2034,14 @@ module RubyGL::Native
     GL_ONE_MINUS_SRC1_COLOR = 0x88FA
     GL_ONE_MINUS_SRC_ALPHA = 0x0303
     GL_ONE_MINUS_SRC_COLOR = 0x0301
+    GL_OPERAND0_ALPHA = 0x8598
+    GL_OPERAND0_RGB = 0x8590
+    GL_OPERAND1_ALPHA = 0x8599
+    GL_OPERAND1_RGB = 0x8591
+    GL_OPERAND2_ALPHA = 0x859A
+    GL_OPERAND2_RGB = 0x8592
     GL_OR = 0x1507
+    GL_ORDER = 0x0A01
     GL_OR_INVERTED = 0x150D
     GL_OR_REVERSE = 0x150B
     GL_OUT_OF_MEMORY = 0x0505
@@ -1426,22 +2057,55 @@ module RubyGL::Native
     GL_PACK_SKIP_PIXELS = 0x0D04
     GL_PACK_SKIP_ROWS = 0x0D03
     GL_PACK_SWAP_BYTES = 0x0D00
+    GL_PASS_THROUGH_TOKEN = 0x0700
     GL_PATCHES = 0x000E
     GL_PATCH_DEFAULT_INNER_LEVEL = 0x8E73
     GL_PATCH_DEFAULT_OUTER_LEVEL = 0x8E74
     GL_PATCH_VERTICES = 0x8E72
+    GL_PERSPECTIVE_CORRECTION_HINT = 0x0C50
     GL_PIXEL_BUFFER_BARRIER_BIT = 0x00000080
+    GL_PIXEL_MAP_A_TO_A = 0x0C79
+    GL_PIXEL_MAP_A_TO_A_SIZE = 0x0CB9
+    GL_PIXEL_MAP_B_TO_B = 0x0C78
+    GL_PIXEL_MAP_B_TO_B_SIZE = 0x0CB8
+    GL_PIXEL_MAP_G_TO_G = 0x0C77
+    GL_PIXEL_MAP_G_TO_G_SIZE = 0x0CB7
+    GL_PIXEL_MAP_I_TO_A = 0x0C75
+    GL_PIXEL_MAP_I_TO_A_SIZE = 0x0CB5
+    GL_PIXEL_MAP_I_TO_B = 0x0C74
+    GL_PIXEL_MAP_I_TO_B_SIZE = 0x0CB4
+    GL_PIXEL_MAP_I_TO_G = 0x0C73
+    GL_PIXEL_MAP_I_TO_G_SIZE = 0x0CB3
+    GL_PIXEL_MAP_I_TO_I = 0x0C70
+    GL_PIXEL_MAP_I_TO_I_SIZE = 0x0CB0
+    GL_PIXEL_MAP_I_TO_R = 0x0C72
+    GL_PIXEL_MAP_I_TO_R_SIZE = 0x0CB2
+    GL_PIXEL_MAP_R_TO_R = 0x0C76
+    GL_PIXEL_MAP_R_TO_R_SIZE = 0x0CB6
+    GL_PIXEL_MAP_S_TO_S = 0x0C71
+    GL_PIXEL_MAP_S_TO_S_SIZE = 0x0CB1
+    GL_PIXEL_MODE_BIT = 0x00000020
     GL_PIXEL_PACK_BUFFER = 0x88EB
     GL_PIXEL_PACK_BUFFER_BINDING = 0x88ED
     GL_PIXEL_UNPACK_BUFFER = 0x88EC
     GL_PIXEL_UNPACK_BUFFER_BINDING = 0x88EF
     GL_POINT = 0x1B00
     GL_POINTS = 0x0000
+    GL_POINT_BIT = 0x00000002
+    GL_POINT_DISTANCE_ATTENUATION = 0x8129
     GL_POINT_FADE_THRESHOLD_SIZE = 0x8128
     GL_POINT_SIZE = 0x0B11
     GL_POINT_SIZE_GRANULARITY = 0x0B13
+    GL_POINT_SIZE_MAX = 0x8127
+    GL_POINT_SIZE_MIN = 0x8126
     GL_POINT_SIZE_RANGE = 0x0B12
+    GL_POINT_SMOOTH = 0x0B10
+    GL_POINT_SMOOTH_HINT = 0x0C51
+    GL_POINT_SPRITE = 0x8861
     GL_POINT_SPRITE_COORD_ORIGIN = 0x8CA0
+    GL_POINT_TOKEN = 0x0701
+    GL_POLYGON = 0x0009
+    GL_POLYGON_BIT = 0x00000008
     GL_POLYGON_MODE = 0x0B40
     GL_POLYGON_OFFSET_FACTOR = 0x8038
     GL_POLYGON_OFFSET_FILL = 0x8037
@@ -1450,6 +2114,12 @@ module RubyGL::Native
     GL_POLYGON_OFFSET_UNITS = 0x2A00
     GL_POLYGON_SMOOTH = 0x0B41
     GL_POLYGON_SMOOTH_HINT = 0x0C53
+    GL_POLYGON_STIPPLE = 0x0B42
+    GL_POLYGON_STIPPLE_BIT = 0x00000010
+    GL_POLYGON_TOKEN = 0x0703
+    GL_POSITION = 0x1203
+    GL_PREVIOUS = 0x8578
+    GL_PRIMARY_COLOR = 0x8577
     GL_PRIMITIVES_GENERATED = 0x8C87
     GL_PRIMITIVE_RESTART = 0x8F9D
     GL_PRIMITIVE_RESTART_FIXED_INDEX = 0x8D69
@@ -1465,6 +2135,9 @@ module RubyGL::Native
     GL_PROGRAM_PIPELINE_BINDING = 0x825A
     GL_PROGRAM_POINT_SIZE = 0x8642
     GL_PROGRAM_SEPARABLE = 0x8258
+    GL_PROJECTION = 0x1701
+    GL_PROJECTION_MATRIX = 0x0BA7
+    GL_PROJECTION_STACK_DEPTH = 0x0BA4
     GL_PROVOKING_VERTEX = 0x8E4F
     GL_PROXY_TEXTURE_1D = 0x8063
     GL_PROXY_TEXTURE_1D_ARRAY = 0x8C19
@@ -1476,8 +2149,11 @@ module RubyGL::Native
     GL_PROXY_TEXTURE_CUBE_MAP = 0x851B
     GL_PROXY_TEXTURE_CUBE_MAP_ARRAY = 0x900B
     GL_PROXY_TEXTURE_RECTANGLE = 0x84F7
+    GL_Q = 0x2003
+    GL_QUADRATIC_ATTENUATION = 0x1209
     GL_QUADS = 0x0007
     GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION = 0x8E4C
+    GL_QUAD_STRIP = 0x0008
     GL_QUERY = 0x82E3
     GL_QUERY_BUFFER = 0x9192
     GL_QUERY_BUFFER_BARRIER_BIT = 0x00008000
@@ -1495,6 +2171,7 @@ module RubyGL::Native
     GL_QUERY_TARGET = 0x82EA
     GL_QUERY_WAIT = 0x8E13
     GL_QUERY_WAIT_INVERTED = 0x8E17
+    GL_R = 0x2002
     GL_R11F_G11F_B10F = 0x8C3A
     GL_R16 = 0x822A
     GL_R16F = 0x822D
@@ -1519,13 +2196,18 @@ module RubyGL::Native
     GL_READ_PIXELS_TYPE = 0x828E
     GL_READ_WRITE = 0x88BA
     GL_RED = 0x1903
+    GL_RED_BIAS = 0x0D15
+    GL_RED_BITS = 0x0D52
     GL_RED_INTEGER = 0x8D94
+    GL_RED_SCALE = 0x0D14
     GL_REFERENCED_BY_COMPUTE_SHADER = 0x930B
     GL_REFERENCED_BY_FRAGMENT_SHADER = 0x930A
     GL_REFERENCED_BY_GEOMETRY_SHADER = 0x9309
     GL_REFERENCED_BY_TESS_CONTROL_SHADER = 0x9307
     GL_REFERENCED_BY_TESS_EVALUATION_SHADER = 0x9308
     GL_REFERENCED_BY_VERTEX_SHADER = 0x9306
+    GL_REFLECTION_MAP = 0x8512
+    GL_RENDER = 0x1C00
     GL_RENDERBUFFER = 0x8D41
     GL_RENDERBUFFER_ALPHA_SIZE = 0x8D53
     GL_RENDERBUFFER_BINDING = 0x8CA7
@@ -1539,9 +2221,12 @@ module RubyGL::Native
     GL_RENDERBUFFER_STENCIL_SIZE = 0x8D55
     GL_RENDERBUFFER_WIDTH = 0x8D42
     GL_RENDERER = 0x1F01
+    GL_RENDER_MODE = 0x0C40
     GL_REPEAT = 0x2901
     GL_REPLACE = 0x1E01
+    GL_RESCALE_NORMAL = 0x803A
     GL_RESET_NOTIFICATION_STRATEGY = 0x8256
+    GL_RETURN = 0x0102
     GL_RG = 0x8227
     GL_RG16 = 0x822C
     GL_RG16F = 0x822F
@@ -1594,9 +2279,12 @@ module RubyGL::Native
     GL_RGBA8UI = 0x8D7C
     GL_RGBA8_SNORM = 0x8F97
     GL_RGBA_INTEGER = 0x8D99
+    GL_RGBA_MODE = 0x0C31
     GL_RGB_INTEGER = 0x8D98
+    GL_RGB_SCALE = 0x8573
     GL_RG_INTEGER = 0x8228
     GL_RIGHT = 0x0407
+    GL_S = 0x2000
     GL_SAMPLER = 0x82E6
     GL_SAMPLER_1D = 0x8B5D
     GL_SAMPLER_1D_ARRAY = 0x8DC0
@@ -1629,9 +2317,20 @@ module RubyGL::Native
     GL_SAMPLE_MASK_VALUE = 0x8E52
     GL_SAMPLE_POSITION = 0x8E50
     GL_SAMPLE_SHADING = 0x8C36
+    GL_SCISSOR_BIT = 0x00080000
     GL_SCISSOR_BOX = 0x0C10
     GL_SCISSOR_TEST = 0x0C11
+    GL_SECONDARY_COLOR_ARRAY = 0x845E
+    GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING = 0x889C
+    GL_SECONDARY_COLOR_ARRAY_POINTER = 0x845D
+    GL_SECONDARY_COLOR_ARRAY_SIZE = 0x845A
+    GL_SECONDARY_COLOR_ARRAY_STRIDE = 0x845C
+    GL_SECONDARY_COLOR_ARRAY_TYPE = 0x845B
+    GL_SELECT = 0x1C02
+    GL_SELECTION_BUFFER_POINTER = 0x0DF3
+    GL_SELECTION_BUFFER_SIZE = 0x0DF4
     GL_SEPARATE_ATTRIBS = 0x8C8D
+    GL_SEPARATE_SPECULAR_COLOR = 0x81FA
     GL_SET = 0x150F
     GL_SHADER = 0x82E1
     GL_SHADER_BINARY_FORMATS = 0x8DF8
@@ -1649,7 +2348,9 @@ module RubyGL::Native
     GL_SHADER_STORAGE_BUFFER_SIZE = 0x90D5
     GL_SHADER_STORAGE_BUFFER_START = 0x90D4
     GL_SHADER_TYPE = 0x8B4F
+    GL_SHADE_MODEL = 0x0B54
     GL_SHADING_LANGUAGE_VERSION = 0x8B8C
+    GL_SHININESS = 0x1601
     GL_SHORT = 0x1402
     GL_SIGNALED = 0x9119
     GL_SIGNED_NORMALIZED = 0x8F9C
@@ -1657,12 +2358,34 @@ module RubyGL::Native
     GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE = 0x82AE
     GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST = 0x82AD
     GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE = 0x82AF
+    GL_SINGLE_COLOR = 0x81F9
+    GL_SLUMINANCE = 0x8C46
+    GL_SLUMINANCE8 = 0x8C47
+    GL_SLUMINANCE8_ALPHA8 = 0x8C45
+    GL_SLUMINANCE_ALPHA = 0x8C44
+    GL_SMOOTH = 0x1D01
     GL_SMOOTH_LINE_WIDTH_GRANULARITY = 0x0B23
     GL_SMOOTH_LINE_WIDTH_RANGE = 0x0B22
     GL_SMOOTH_POINT_SIZE_GRANULARITY = 0x0B13
     GL_SMOOTH_POINT_SIZE_RANGE = 0x0B12
+    GL_SOURCE0_ALPHA = 0x8588
+    GL_SOURCE0_RGB = 0x8580
+    GL_SOURCE1_ALPHA = 0x8589
+    GL_SOURCE1_RGB = 0x8581
+    GL_SOURCE2_ALPHA = 0x858A
+    GL_SOURCE2_RGB = 0x8582
+    GL_SPECULAR = 0x1202
+    GL_SPHERE_MAP = 0x2402
+    GL_SPOT_CUTOFF = 0x1206
+    GL_SPOT_DIRECTION = 0x1204
+    GL_SPOT_EXPONENT = 0x1205
+    GL_SRC0_ALPHA = 0x8588
+    GL_SRC0_RGB = 0x8580
     GL_SRC1_ALPHA = 0x8589
     GL_SRC1_COLOR = 0x88F9
+    GL_SRC1_RGB = 0x8581
+    GL_SRC2_ALPHA = 0x858A
+    GL_SRC2_RGB = 0x8582
     GL_SRC_ALPHA = 0x0302
     GL_SRC_ALPHA_SATURATE = 0x0308
     GL_SRC_COLOR = 0x0300
@@ -1686,6 +2409,7 @@ module RubyGL::Native
     GL_STENCIL_BACK_REF = 0x8CA3
     GL_STENCIL_BACK_VALUE_MASK = 0x8CA4
     GL_STENCIL_BACK_WRITEMASK = 0x8CA5
+    GL_STENCIL_BITS = 0x0D57
     GL_STENCIL_BUFFER_BIT = 0x00000400
     GL_STENCIL_CLEAR_VALUE = 0x0B91
     GL_STENCIL_COMPONENTS = 0x8285
@@ -1708,12 +2432,21 @@ module RubyGL::Native
     GL_STREAM_DRAW = 0x88E0
     GL_STREAM_READ = 0x88E1
     GL_SUBPIXEL_BITS = 0x0D50
+    GL_SUBTRACT = 0x84E7
     GL_SYNC_CONDITION = 0x9113
     GL_SYNC_FENCE = 0x9116
     GL_SYNC_FLAGS = 0x9115
     GL_SYNC_FLUSH_COMMANDS_BIT = 0x00000001
     GL_SYNC_GPU_COMMANDS_COMPLETE = 0x9117
     GL_SYNC_STATUS = 0x9114
+    GL_T = 0x2001
+    GL_T2F_C3F_V3F = 0x2A2A
+    GL_T2F_C4F_N3F_V3F = 0x2A2C
+    GL_T2F_C4UB_V3F = 0x2A29
+    GL_T2F_N3F_V3F = 0x2A2B
+    GL_T2F_V3F = 0x2A27
+    GL_T4F_C4F_N3F_V4F = 0x2A2D
+    GL_T4F_V4F = 0x2A28
     GL_TESS_CONTROL_OUTPUT_VERTICES = 0x8E75
     GL_TESS_CONTROL_SHADER = 0x8E88
     GL_TESS_CONTROL_SHADER_BIT = 0x00000008
@@ -1784,8 +2517,10 @@ module RubyGL::Native
     GL_TEXTURE_BINDING_CUBE_MAP = 0x8514
     GL_TEXTURE_BINDING_CUBE_MAP_ARRAY = 0x900A
     GL_TEXTURE_BINDING_RECTANGLE = 0x84F6
+    GL_TEXTURE_BIT = 0x00040000
     GL_TEXTURE_BLUE_SIZE = 0x805E
     GL_TEXTURE_BLUE_TYPE = 0x8C12
+    GL_TEXTURE_BORDER = 0x1005
     GL_TEXTURE_BORDER_COLOR = 0x1004
     GL_TEXTURE_BUFFER = 0x8C2A
     GL_TEXTURE_BUFFER_BINDING = 0x8C2A
@@ -1795,12 +2530,19 @@ module RubyGL::Native
     GL_TEXTURE_BUFFER_SIZE = 0x919E
     GL_TEXTURE_COMPARE_FUNC = 0x884D
     GL_TEXTURE_COMPARE_MODE = 0x884C
+    GL_TEXTURE_COMPONENTS = 0x1003
     GL_TEXTURE_COMPRESSED = 0x86A1
     GL_TEXTURE_COMPRESSED_BLOCK_HEIGHT = 0x82B2
     GL_TEXTURE_COMPRESSED_BLOCK_SIZE = 0x82B3
     GL_TEXTURE_COMPRESSED_BLOCK_WIDTH = 0x82B1
     GL_TEXTURE_COMPRESSED_IMAGE_SIZE = 0x86A0
     GL_TEXTURE_COMPRESSION_HINT = 0x84EF
+    GL_TEXTURE_COORD_ARRAY = 0x8078
+    GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING = 0x889A
+    GL_TEXTURE_COORD_ARRAY_POINTER = 0x8092
+    GL_TEXTURE_COORD_ARRAY_SIZE = 0x8088
+    GL_TEXTURE_COORD_ARRAY_STRIDE = 0x808A
+    GL_TEXTURE_COORD_ARRAY_TYPE = 0x8089
     GL_TEXTURE_CUBE_MAP = 0x8513
     GL_TEXTURE_CUBE_MAP_ARRAY = 0x9009
     GL_TEXTURE_CUBE_MAP_NEGATIVE_X = 0x8516
@@ -1813,10 +2555,19 @@ module RubyGL::Native
     GL_TEXTURE_DEPTH = 0x8071
     GL_TEXTURE_DEPTH_SIZE = 0x884A
     GL_TEXTURE_DEPTH_TYPE = 0x8C16
+    GL_TEXTURE_ENV = 0x2300
+    GL_TEXTURE_ENV_COLOR = 0x2201
+    GL_TEXTURE_ENV_MODE = 0x2200
     GL_TEXTURE_FETCH_BARRIER_BIT = 0x00000008
+    GL_TEXTURE_FILTER_CONTROL = 0x8500
     GL_TEXTURE_FIXED_SAMPLE_LOCATIONS = 0x9107
     GL_TEXTURE_GATHER = 0x82A2
     GL_TEXTURE_GATHER_SHADOW = 0x82A3
+    GL_TEXTURE_GEN_MODE = 0x2500
+    GL_TEXTURE_GEN_Q = 0x0C63
+    GL_TEXTURE_GEN_R = 0x0C62
+    GL_TEXTURE_GEN_S = 0x0C60
+    GL_TEXTURE_GEN_T = 0x0C61
     GL_TEXTURE_GREEN_SIZE = 0x805D
     GL_TEXTURE_GREEN_TYPE = 0x8C11
     GL_TEXTURE_HEIGHT = 0x1001
@@ -1824,19 +2575,27 @@ module RubyGL::Native
     GL_TEXTURE_IMAGE_TYPE = 0x8290
     GL_TEXTURE_IMMUTABLE_FORMAT = 0x912F
     GL_TEXTURE_IMMUTABLE_LEVELS = 0x82DF
+    GL_TEXTURE_INTENSITY_SIZE = 0x8061
+    GL_TEXTURE_INTENSITY_TYPE = 0x8C15
     GL_TEXTURE_INTERNAL_FORMAT = 0x1003
     GL_TEXTURE_LOD_BIAS = 0x8501
+    GL_TEXTURE_LUMINANCE_SIZE = 0x8060
+    GL_TEXTURE_LUMINANCE_TYPE = 0x8C14
     GL_TEXTURE_MAG_FILTER = 0x2800
+    GL_TEXTURE_MATRIX = 0x0BA8
     GL_TEXTURE_MAX_LEVEL = 0x813D
     GL_TEXTURE_MAX_LOD = 0x813B
     GL_TEXTURE_MIN_FILTER = 0x2801
     GL_TEXTURE_MIN_LOD = 0x813A
+    GL_TEXTURE_PRIORITY = 0x8066
     GL_TEXTURE_RECTANGLE = 0x84F5
     GL_TEXTURE_RED_SIZE = 0x805C
     GL_TEXTURE_RED_TYPE = 0x8C10
+    GL_TEXTURE_RESIDENT = 0x8067
     GL_TEXTURE_SAMPLES = 0x9106
     GL_TEXTURE_SHADOW = 0x82A1
     GL_TEXTURE_SHARED_SIZE = 0x8C3F
+    GL_TEXTURE_STACK_DEPTH = 0x0BA5
     GL_TEXTURE_STENCIL_SIZE = 0x88F1
     GL_TEXTURE_SWIZZLE_A = 0x8E45
     GL_TEXTURE_SWIZZLE_B = 0x8E44
@@ -1860,6 +2619,7 @@ module RubyGL::Native
     GL_TIME_ELAPSED = 0x88BF
     GL_TOP_LEVEL_ARRAY_SIZE = 0x930C
     GL_TOP_LEVEL_ARRAY_STRIDE = 0x930D
+    GL_TRANSFORM_BIT = 0x00001000
     GL_TRANSFORM_FEEDBACK = 0x8E22
     GL_TRANSFORM_FEEDBACK_ACTIVE = 0x8E24
     GL_TRANSFORM_FEEDBACK_BARRIER_BIT = 0x00000800
@@ -1878,6 +2638,10 @@ module RubyGL::Native
     GL_TRANSFORM_FEEDBACK_VARYING = 0x92F4
     GL_TRANSFORM_FEEDBACK_VARYINGS = 0x8C83
     GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH = 0x8C76
+    GL_TRANSPOSE_COLOR_MATRIX = 0x84E6
+    GL_TRANSPOSE_MODELVIEW_MATRIX = 0x84E3
+    GL_TRANSPOSE_PROJECTION_MATRIX = 0x84E4
+    GL_TRANSPOSE_TEXTURE_MATRIX = 0x84E5
     GL_TRIANGLES = 0x0004
     GL_TRIANGLES_ADJACENCY = 0x000C
     GL_TRIANGLE_FAN = 0x0006
@@ -1974,11 +2738,18 @@ module RubyGL::Native
     GL_UNSIGNED_SHORT_5_6_5 = 0x8363
     GL_UNSIGNED_SHORT_5_6_5_REV = 0x8364
     GL_UPPER_LEFT = 0x8CA2
+    GL_V2F = 0x2A20
+    GL_V3F = 0x2A21
     GL_VALIDATE_STATUS = 0x8B83
     GL_VENDOR = 0x1F00
     GL_VERSION = 0x1F02
     GL_VERTEX_ARRAY = 0x8074
     GL_VERTEX_ARRAY_BINDING = 0x85B5
+    GL_VERTEX_ARRAY_BUFFER_BINDING = 0x8896
+    GL_VERTEX_ARRAY_POINTER = 0x808E
+    GL_VERTEX_ARRAY_SIZE = 0x807A
+    GL_VERTEX_ARRAY_STRIDE = 0x807C
+    GL_VERTEX_ARRAY_TYPE = 0x807B
     GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT = 0x00000001
     GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 0x889F
     GL_VERTEX_ATTRIB_ARRAY_DIVISOR = 0x88FE
@@ -1997,12 +2768,14 @@ module RubyGL::Native
     GL_VERTEX_BINDING_OFFSET = 0x82D7
     GL_VERTEX_BINDING_STRIDE = 0x82D8
     GL_VERTEX_PROGRAM_POINT_SIZE = 0x8642
+    GL_VERTEX_PROGRAM_TWO_SIDE = 0x8643
     GL_VERTEX_SHADER = 0x8B31
     GL_VERTEX_SHADER_BIT = 0x00000001
     GL_VERTEX_SUBROUTINE = 0x92E8
     GL_VERTEX_SUBROUTINE_UNIFORM = 0x92EE
     GL_VERTEX_TEXTURE = 0x829B
     GL_VIEWPORT = 0x0BA2
+    GL_VIEWPORT_BIT = 0x00000800
     GL_VIEWPORT_BOUNDS_RANGE = 0x825D
     GL_VIEWPORT_INDEX_PROVOKING_VERTEX = 0x825F
     GL_VIEWPORT_SUBPIXEL_BITS = 0x825C
@@ -2024,9 +2797,12 @@ module RubyGL::Native
     GL_VIEW_CLASS_S3TC_DXT5_RGBA = 0x82CF
     GL_VIEW_COMPATIBILITY_CLASS = 0x82B6
     GL_WAIT_FAILED = 0x911D
+    GL_WEIGHT_ARRAY_BUFFER_BINDING = 0x889E
     GL_WRITE_ONLY = 0x88B9
     GL_XOR = 0x1506
     GL_ZERO = 0
     GL_ZERO_TO_ONE = 0x935F
+    GL_ZOOM_X = 0x0D16
+    GL_ZOOM_Y = 0x0D17
 
 end

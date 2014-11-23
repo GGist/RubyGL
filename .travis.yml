@@ -1,0 +1,18 @@
+language: ruby
+
+script:
+- bundle exec rake test
+
+env:
+  global:
+  - secure: ilLZ5blj2PXwBbWphAgLpqDtg7jKF3PbucLF9ZWw0hnZw/883dreYAJL70iyxPtU14ARPjAbRZG3ix52+VUVxss3tuMluAKbJmaD8c5rLpnYmL6omnZyNjD0vqib/zC+zSZFnoVz8UuNR/gVuqeDYtRInxcfQEfVBZg3beY6P/A=
+
+after_success:
+- chmod +x .travis/push-rdoc-to-gh-pages.sh
+- .travis/push-rdoc-to-gh-pages.sh
+
+deploy:
+  provider: rubygems
+  api_key:
+  - secure: ohBwl2E3XI6eP3O35SiJU5hnnh6/fah0yCtAHcs30PJaDuHHoCB/RfwhsiNHWAvs7jJGg261UD/Mz1t1vl3mpxx0KfTc1y/Px+5JbjHSlvd6OeVMu1fIZweYXofjQbhHjugbWmDKII5a1G+/4WEU6FTI0RGpGww1w+dh4nXjQj4=
+  gem: rubygl

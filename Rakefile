@@ -2,14 +2,14 @@ require 'rake/task'
 require 'rake/testtask'
 require 'tmpdir'
 
+# Dependency Locations
 SDL_INCLUDE = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\include\SDL2'
 SDL_LIB = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\lib'
 SDL_BIN = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\bin'
 
-MINGW_LIB = ''
-
-PROJ_INCLUDE = 'lib/RubyGL/Native/include'
-PROJ_SRC = 'lib/RubyGL/Native/src/'
+# C File Locations
+PROJ_INCLUDE = 'lib/rubygl/native/include/'
+PROJ_SRC = 'lib/rubygl/native/src/'
 
 # OS Detection
 def os
@@ -33,8 +33,11 @@ end
 
 /---------------------------------RAKE JOBS-----------------------------------/
 
-task :default do
-    files = ['Audio', 'Window', 'GLContext', 'Input', 'OpenGL']
+task :default => [:bindings, :build, :clean]
+
+# Builds The RubyGL Shared Library From C Source Files And SDL Library
+task :build do
+    files = ['Window', 'GLContext', 'Input', 'OpenGL']
     
     # Build Object Files
     obj = "gcc -I#{SDL_INCLUDE}  -I#{PROJ_INCLUDE} -c -fPIC REPLACE.c -o REPLACE.o"
@@ -44,25 +47,36 @@ task :default do
     }
 
     # Build Shared Object File
-    bin = "gcc -L#{SDL_LIB} -L#{MINGW_LIB} #{files.join('.o ') << '.o'} \
-        -lmingw32 -lSDL2main -lSDL2 -lopengl32 -shared -o \
-        ext/#{os.to_s}/RubyGL.so"
-    sh bin
+    bin = "gcc -L#{SDL_LIB} #{files.join('.o ') << '.o'} -lSDL2main -lSDL2 \
+           -lopengl32 -shared -o ext/#{os.to_s}/RubyGL.so"
+    sh bin 
 end
 
+# Created The Documentation For The Library
+task :doc do
+    sh "rdoc lib/*"
+end
+
+# Clean Out Generated Files Silently
 task :clean do
-    # Clean Out Object Files
-    FileUtils.rm Dir.glob(PROJ_SRC + '/*.o')
+    FileUtils.rm_r('doc', {:secure => true, :force => true})
+
+    FileUtils.rm_f(PROJ_INCLUDE + '/OpenGL.h')
+    
+    FileUtils.rm_f(PROJ_SRC + '/OpenGL.c')
+    
+    FileUtils.rm_f Dir.glob(PROJ_SRC + '/*.o')
 end
 
+# Generate Updated OpenGL Bindings
 task :bindings do
-    shared_lib = "RubyGL.so"
+    gl_api, gl_version, shared_lib = 'gl', '4.5C', 'RubyGL.so'
 
     Dir.mktmpdir { |dir|
-        # Generates Header And Source C Files
-        sh "ruby bin/gl_code_gen.rb gl 4.5 OpenGL #{dir}"
+        # Generates C Header And Source Files
+        sh "ruby bin/gl_code_gen.rb #{gl_api} #{gl_version} OpenGL #{dir}"
     
-        # Run Preprocessor On Source File
+        # Run Preprocessor On C Source File
         sh "gcc -E -I#{SDL_INCLUDE} -o #{dir}/OpenGL.o #{dir}/OpenGL.c"
     
         # Pipe Preprocessor(ed) File And Header File To Generate Bindings
@@ -72,12 +86,13 @@ task :bindings do
         # Move Files To Correct Folders
         mv "#{dir}/OpenGL.h", PROJ_INCLUDE
         mv "#{dir}/OpenGL.c", PROJ_SRC
-        mv "#{dir}/opengl.rb", "lib/RubyGL/Native/"
+        mv "#{dir}/opengl.rb", "lib/rubygl/native/"
     }
 end
 
+# Run All Tests In The tests Directory
 Rake::TestTask.new do |t|
-  t.libs << "tests"
-  t.test_files = FileList['tests/test*.rb']
+  t.libs << 'test' << 'lib/rubygl'
+  t.test_files = FileList['test/test*.rb']
   t.verbose = true
 end

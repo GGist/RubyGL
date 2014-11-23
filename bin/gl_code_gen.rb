@@ -144,7 +144,7 @@ def prompt_user(api_list)
     puts "Note: OpenGL 3.2 introduced the notion of a 'core' profile which
     essentially means that it is not completely backwards compatible with
     earlier versions. To retain this backwards compatibility (not recommended)
-    append a 'C' to the index number of the API you want.".gsub(/\s/, ' ')
+    append a 'C' to the index number of the API you want.".gsub(/\s+/, ' ')
 
     # User Input
     print "\nEnter The Index Number Next To The API You Want: "
@@ -183,7 +183,7 @@ COLUMN_WIDTH = 80
 GRID_TITLE = "OpenGL API Versions"
 GL_URL = 'https://cvs.khronos.org/svn/repos/ogl/trunk/doc/registry/public/api'
 GL_PATH = '/gl.xml'
-EGL_URL = 'http://www.khronos.org/registry/egl/api'
+EGL_URL = 'https://www.khronos.org/registry/egl/api'
 EGL_KHR_PATH = '/KHR/khrplatform.h'
 SOURCE_INDENTS = 2
 
@@ -225,7 +225,7 @@ if (!api || !version) then # Prompt User
     
     api = api_tuple[0]
     version = api_tuple[1]
-    compatibility_mode = api_tuple[3]
+    compatibility_mode = api_tuple[2]
 else # Verify User Parameters
     if (!valid_api_values?(api_list, api, version)) then
         abort("Invalid API Or Version Parameters Passed To Script")
