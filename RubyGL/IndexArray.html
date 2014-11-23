@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class RubyGL::IndexArray - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/rubygl/memory.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-draw">#draw</a>
+    
+    <li ><a href="#method-i-release">#release</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Object.html">Object</a>
+  
+    <li><a href="../RubyGL.html">RubyGL</a>
+  
+    <li><a href="../RubyGL/ComplexShape.html">RubyGL::ComplexShape</a>
+  
+    <li><a href="../RubyGL/Conversion.html">RubyGL::Conversion</a>
+  
+    <li><a href="../RubyGL/Conversion/Math.html">RubyGL::Conversion::Math</a>
+  
+    <li><a href="../RubyGL/DefaultSetup.html">RubyGL::DefaultSetup</a>
+  
+    <li><a href="../RubyGL/IndexArray.html">RubyGL::IndexArray</a>
+  
+    <li><a href="../RubyGL/InputCallback.html">RubyGL::InputCallback</a>
+  
+    <li><a href="../RubyGL/Mat4.html">RubyGL::Mat4</a>
+  
+    <li><a href="../RubyGL/Native.html">RubyGL::Native</a>
+  
+    <li><a href="../RubyGL/Native/EventType.html">RubyGL::Native::EventType</a>
+  
+    <li><a href="../RubyGL/Point.html">RubyGL::Point</a>
+  
+    <li><a href="../RubyGL/Shader.html">RubyGL::Shader</a>
+  
+    <li><a href="../RubyGL/ShaderGenerator.html">RubyGL::ShaderGenerator</a>
+  
+    <li><a href="../RubyGL/SimpleShape.html">RubyGL::SimpleShape</a>
+  
+    <li><a href="../RubyGL/Util.html">RubyGL::Util</a>
+  
+    <li><a href="../RubyGL/Vec3.html">RubyGL::Vec3</a>
+  
+    <li><a href="../RubyGL/Vec4.html">RubyGL::Vec4</a>
+  
+    <li><a href="../RubyGL/VertexArray.html">RubyGL::VertexArray</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class RubyGL::IndexArray</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(index_array)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/memory.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">index_array</span>)
+    <span class="ruby-identifier">buff_ptr</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:pointer</span>)
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glGenBuffers</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">buff_ptr</span>)
+    
+    <span class="ruby-ivar">@buffer_id</span> = <span class="ruby-identifier">buff_ptr</span>.<span class="ruby-identifier">get_int</span>(<span class="ruby-value">0</span>)
+    <span class="ruby-ivar">@buffer_elements</span> = <span class="ruby-identifier">index_array</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-ivar">@buffer_valid</span> = <span class="ruby-keyword">true</span>
+    
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer_id</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Could Not Allocate A GPU Buffer For The IndexArray Object&quot;</span>
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glBindBuffer</span>(<span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_ELEMENT_ARRAY_BUFFER</span>, <span class="ruby-ivar">@buffer_id</span>)
+    
+    <span class="ruby-identifier">index_data</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:uint</span>, <span class="ruby-identifier">index_array</span>.<span class="ruby-identifier">size</span>)
+    <span class="ruby-identifier">index_data</span>.<span class="ruby-identifier">write_array_of_uint</span>(<span class="ruby-identifier">index_array</span>)
+    
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glBufferData</span>(<span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_ELEMENT_ARRAY_BUFFER</span>, <span class="ruby-identifier">index_data</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">index_data</span>, <span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_STATIC_DRAW</span>)
+    
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glBindBuffer</span>(<span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_ELEMENT_ARRAY_BUFFER</span>, <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-draw" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">draw</span><span
+            class="method-args">(components)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="draw-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/memory.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">draw</span>(<span class="ruby-identifier">components</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Call To IndexArray#draw On Frozen Object&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@buffer_valid</span>
+
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glBindBuffer</span>(<span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_ELEMENT_ARRAY_BUFFER</span>, <span class="ruby-ivar">@buffer_id</span>)
+
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glDrawElements</span>(<span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_TRIANGLES</span>, <span class="ruby-ivar">@buffer_elements</span>, <span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_UNSIGNED_INT</span>, <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span><span class="ruby-operator">::</span><span class="ruby-constant">NULL</span>)
+
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glBindBuffer</span>(<span class="ruby-constant">Native</span><span class="ruby-operator">::</span><span class="ruby-constant">GL_ELEMENT_ARRAY_BUFFER</span>, <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- draw-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- draw-method -->
+
+    
+      <div id="method-i-release" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">release</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This frees the currently allocated GPU buffer for this <a
+href="IndexArray.html">IndexArray</a> and invalidates this <a
+href="IndexArray.html">IndexArray</a> object. Any calls to this object
+after calling this method will throw a runtime error.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="release-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/memory.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">release</span>()
+    <span class="ruby-identifier">buff_ptr</span> = <span class="ruby-constant">FFI</span><span class="ruby-operator">::</span><span class="ruby-constant">MemoryPointer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:uint</span>)
+    <span class="ruby-identifier">buff_ptr</span>.<span class="ruby-identifier">put_int</span>(<span class="ruby-ivar">@buffer_id</span>)
+    
+    <span class="ruby-constant">Native</span>.<span class="ruby-identifier">glDeleteBuffers</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">buff_ptr</span>)
+    
+    <span class="ruby-ivar">@buffer_valid</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- release-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- release-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class RubyGL::Mat4 - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/rubygl/math.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-orthogonal">::orthogonal</a>
+    
+    <li ><a href="#method-c-perspective">::perspective</a>
+    
+    <li ><a href="#method-c-rotation">::rotation</a>
+    
+    <li ><a href="#method-c-translation">::translation</a>
+    
+    <li ><a href="#method-i-2A">#*</a>
+    
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    
+    <li ><a href="#method-i-5B-5D-3D">#[]=</a>
+    
+    <li ><a href="#method-i-dim">#dim</a>
+    
+    <li ><a href="#method-i-to_a">#to_a</a>
+    
+    <li ><a href="#method-i-to_ary">#to_ary</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Object.html">Object</a>
+  
+    <li><a href="../RubyGL.html">RubyGL</a>
+  
+    <li><a href="../RubyGL/ComplexShape.html">RubyGL::ComplexShape</a>
+  
+    <li><a href="../RubyGL/Conversion.html">RubyGL::Conversion</a>
+  
+    <li><a href="../RubyGL/Conversion/Math.html">RubyGL::Conversion::Math</a>
+  
+    <li><a href="../RubyGL/DefaultSetup.html">RubyGL::DefaultSetup</a>
+  
+    <li><a href="../RubyGL/IndexArray.html">RubyGL::IndexArray</a>
+  
+    <li><a href="../RubyGL/InputCallback.html">RubyGL::InputCallback</a>
+  
+    <li><a href="../RubyGL/Mat4.html">RubyGL::Mat4</a>
+  
+    <li><a href="../RubyGL/Native.html">RubyGL::Native</a>
+  
+    <li><a href="../RubyGL/Native/EventType.html">RubyGL::Native::EventType</a>
+  
+    <li><a href="../RubyGL/Point.html">RubyGL::Point</a>
+  
+    <li><a href="../RubyGL/Shader.html">RubyGL::Shader</a>
+  
+    <li><a href="../RubyGL/ShaderGenerator.html">RubyGL::ShaderGenerator</a>
+  
+    <li><a href="../RubyGL/SimpleShape.html">RubyGL::SimpleShape</a>
+  
+    <li><a href="../RubyGL/Util.html">RubyGL::Util</a>
+  
+    <li><a href="../RubyGL/Vec3.html">RubyGL::Vec3</a>
+  
+    <li><a href="../RubyGL/Vec4.html">RubyGL::Vec4</a>
+  
+    <li><a href="../RubyGL/VertexArray.html">RubyGL::VertexArray</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class RubyGL::Mat4</h1>
+
+  <div id="description" class="description">
+    
+<p>Stored In Column Order For Interoperability With OpenGL. Subscript Operator
+Will Return A Vector That Represents A Column Within The Matrix. This
+Matrix Class Only Supports Matrices Where The Number Of Rows Equals The
+Number Of Columns; Operations Are Constrained As Such.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(diagonal = 1.0)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">diagonal</span> = <span class="ruby-value">1.0</span>)
+    <span class="ruby-ivar">@data</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">column</span> = <span class="ruby-constant">Vec4</span>.<span class="ruby-identifier">new</span>()
+        <span class="ruby-identifier">column</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-identifier">diagonal</span>
+        
+        <span class="ruby-identifier">column</span>
+    }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+      <div id="method-c-orthogonal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">orthogonal</span><span
+            class="method-args">(left, right, bottom, top, z_near = -1.0, z_far = 1.0)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="orthogonal-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">orthogonal</span>(<span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">bottom</span>, <span class="ruby-identifier">top</span>, <span class="ruby-identifier">z_near</span> = <span class="ruby-value">-1.0</span>, <span class="ruby-identifier">z_far</span> = <span class="ruby-value">1.0</span>)
+    <span class="ruby-identifier">mat</span> = <span class="ruby-constant">Mat4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1.0</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-value">2.0</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">right</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">1</span>][<span class="ruby-value">1</span>] = <span class="ruby-value">2.0</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">top</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bottom</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">2</span>] = <span class="ruby-value">2.0</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">z_near</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">z_far</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">3</span>][<span class="ruby-value">3</span>] = <span class="ruby-value">1.0</span>
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">3</span>][<span class="ruby-value">0</span>] = <span class="ruby-operator">-</span>(<span class="ruby-identifier">right</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">left</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">right</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">3</span>][<span class="ruby-value">1</span>] = <span class="ruby-operator">-</span>(<span class="ruby-identifier">top</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bottom</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">top</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bottom</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">3</span>][<span class="ruby-value">2</span>] = <span class="ruby-operator">-</span>(<span class="ruby-identifier">z_far</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">z_near</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">z_far</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">z_near</span>)
+    
+    <span class="ruby-identifier">mat</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- orthogonal-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- orthogonal-method -->
+
+    
+      <div id="method-c-perspective" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">perspective</span><span
+            class="method-args">(fov, aspect, z_near, z_far)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="perspective-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">perspective</span>(<span class="ruby-identifier">fov</span>, <span class="ruby-identifier">aspect</span>, <span class="ruby-identifier">z_near</span>, <span class="ruby-identifier">z_far</span>)
+    <span class="ruby-identifier">top</span> = <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">tan</span>(<span class="ruby-constant">Conversion</span><span class="ruby-operator">::</span><span class="ruby-identifier">deg_to_rad</span>(<span class="ruby-identifier">fov</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">z_near</span>
+    <span class="ruby-identifier">right</span> = <span class="ruby-identifier">top</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">aspect</span>
+    
+    <span class="ruby-identifier">mat</span> = <span class="ruby-constant">Mat4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1.0</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">z_near</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">right</span>
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">1</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">z_near</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">top</span>
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">2</span>] = <span class="ruby-operator">-</span>(<span class="ruby-identifier">z_far</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">z_near</span>) <span class="ruby-operator">/</span> (<span class="ruby-identifier">z_far</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">z_near</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">3</span>][<span class="ruby-value">2</span>] = <span class="ruby-value">-2.0</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">z_far</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">z_near</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">z_far</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">z_near</span>)
+    <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">3</span>] = <span class="ruby-value">-1.0</span>
+    
+    <span class="ruby-identifier">mat</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- perspective-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- perspective-method -->
+
+    
+      <div id="method-c-rotation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rotation</span><span
+            class="method-args">(x_axis, y_axis, z_axis, theta)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The axis value should be 0 if that axis should not be rotated around; any
+other value indicates its priority (higher priority axis is rotated around
+before the lower priority axis).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="rotation-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rotation</span>(<span class="ruby-identifier">x_axis</span>, <span class="ruby-identifier">y_axis</span>, <span class="ruby-identifier">z_axis</span>, <span class="ruby-identifier">theta</span>)
+    <span class="ruby-identifier">rad_angle</span> = <span class="ruby-constant">Conversion</span><span class="ruby-operator">::</span><span class="ruby-identifier">deg_to_rad</span>(<span class="ruby-identifier">theta</span>)
+    <span class="ruby-identifier">sin_angle</span> = <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">rad_angle</span>)
+    <span class="ruby-identifier">cos_angle</span> = <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">rad_angle</span>)
+    
+    <span class="ruby-comment"># Multiply Lower -&gt; Higher To Get Ordering Correct</span>
+    <span class="ruby-identifier">axis_priority</span> = [[<span class="ruby-value">:x</span>, <span class="ruby-identifier">x_axis</span>], [<span class="ruby-value">:y</span>, <span class="ruby-identifier">y_axis</span>], [<span class="ruby-value">:z</span>, <span class="ruby-identifier">z_axis</span>]]
+    <span class="ruby-identifier">axis_priority</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span>(<span class="ruby-identifier">_</span>, <span class="ruby-identifier">val</span>)<span class="ruby-operator">|</span> 
+        <span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> 
+    }.<span class="ruby-identifier">sort!</span>.<span class="ruby-identifier">reverse!</span>
+    
+    <span class="ruby-identifier">rot_matrix</span> = <span class="ruby-constant">Mat4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1.0</span>)
+    <span class="ruby-identifier">axis_priority</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span>(<span class="ruby-identifier">axis</span>, <span class="ruby-identifier">_</span>)<span class="ruby-operator">|</span>
+        <span class="ruby-identifier">mat</span> = <span class="ruby-constant">Mat4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1.0</span>)
+    
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">axis</span> <span class="ruby-operator">==</span> <span class="ruby-value">:x</span> <span class="ruby-keyword">then</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">1</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">2</span>] = <span class="ruby-identifier">cos_angle</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">1</span>][<span class="ruby-value">2</span>] = <span class="ruby-identifier">sin_angle</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">1</span>] = <span class="ruby-operator">-</span><span class="ruby-identifier">sin_angle</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">axis</span> <span class="ruby-operator">==</span> <span class="ruby-value">:y</span> <span class="ruby-keyword">then</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">2</span>] = <span class="ruby-identifier">cos_angle</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">0</span>][<span class="ruby-value">2</span>] = <span class="ruby-operator">-</span><span class="ruby-identifier">sin_angle</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">2</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">sin_angle</span>
+        <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">mat</span>[<span class="ruby-value">1</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">cos_angle</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">sin_angle</span>
+            <span class="ruby-identifier">mat</span>[<span class="ruby-value">1</span>][<span class="ruby-value">0</span>] = <span class="ruby-operator">-</span><span class="ruby-identifier">sin_angle</span>
+        <span class="ruby-keyword">end</span>
+        
+        <span class="ruby-identifier">rot_matrix</span> <span class="ruby-operator">*=</span> <span class="ruby-identifier">mat</span>
+    }
+    
+    <span class="ruby-identifier">rot_matrix</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- rotation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- rotation-method -->
+
+    
+      <div id="method-c-translation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">translation</span><span
+            class="method-args">(x, y, z)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="translation-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">translation</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">z</span>)
+    <span class="ruby-identifier">matrix</span> = <span class="ruby-constant">Mat4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">1.0</span>)
+    
+    <span class="ruby-identifier">matrix</span>[<span class="ruby-value">3</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">x</span>
+    <span class="ruby-identifier">matrix</span>[<span class="ruby-value">3</span>][<span class="ruby-value">1</span>] = <span class="ruby-identifier">y</span>
+    <span class="ruby-identifier">matrix</span>[<span class="ruby-value">3</span>][<span class="ruby-value">2</span>] = <span class="ruby-identifier">z</span>
+    
+    <span class="ruby-identifier">matrix</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- translation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- translation-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-2A" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">*</span><span
+            class="method-args">(other_matrix)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="2A-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">*</span>(<span class="ruby-identifier">other_matrix</span>)
+    <span class="ruby-identifier">new_matrix</span> = <span class="ruby-constant">Mat4</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+    
+    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">dim</span>
+        <span class="ruby-keyword">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">dim</span>
+            <span class="ruby-keyword">for</span> <span class="ruby-identifier">k</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">dim</span>
+                <span class="ruby-identifier">new_matrix</span>[<span class="ruby-identifier">j</span>][<span class="ruby-identifier">i</span>] <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>][<span class="ruby-identifier">i</span>] <span class="ruby-operator">*</span> <span class="ruby-identifier">other_matrix</span>[<span class="ruby-identifier">j</span>][<span class="ruby-identifier">k</span>]
+            <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-identifier">new_matrix</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 2A-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 2A-method -->
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(index)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 282</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">index</span>)
+    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">index</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 5B-5D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 5B-5D-method -->
+
+    
+      <div id="method-i-5B-5D-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]=</span><span
+            class="method-args">(index, value)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-3D-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 286</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 5B-5D-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 5B-5D-3D-method -->
+
+    
+      <div id="method-i-dim" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dim</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dim-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dim</span>()
+    <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>()
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- dim-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- dim-method -->
+
+    
+      <div id="method-i-to_a" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_a</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_a-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 296</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>()
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_a-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_a-method -->
+
+    
+      <div id="method-i-to_ary" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_ary</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_ary-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 290</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_ary</span>()
+    <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">vec</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">vec</span>.<span class="ruby-identifier">to_ary</span>
+    }.<span class="ruby-identifier">flatten!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_ary-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_ary-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

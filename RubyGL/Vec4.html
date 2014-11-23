@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class RubyGL::Vec4 - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/rubygl/math.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-2B">#+</a>
+    
+    <li ><a href="#method-i-2D">#-</a>
+    
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    
+    <li ><a href="#method-i-5B-5D-3D">#[]=</a>
+    
+    <li ><a href="#method-i-len">#len</a>
+    
+    <li ><a href="#method-i-norm">#norm</a>
+    
+    <li ><a href="#method-i-norm-21">#norm!</a>
+    
+    <li ><a href="#method-i-to_a">#to_a</a>
+    
+    <li ><a href="#method-i-to_ary">#to_ary</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Object.html">Object</a>
+  
+    <li><a href="../RubyGL.html">RubyGL</a>
+  
+    <li><a href="../RubyGL/ComplexShape.html">RubyGL::ComplexShape</a>
+  
+    <li><a href="../RubyGL/Conversion.html">RubyGL::Conversion</a>
+  
+    <li><a href="../RubyGL/Conversion/Math.html">RubyGL::Conversion::Math</a>
+  
+    <li><a href="../RubyGL/DefaultSetup.html">RubyGL::DefaultSetup</a>
+  
+    <li><a href="../RubyGL/IndexArray.html">RubyGL::IndexArray</a>
+  
+    <li><a href="../RubyGL/InputCallback.html">RubyGL::InputCallback</a>
+  
+    <li><a href="../RubyGL/Mat4.html">RubyGL::Mat4</a>
+  
+    <li><a href="../RubyGL/Native.html">RubyGL::Native</a>
+  
+    <li><a href="../RubyGL/Native/EventType.html">RubyGL::Native::EventType</a>
+  
+    <li><a href="../RubyGL/Point.html">RubyGL::Point</a>
+  
+    <li><a href="../RubyGL/Shader.html">RubyGL::Shader</a>
+  
+    <li><a href="../RubyGL/ShaderGenerator.html">RubyGL::ShaderGenerator</a>
+  
+    <li><a href="../RubyGL/SimpleShape.html">RubyGL::SimpleShape</a>
+  
+    <li><a href="../RubyGL/Util.html">RubyGL::Util</a>
+  
+    <li><a href="../RubyGL/Vec3.html">RubyGL::Vec3</a>
+  
+    <li><a href="../RubyGL/Vec4.html">RubyGL::Vec4</a>
+  
+    <li><a href="../RubyGL/VertexArray.html">RubyGL::VertexArray</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class RubyGL::Vec4</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>()
+    <span class="ruby-ivar">@data</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">4</span>, <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-2B" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">+</span><span
+            class="method-args">(other_vector)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="2B-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">+</span>(<span class="ruby-identifier">other_vector</span>)
+    <span class="ruby-identifier">new_vector</span> = <span class="ruby-constant">Vec4</span>.<span class="ruby-identifier">new</span>()
+    
+    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">new_vector</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">other_vector</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-identifier">new_vector</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 2B-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 2B-method -->
+
+    
+      <div id="method-i-2D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">-</span><span
+            class="method-args">(other_vector)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="2D-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">-</span>(<span class="ruby-identifier">other_vector</span>)
+    <span class="ruby-identifier">new_vector</span> = <span class="ruby-constant">Vec4</span>.<span class="ruby-identifier">new</span>()
+    
+    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">new_vector</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">other_vector</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-identifier">new_vector</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 2D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 2D-method -->
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(index)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">index</span>)
+    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">index</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 5B-5D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 5B-5D-method -->
+
+    
+      <div id="method-i-5B-5D-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]=</span><span
+            class="method-args">(index, value)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-3D-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- 5B-5D-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- 5B-5D-3D-method -->
+
+    
+      <div id="method-i-len" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">len</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="len-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">len</span>()
+    <span class="ruby-identifier">sum</span> = <span class="ruby-value">0</span>
+    
+    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">*</span> <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">sum</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- len-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- len-method -->
+
+    
+      <div id="method-i-norm" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">norm</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="norm-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">norm</span>()
+    <span class="ruby-identifier">new_vector</span> = <span class="ruby-constant">Vec2</span>.<span class="ruby-identifier">new</span>()
+    
+    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">new_vector</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">new_vector</span>.<span class="ruby-identifier">norm!</span>
+    
+    <span class="ruby-identifier">new_vector</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- norm-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- norm-method -->
+
+    
+      <div id="method-i-norm-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">norm!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="norm-21-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">norm!</span>()
+    <span class="ruby-identifier">curr_len</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">len</span>()
+    
+    <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-ivar">@data</span> <span class="ruby-operator">/=</span> <span class="ruby-identifier">curr_len</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- norm-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- norm-21-method -->
+
+    
+      <div id="method-i-to_a" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_a</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_a-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_a</span>()
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_a-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_a-method -->
+
+    
+      <div id="method-i-to_ary" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_ary</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_ary-source">
+            <pre><span class="ruby-comment"># File lib/rubygl/math.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_ary</span>()
+    <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_ary-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_ary-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
