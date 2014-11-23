@@ -16,5 +16,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.license       = "MIT"
   
-  spec.add_dependency 'ffi'
+  spec.add_runtime_dependency 'ffi', '~> 0'
 end

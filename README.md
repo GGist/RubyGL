@@ -1,8 +1,8 @@
-RubyGL - [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/GGist/RubyGL/master/LICENSE)
+RubyGL - [![Build Status](https://travis-ci.org/GGist/RubyGL.svg)](https://travis-ci.org/GGist/RubyGL) [![Documentation](http://img.shields.io/badge/docs-in--progress-blue.svg)](http://ggist.github.io/RubyGL/index.html) [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/GGist/RubyGL/master/LICENSE)
 =======
 A Complete Solution For Graphics Programming In Ruby.
 
-Installing
+Installing - [![Gem Version](https://badge.fury.io/rb/rubygl.svg)](http://badge.fury.io/rb/rubygl)
 ----------
 ```
 gem install rubygl
