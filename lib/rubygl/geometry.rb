@@ -82,8 +82,8 @@ module RubyGL
             for i in 0...points_per_ring
                 curr_vert = points[i]
                 next_vert = Util.overflow_wrap(points, i + 1)
-                
-                vertex_array.push([next_vert.to_a, curr_vert.to_a, bottom_point])
+               
+                vertex_array.push([curr_vert.to_a, next_vert.to_a, bottom_point])
                 previous_points.push(curr_vert)
             end
             
@@ -94,9 +94,10 @@ module RubyGL
                 
                 last_curr_vert = previous_points[i % points_per_ring]
                 last_next_vert = Util.overflow_wrap(previous_points, (i % points_per_ring) + 1)
-                
-                vertex_array.push([next_vert.to_a, curr_vert.to_a, last_curr_vert.to_a])
-                vertex_array.push([last_next_vert.to_a, next_vert.to_a, last_curr_vert.to_a])
+
+                vertex_array.push([curr_vert.to_a, next_vert.to_a, last_curr_vert.to_a])
+                vertex_array.push([next_vert.to_a, last_next_vert.to_a, last_curr_vert.to_a])
+
                 previous_points[i % points_per_ring] = curr_vert
             end
             
@@ -106,7 +107,7 @@ module RubyGL
                 curr_vert = previous_points[i]
                 next_vert = Util.overflow_wrap(previous_points, i + 1)
                 
-                vertex_array.push([curr_vert.to_a, next_vert.to_a, top_point.to_a])
+                vertex_array.push([next_vert.to_a, curr_vert.to_a, top_point.to_a])
             end
             
             vertex_array.flatten!
@@ -172,35 +173,35 @@ module RubyGL
                 slope = tab_left.midpoint(tab_right) - gird_center
                 crown_midpoint = slope.scale(crown_y_midpoint) + gird_center
                 
-                vertex_array.push([crown_midpoint.to_a, gird_left.to_a, gird_center.to_a])
-                vertex_array.push([crown_midpoint.to_a, gird_center.to_a, gird_right.to_a])
+                vertex_array.push([gird_left.to_a, crown_midpoint.to_a, gird_center.to_a])
+                vertex_array.push([gird_center.to_a, crown_midpoint.to_a, gird_right.to_a])
                 
-                vertex_array.push([crown_midpoint.to_a, tab_left.to_a, gird_left.to_a])
-                vertex_array.push([crown_midpoint.to_a, gird_right.to_a, tab_right.to_a])
+                vertex_array.push([tab_left.to_a, crown_midpoint.to_a, gird_left.to_a])
+                vertex_array.push([gird_right.to_a, crown_midpoint.to_a, tab_right.to_a])
                 
-                vertex_array.push([crown_midpoint.to_a, tab_right.to_a, tab_left.to_a])
+                vertex_array.push([tab_right.to_a, crown_midpoint.to_a, tab_left.to_a])
                 
                 # Girdle Triangles
                 lower_gird_center = Point.new(gird_center.x, gird_center.y - girdle_thickness, gird_center.z)
                 lower_gird_left = Point.new(gird_left.x, gird_left.y - girdle_thickness, gird_left.z)
                 lower_gird_right = Point.new(gird_right.x, gird_right.y - girdle_thickness, gird_right.z)
                 
-                vertex_array.push([gird_center.to_a, gird_left.to_a, lower_gird_left.to_a])
-                vertex_array.push([gird_center.to_a, lower_gird_left.to_a, lower_gird_center.to_a])
+                vertex_array.push([gird_left.to_a, gird_center.to_a, lower_gird_left.to_a])
+                vertex_array.push([lower_gird_left.to_a, gird_center.to_a, lower_gird_center.to_a])
                 
-                vertex_array.push([gird_center.to_a, lower_gird_center.to_a, gird_right.to_a])
-                vertex_array.push([gird_right.to_a, lower_gird_center.to_a, lower_gird_right.to_a])
+                vertex_array.push([lower_gird_center.to_a, gird_center.to_a, gird_right.to_a])
+                vertex_array.push([lower_gird_center.to_a, gird_right.to_a, lower_gird_right.to_a])
                 
                 # Pavilion Triangles
                 pavil_bottom = Point.new(0, 0, 0)
                 
-                vertex_array.push([lower_gird_center.to_a, lower_gird_left.to_a, pavil_bottom.to_a])
-                vertex_array.push([lower_gird_center.to_a, pavil_bottom.to_a, lower_gird_right.to_a])
+                vertex_array.push([lower_gird_left.to_a, lower_gird_center.to_a, pavil_bottom.to_a])
+                vertex_array.push([pavil_bottom.to_a, lower_gird_center.to_a, lower_gird_right.to_a])
                 
                 # Table Triangles
                 table_mid = Point.new(0, diamond_height, 0)
                 
-                vertex_array.push([table_mid.to_a, tab_left.to_a, tab_right.to_a])
+                vertex_array.push([tab_left.to_a, table_mid.to_a, tab_right.to_a])
             end
             
             vertex_array.flatten!
