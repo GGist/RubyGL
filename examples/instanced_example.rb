@@ -84,6 +84,14 @@ time = Time.now.strftime("%s").to_i
 t1 = RubyGL::Mat4.translation(-61, -60, -40)
 focused, angle = false, 150
 
+# Callback Triggered When Application Is Closed
+RubyGL::Event.register(:quit) {
+    vertices.release
+    positions.release
+    config.teardown
+    abort("Application Closed")
+}
+
 # Main Program Loop
 loop {
     RubyGL::Native.glClearColor(1.0, 1.0, 1.0, 1.0)

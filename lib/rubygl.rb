@@ -35,6 +35,7 @@ module RubyGL
 end
 
 # Load Module Code
+require_relative './rubygl/event'
 require_relative './rubygl/geometry'
 require_relative './rubygl/math'
 require_relative './rubygl/memory'

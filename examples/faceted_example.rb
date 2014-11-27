@@ -32,6 +32,13 @@ RubyGL::Native.glEnable(RubyGL::Native::GL_DEPTH_TEST)
 frames, counter = 0, 0
 time = Time.now.strftime("%s").to_i
 
+# Callback Triggered When Application Is Closed
+RubyGL::Event.register(:quit) {
+    diamond_buff.release
+    config.teardown
+    abort("Application Closed")
+}
+
 # Main Program Loop
 loop {
     RubyGL::Native.glClearColor(1.0, 1.0, 1.0, 1.0)

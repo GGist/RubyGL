@@ -21,6 +21,10 @@ module RubyGL
             Point.new(@x - point.x, @y - point.y, @z - point.z)
         end
         
+        def *(point)
+            Point.new(@x * point.x, @y * point.y, @z * point.z)
+        end
+        
         def scale(value)
             Point.new(@x * value, @y * value, @z * value)
         end

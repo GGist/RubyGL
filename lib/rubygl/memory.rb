@@ -64,6 +64,8 @@ module RubyGL
         # invalidates this VertexArray object. Any calls to this object after calling
         # this method will throw a runtime error.
         def release()
+            raise "Call To VertexArray#release On Invalid Object" unless @buffer_valid
+        
             buff_ptr = FFI::MemoryPointer.new(:uint)
             buff_ptr.write_uint(@buffer_id)
             
@@ -110,8 +112,10 @@ module RubyGL
         # invalidates this IndexArray object. Any calls to this object after calling
         # this method will throw a runtime error.
         def release()
+            raise "Call To IndexArray#release On Invalid Object" unless @buffer_valid
+        
             buff_ptr = FFI::MemoryPointer.new(:uint)
-            buff_ptr.put_int(@buffer_id)
+            buff_ptr.write_uint(@buffer_id)
             
             Native.glDeleteBuffers(1, buff_ptr)
             
