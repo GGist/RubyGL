@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   
   spec.files         = `git ls-files`.split($/)
   spec.name          = 'rubygl'
-  spec.version       = '0.2.0'
+  spec.version       = '0.2.1'
   spec.require_paths = ["lib"]
   spec.license       = "MIT"
   
