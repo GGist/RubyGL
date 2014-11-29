@@ -13,9 +13,9 @@ Gem::Specification.new do |spec|
   
   spec.files         = `git ls-files`.split($/)
   spec.name          = 'rubygl'
-  spec.version       = '0.3.1'
+  spec.version       = '0.3.2'
   spec.require_paths = ["lib"]
   spec.license       = "MIT"
   
-  spec.add_runtime_dependency 'ffi', '~> 0'
+  spec.add_runtime_dependency 'ffi', '~> 1.9', '>= 1.9.5'
 end
