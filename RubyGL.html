@@ -1,162 +1,255 @@
-<!DOCTYPE html>
-
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-<title>module RubyGL - RDoc Documentation</title>
+  <title>Module: RubyGL</title>
 
-<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
-<script type="text/javascript">
-  var rdoc_rel_prefix = "./";
-</script>
+  <script src="./js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript" charset="utf-8"></script>
 
-<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
-
-
+</head>
 <body id="top" class="module">
-<nav id="metadata">
-  <nav id="home-section" class="section">
-  <h3 class="section-header">
-    <a href="./index.html">Home</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
-  </h3>
-</nav>
 
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
 
-  <nav id="search-section" class="section project-section" class="initially-hidden">
-  <form action="#" method="get" accept-charset="utf-8">
-    <h3 class="section-header">
-      <input type="text" name="search" placeholder="Search" id="search-field"
-             title="Type to search, Up and Down to navigate, Enter to load">
-    </h3>
-  </form>
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="./lib/rubygl/geometry_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/geometry.rb">lib/rubygl/geometry.rb</a></li>
+          
+            <li><a href="./lib/rubygl/memory_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/memory.rb">lib/rubygl/memory.rb</a></li>
+          
+            <li><a href="./lib/rubygl/event_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/event.rb">lib/rubygl/event.rb</a></li>
+          
+            <li><a href="./lib/rubygl/math_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/math.rb">lib/rubygl/math.rb</a></li>
+          
+            <li><a href="./lib/rubygl/setup_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/setup.rb">lib/rubygl/setup.rb</a></li>
+          
+            <li><a href="./lib/rubygl/shader_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/shader.rb">lib/rubygl/shader.rb</a></li>
+          
+            <li><a href="./lib/rubygl/util_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl/util.rb">lib/rubygl/util.rb</a></li>
+          
+            <li><a href="./lib/rubygl_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/rubygl.rb">lib/rubygl.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
 
-  <ul id="search-results" class="initially-hidden"></ul>
-</nav>
+      
+    </div>
 
+    <div id="class-metadata">
+      
 
-  
+      
 
-  <div id="file-metadata">
-    <nav id="file-list-section" class="section">
-  <h3 class="section-header">Defined In</h3>
-  <ul>
-    <li>lib/rubygl.rb
-    <li>lib/rubygl/callback.rb
-    <li>lib/rubygl/geometry.rb
-    <li>lib/rubygl/math.rb
-    <li>lib/rubygl/memory.rb
-    <li>lib/rubygl/native/glcontext.rb
-    <li>lib/rubygl/native/input.rb
-    <li>lib/rubygl/native/opengl.rb
-    <li>lib/rubygl/native/window.rb
-    <li>lib/rubygl/setup.rb
-    <li>lib/rubygl/shader.rb
-    <li>lib/rubygl/util.rb
-  </ul>
-</nav>
+      
+      <!-- Namespace Contents -->
+      <div id="namespace-list-section" class="section">
+        <h3 class="section-header">Namespace</h3>
+        <ul class="link-list">
+          
+          <li><span class="type">MODULE</span> <a href="RubyGL/Native.html">RubyGL::Native</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/ComplexShape.html">RubyGL::ComplexShape</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Conversion.html">RubyGL::Conversion</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/DefaultSetup.html">RubyGL::DefaultSetup</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Event.html">RubyGL::Event</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/IndexArray.html">RubyGL::IndexArray</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Mat4.html">RubyGL::Mat4</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Point.html">RubyGL::Point</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Shader.html">RubyGL::Shader</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/ShaderGenerator.html">RubyGL::ShaderGenerator</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/SimpleShape.html">RubyGL::SimpleShape</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Util.html">RubyGL::Util</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Vec3.html">RubyGL::Vec3</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/Vec4.html">RubyGL::Vec4</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="RubyGL/VertexArray.html">RubyGL::VertexArray</a></li>
+          
+        </ul>
+      </div>
+      
 
-    
+      
+
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./RubyGL.html">RubyGL</a></li>
+        
+          <li><a href="./RubyGL/ComplexShape.html">RubyGL::ComplexShape</a></li>
+        
+          <li><a href="./RubyGL/Conversion.html">RubyGL::Conversion</a></li>
+        
+          <li><a href="./RubyGL/DefaultSetup.html">RubyGL::DefaultSetup</a></li>
+        
+          <li><a href="./RubyGL/Event.html">RubyGL::Event</a></li>
+        
+          <li><a href="./RubyGL/IndexArray.html">RubyGL::IndexArray</a></li>
+        
+          <li><a href="./RubyGL/Mat4.html">RubyGL::Mat4</a></li>
+        
+          <li><a href="./RubyGL/Native.html">RubyGL::Native</a></li>
+        
+          <li><a href="./RubyGL/Native/CommonEvent.html">RubyGL::Native::CommonEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/ControllerAxisEvent.html">RubyGL::Native::ControllerAxisEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/ControllerButtonEvent.html">RubyGL::Native::ControllerButtonEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/ControllerDeviceEvent.html">RubyGL::Native::ControllerDeviceEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/DropEvent.html">RubyGL::Native::DropEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/Event.html">RubyGL::Native::Event</a></li>
+        
+          <li><a href="./RubyGL/Native/JoyAxisEvent.html">RubyGL::Native::JoyAxisEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/JoyBallEvent.html">RubyGL::Native::JoyBallEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/JoyButtonEvent.html">RubyGL::Native::JoyButtonEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/JoyDeviceEvent.html">RubyGL::Native::JoyDeviceEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/JoyHatEvent.html">RubyGL::Native::JoyHatEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/KeyboardEvent.html">RubyGL::Native::KeyboardEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/Keysym.html">RubyGL::Native::Keysym</a></li>
+        
+          <li><a href="./RubyGL/Native/MouseButtonEvent.html">RubyGL::Native::MouseButtonEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/MouseMotionEvent.html">RubyGL::Native::MouseMotionEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/MouseWheelEvent.html">RubyGL::Native::MouseWheelEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/QuitEvent.html">RubyGL::Native::QuitEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/TextEditingEvent.html">RubyGL::Native::TextEditingEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/TextInputEvent.html">RubyGL::Native::TextInputEvent</a></li>
+        
+          <li><a href="./RubyGL/Native/WindowEvent.html">RubyGL::Native::WindowEvent</a></li>
+        
+          <li><a href="./RubyGL/Point.html">RubyGL::Point</a></li>
+        
+          <li><a href="./RubyGL/Shader.html">RubyGL::Shader</a></li>
+        
+          <li><a href="./RubyGL/ShaderGenerator.html">RubyGL::ShaderGenerator</a></li>
+        
+          <li><a href="./RubyGL/SimpleShape.html">RubyGL::SimpleShape</a></li>
+        
+          <li><a href="./RubyGL/Util.html">RubyGL::Util</a></li>
+        
+          <li><a href="./RubyGL/Vec3.html">RubyGL::Vec3</a></li>
+        
+          <li><a href="./RubyGL/Vec4.html">RubyGL::Vec4</a></li>
+        
+          <li><a href="./RubyGL/VertexArray.html">RubyGL::VertexArray</a></li>
+        
+          <li><a href="./Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
   </div>
 
-  <div id="class-metadata">
-    
-    
-    
-    
-    
-  </div>
+  <div id="documentation">
+    <h1 class="module">RubyGL</h1>
 
-  <div id="project-metadata">
-    
-    <nav id="classindex-section" class="section project-section">
-  <h3 class="section-header">Class and Module Index</h3>
-
-  <ul class="link-list">
-  
-    <li><a href="./Object.html">Object</a>
-  
-    <li><a href="./RubyGL.html">RubyGL</a>
-  
-    <li><a href="./RubyGL/ComplexShape.html">RubyGL::ComplexShape</a>
-  
-    <li><a href="./RubyGL/Conversion.html">RubyGL::Conversion</a>
-  
-    <li><a href="./RubyGL/Conversion/Math.html">RubyGL::Conversion::Math</a>
-  
-    <li><a href="./RubyGL/DefaultSetup.html">RubyGL::DefaultSetup</a>
-  
-    <li><a href="./RubyGL/IndexArray.html">RubyGL::IndexArray</a>
-  
-    <li><a href="./RubyGL/InputCallback.html">RubyGL::InputCallback</a>
-  
-    <li><a href="./RubyGL/Mat4.html">RubyGL::Mat4</a>
-  
-    <li><a href="./RubyGL/Native.html">RubyGL::Native</a>
-  
-    <li><a href="./RubyGL/Native/EventType.html">RubyGL::Native::EventType</a>
-  
-    <li><a href="./RubyGL/Point.html">RubyGL::Point</a>
-  
-    <li><a href="./RubyGL/Shader.html">RubyGL::Shader</a>
-  
-    <li><a href="./RubyGL/ShaderGenerator.html">RubyGL::ShaderGenerator</a>
-  
-    <li><a href="./RubyGL/SimpleShape.html">RubyGL::SimpleShape</a>
-  
-    <li><a href="./RubyGL/Util.html">RubyGL::Util</a>
-  
-    <li><a href="./RubyGL/Vec3.html">RubyGL::Vec3</a>
-  
-    <li><a href="./RubyGL/Vec4.html">RubyGL::Vec4</a>
-  
-    <li><a href="./RubyGL/VertexArray.html">RubyGL::VertexArray</a>
-  
-  </ul>
-</nav>
-
-  </div>
-</nav>
-
-<div id="documentation">
-  <h1 class="module">module RubyGL</h1>
-
-  <div id="description" class="description">
-    
+    <div id="description" class="description">
+      
 <p>Initialize All Modules</p>
 
-  </div><!-- description -->
+    </div><!-- description -->
 
+    
+    
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
+
+      
+
+      
+
+      
+
+      <!-- Methods -->
+      
+    </div><!-- 5Buntitled-5D -->
   
-  
-  
-  <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
+  </div><!-- documentation -->
 
-    
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
 
-    
-
-    <!-- Methods -->
-    
-  </section><!-- 5Buntitled-5D -->
-
-</div><!-- documentation -->
-
-
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
-</footer>
+</body>
+</html>
 
