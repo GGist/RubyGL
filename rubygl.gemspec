@@ -8,11 +8,12 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{A Complete Solution For Graphics Programming In Ruby.}
   spec.description   = %q{This library provides you with all of the essentials for 
   doing graphics programming in Ruby including windowing, context management, 
-  1:1 mapping of OpenGL calls, and input handling.}
+  1:1 mapping of OpenGL calls, and input handling. Currently supports both Windows
+  and MacOSX.}
   
   spec.files         = `git ls-files`.split($/)
   spec.name          = 'rubygl'
-  spec.version       = '0.2.1'
+  spec.version       = '0.3.1'
   spec.require_paths = ["lib"]
   spec.license       = "MIT"
   

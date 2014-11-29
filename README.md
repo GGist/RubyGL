@@ -4,6 +4,7 @@ A Complete Solution For Graphics Programming In Ruby.
 
 Installing - [![Gem Version](https://badge.fury.io/rb/rubygl.svg)](http://badge.fury.io/rb/rubygl)
 ----------
+Currently supports Windows and MacOSX out of the box.
 ```
 gem install rubygl
 ```
@@ -34,7 +35,6 @@ https://www.opengl.org/sdk/docs/man/ to see which functions are supported by eac
 
 Known Issues
 ------------
-- Only supports Windows at the moment (OSX support coming soon)
 - Not sure how to support Linux without requiring users to compile a shared library
 - Windows does not guarantee that OpenGL functions loaded during context creation will be valid for other contexts
  - Need to figure out how to efficiently swap these out if the user creates more than one context

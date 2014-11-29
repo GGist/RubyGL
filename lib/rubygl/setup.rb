@@ -11,9 +11,11 @@ module RubyGL
             RubyGL::Native.initInput
             RubyGL::Native.loadLibrary(FFI::Pointer::NULL)
             
-            RubyGL::Native.setAttribute(:context_major_version, 4)
-            RubyGL::Native.setAttribute(:context_minor_version, 2)
-            RubyGL::Native.setAttribute(:context_profile_mask, RubyGL::Native.CONTEXT_PROFILE_COMPATIBILITY)
+            # Dont Try To Guess User's OpenGL Version Even If SDL Want Us To Specify
+            # It. I Have Not Seen Context Creation Fail Because Of Not Calling This.
+            #RubyGL::Native.setAttribute(:context_major_version, 4)
+            #RubyGL::Native.setAttribute(:context_minor_version, 2)
+            #RubyGL::Native.setAttribute(:context_profile_mask, RubyGL::Native.CONTEXT_PROFILE_COMPATIBILITY)
             
             RubyGL::Native.setAttribute(:depth_size, 24)
             RubyGL::Native.setAttribute(:doublebuffer, 1)
@@ -43,7 +45,8 @@ module RubyGL
             RubyGL::Native.destroyWindow(@window)
         
             RubyGL::Native.unloadLibrary()
-            RubyGL::Native.quitWindow()
+            # Segmentation fault On MacOSX When Called
+            #RubyGL::Native.quitWindow()
             RubyGL::Native.quitInput()
         end
     end

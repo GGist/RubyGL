@@ -16,11 +16,12 @@ def os
             when /solaris|bsd/
                 :unix
             else
-                raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
+                raise Error::WebDriverError, "Unknown OS: #{host_os.inspect}"
         end
     )
 end
 
+# Expand Relative Path Into Absolute Path
 def relative_path(resource_path)
     File.join(File.dirname(File.expand_path(__FILE__)), resource_path)
 end
@@ -29,8 +30,15 @@ end
 module RubyGL
     module Native
         extend FFI::Library
-        ffi_lib relative_path("../ext/#{os.to_s}/SDL2.dll")
-        ffi_lib relative_path("../ext/#{os.to_s}/RubyGL.so")
+        if os == :windows
+            ffi_lib relative_path("../ext/windows/SDL2.dll")
+            ffi_lib relative_path("../ext/windows/RubyGL.so")
+        elsif os == :macosx
+            ffi_lib relative_path("../ext/macosx/SDL2")
+            ffi_lib relative_path("../ext/macosx/RubyGL.so")
+        else
+            abort("Current OS Not Supported")
+        end
     end
 end
 

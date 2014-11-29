@@ -34,8 +34,8 @@ FFI_TYPES = { 'char' => 'char', 'signed char' => 'char',
 'uint16_t' => 'uint16', 'int' => 'int', 'unsigned int' => 'uint', 
 'int32_t' => 'int32', 'uint32_t' => 'uint32', 'long int' => 'long', 
 'unsigned long int' => 'ulong', 'int64_t' => 'int64', 'uint64_t' => 'uint64', 
-'long long int' => 'long_long', 'unsigned long long int' => 'ulong_long', 
-'float' => 'float', 'double' => 'double' }
+'long long int' => 'long_long', 'unsigned long long' => 'ulong_long', 
+'unsigned long long int' => 'ulong_long', 'float' => 'float', 'double' => 'double' }
 FFI_PTR_TYPES = { /\Aconst +(?:unsigned +)?char *\*\Z/ => 'string', /\*/ => 'pointer' }
 
 # Open Pre-Processor(ed) Source File
@@ -80,6 +80,14 @@ gl_functions = source_code.scan(/^.+?gl.+?\(.*?\);$/)
 ffi_template = "require 'ffi'
 
 module RubyGL::Native
+    def self.unsafe_attach_function(func, args, returns, options = {})
+        begin
+            attach_function func, args, returns, options
+        rescue FFI::NotFoundError
+            # Ignore Functions Not Found
+        end
+    end
+
 FUNCTIONS_GO_HERE
     
 CONSTANTS_GO_HERE
@@ -89,7 +97,7 @@ end
 # Append Functions (Param Type -> Typedefs -> Ruby Type)
 buffer = ''
 gl_functions.each { |signature|
-    buffer << ' ' * SOURCE_INDENTS + 'attach_function :' +
+    buffer << ' ' * SOURCE_INDENTS + 'unsafe_attach_function :' +
         signature[/(gl.*?)\(.*?\);/, 1] + ', ['
 
     # Get Type List

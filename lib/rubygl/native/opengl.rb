@@ -1,1050 +1,1058 @@
 require 'ffi'
 
 module RubyGL::Native
-    attach_function :glAccum, [:uint, :float], :void
-    attach_function :glActiveShaderProgram, [:uint, :uint], :void
-    attach_function :glActiveTexture, [:uint], :void
-    attach_function :glAlphaFunc, [:uint, :float], :void
-    attach_function :glAreTexturesResident, [:int, :pointer, :pointer], :uchar
-    attach_function :glArrayElement, [:int], :void
-    attach_function :glAttachShader, [:uint, :uint], :void
-    attach_function :glBegin, [:uint], :void
-    attach_function :glBeginConditionalRender, [:uint, :uint], :void
-    attach_function :glBeginQuery, [:uint, :uint], :void
-    attach_function :glBeginQueryIndexed, [:uint, :uint, :uint], :void
-    attach_function :glBeginTransformFeedback, [:uint], :void
-    attach_function :glBindAttribLocation, [:uint, :uint, :string], :void
-    attach_function :glBindBuffer, [:uint, :uint], :void
-    attach_function :glBindBufferBase, [:uint, :uint, :uint], :void
-    attach_function :glBindBufferRange, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glBindBuffersBase, [:uint, :uint, :int, :pointer], :void
-    attach_function :glBindBuffersRange, [:uint, :uint, :int, :pointer, :pointer, :pointer], :void
-    attach_function :glBindFragDataLocation, [:uint, :uint, :string], :void
-    attach_function :glBindFragDataLocationIndexed, [:uint, :uint, :uint, :string], :void
-    attach_function :glBindFramebuffer, [:uint, :uint], :void
-    attach_function :glBindImageTexture, [:uint, :uint, :int, :uchar, :int, :uint, :uint], :void
-    attach_function :glBindImageTextures, [:uint, :int, :pointer], :void
-    attach_function :glBindProgramPipeline, [:uint], :void
-    attach_function :glBindRenderbuffer, [:uint, :uint], :void
-    attach_function :glBindSampler, [:uint, :uint], :void
-    attach_function :glBindSamplers, [:uint, :int, :pointer], :void
-    attach_function :glBindTexture, [:uint, :uint], :void
-    attach_function :glBindTextureUnit, [:uint, :uint], :void
-    attach_function :glBindTextures, [:uint, :int, :pointer], :void
-    attach_function :glBindTransformFeedback, [:uint, :uint], :void
-    attach_function :glBindVertexArray, [:uint], :void
-    attach_function :glBindVertexBuffer, [:uint, :uint, :int, :int], :void
-    attach_function :glBindVertexBuffers, [:uint, :int, :pointer, :pointer, :pointer], :void
-    attach_function :glBitmap, [:int, :int, :float, :float, :float, :float, :string], :void
-    attach_function :glBlendColor, [:float, :float, :float, :float], :void
-    attach_function :glBlendEquation, [:uint], :void
-    attach_function :glBlendEquationSeparate, [:uint, :uint], :void
-    attach_function :glBlendEquationSeparatei, [:uint, :uint, :uint], :void
-    attach_function :glBlendEquationi, [:uint, :uint], :void
-    attach_function :glBlendFunc, [:uint, :uint], :void
-    attach_function :glBlendFuncSeparate, [:uint, :uint, :uint, :uint], :void
-    attach_function :glBlendFuncSeparatei, [:uint, :uint, :uint, :uint, :uint], :void
-    attach_function :glBlendFunci, [:uint, :uint, :uint], :void
-    attach_function :glBlitFramebuffer, [:int, :int, :int, :int, :int, :int, :int, :int, :uint, :uint], :void
-    attach_function :glBlitNamedFramebuffer, [:uint, :uint, :int, :int, :int, :int, :int, :int, :int, :int, :uint, :uint], :void
-    attach_function :glBufferData, [:uint, :int, :pointer, :uint], :void
-    attach_function :glBufferStorage, [:uint, :int, :pointer, :uint], :void
-    attach_function :glBufferSubData, [:uint, :int, :int, :pointer], :void
-    attach_function :glCallList, [:uint], :void
-    attach_function :glCallLists, [:int, :uint, :pointer], :void
-    attach_function :glCheckFramebufferStatus, [:uint], :uint
-    attach_function :glCheckNamedFramebufferStatus, [:uint, :uint], :uint
-    attach_function :glClampColor, [:uint, :uint], :void
-    attach_function :glClear, [:uint], :void
-    attach_function :glClearAccum, [:float, :float, :float, :float], :void
-    attach_function :glClearBufferData, [:uint, :uint, :uint, :uint, :pointer], :void
-    attach_function :glClearBufferSubData, [:uint, :uint, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glClearBufferfi, [:uint, :int, :float, :int], :void
-    attach_function :glClearBufferfv, [:uint, :int, :pointer], :void
-    attach_function :glClearBufferiv, [:uint, :int, :pointer], :void
-    attach_function :glClearBufferuiv, [:uint, :int, :pointer], :void
-    attach_function :glClearColor, [:float, :float, :float, :float], :void
-    attach_function :glClearDepth, [:double], :void
-    attach_function :glClearDepthf, [:float], :void
-    attach_function :glClearIndex, [:float], :void
-    attach_function :glClearNamedBufferData, [:uint, :uint, :uint, :uint, :pointer], :void
-    attach_function :glClearNamedBufferSubData, [:uint, :uint, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glClearNamedFramebufferfi, [:uint, :uint, :float, :int], :void
-    attach_function :glClearNamedFramebufferfv, [:uint, :uint, :int, :pointer], :void
-    attach_function :glClearNamedFramebufferiv, [:uint, :uint, :int, :pointer], :void
-    attach_function :glClearNamedFramebufferuiv, [:uint, :uint, :int, :pointer], :void
-    attach_function :glClearStencil, [:int], :void
-    attach_function :glClearTexImage, [:uint, :int, :uint, :uint, :pointer], :void
-    attach_function :glClearTexSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glClientActiveTexture, [:uint], :void
-    attach_function :glClientWaitSync, [:pointer, :uint, :uint64], :uint
-    attach_function :glClipControl, [:uint, :uint], :void
-    attach_function :glClipPlane, [:uint, :pointer], :void
-    attach_function :glColor3b, [:char, :char, :char], :void
-    attach_function :glColor3bv, [:pointer], :void
-    attach_function :glColor3d, [:double, :double, :double], :void
-    attach_function :glColor3dv, [:pointer], :void
-    attach_function :glColor3f, [:float, :float, :float], :void
-    attach_function :glColor3fv, [:pointer], :void
-    attach_function :glColor3i, [:int, :int, :int], :void
-    attach_function :glColor3iv, [:pointer], :void
-    attach_function :glColor3s, [:short, :short, :short], :void
-    attach_function :glColor3sv, [:pointer], :void
-    attach_function :glColor3ub, [:uchar, :uchar, :uchar], :void
-    attach_function :glColor3ubv, [:string], :void
-    attach_function :glColor3ui, [:uint, :uint, :uint], :void
-    attach_function :glColor3uiv, [:pointer], :void
-    attach_function :glColor3us, [:ushort, :ushort, :ushort], :void
-    attach_function :glColor3usv, [:pointer], :void
-    attach_function :glColor4b, [:char, :char, :char, :char], :void
-    attach_function :glColor4bv, [:pointer], :void
-    attach_function :glColor4d, [:double, :double, :double, :double], :void
-    attach_function :glColor4dv, [:pointer], :void
-    attach_function :glColor4f, [:float, :float, :float, :float], :void
-    attach_function :glColor4fv, [:pointer], :void
-    attach_function :glColor4i, [:int, :int, :int, :int], :void
-    attach_function :glColor4iv, [:pointer], :void
-    attach_function :glColor4s, [:short, :short, :short, :short], :void
-    attach_function :glColor4sv, [:pointer], :void
-    attach_function :glColor4ub, [:uchar, :uchar, :uchar, :uchar], :void
-    attach_function :glColor4ubv, [:string], :void
-    attach_function :glColor4ui, [:uint, :uint, :uint, :uint], :void
-    attach_function :glColor4uiv, [:pointer], :void
-    attach_function :glColor4us, [:ushort, :ushort, :ushort, :ushort], :void
-    attach_function :glColor4usv, [:pointer], :void
-    attach_function :glColorMask, [:uchar, :uchar, :uchar, :uchar], :void
-    attach_function :glColorMaski, [:uint, :uchar, :uchar, :uchar, :uchar], :void
-    attach_function :glColorMaterial, [:uint, :uint], :void
-    attach_function :glColorP3ui, [:uint, :uint], :void
-    attach_function :glColorP3uiv, [:uint, :pointer], :void
-    attach_function :glColorP4ui, [:uint, :uint], :void
-    attach_function :glColorP4uiv, [:uint, :pointer], :void
-    attach_function :glColorPointer, [:int, :uint, :int, :pointer], :void
-    attach_function :glCompileShader, [:uint], :void
-    attach_function :glCompressedTexImage1D, [:uint, :int, :uint, :int, :int, :int, :pointer], :void
-    attach_function :glCompressedTexImage2D, [:uint, :int, :uint, :int, :int, :int, :int, :pointer], :void
-    attach_function :glCompressedTexImage3D, [:uint, :int, :uint, :int, :int, :int, :int, :int, :pointer], :void
-    attach_function :glCompressedTexSubImage1D, [:uint, :int, :int, :int, :uint, :int, :pointer], :void
-    attach_function :glCompressedTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
-    attach_function :glCompressedTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
-    attach_function :glCompressedTextureSubImage1D, [:uint, :int, :int, :int, :uint, :int, :pointer], :void
-    attach_function :glCompressedTextureSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
-    attach_function :glCompressedTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
-    attach_function :glCopyBufferSubData, [:uint, :uint, :int, :int, :int], :void
-    attach_function :glCopyImageSubData, [:uint, :uint, :int, :int, :int, :int, :uint, :uint, :int, :int, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyNamedBufferSubData, [:uint, :uint, :int, :int, :int], :void
-    attach_function :glCopyPixels, [:int, :int, :int, :int, :uint], :void
-    attach_function :glCopyTexImage1D, [:uint, :int, :uint, :int, :int, :int, :int], :void
-    attach_function :glCopyTexImage2D, [:uint, :int, :uint, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyTexSubImage1D, [:uint, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyTextureSubImage1D, [:uint, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyTextureSubImage2D, [:uint, :int, :int, :int, :int, :int, :int, :int], :void
-    attach_function :glCopyTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :int], :void
-    attach_function :glCreateBuffers, [:int, :pointer], :void
-    attach_function :glCreateFramebuffers, [:int, :pointer], :void
-    attach_function :glCreateProgram, [], :uint
-    attach_function :glCreateProgramPipelines, [:int, :pointer], :void
-    attach_function :glCreateQueries, [:uint, :int, :pointer], :void
-    attach_function :glCreateRenderbuffers, [:int, :pointer], :void
-    attach_function :glCreateSamplers, [:int, :pointer], :void
-    attach_function :glCreateShader, [:uint], :uint
-    attach_function :glCreateShaderProgramv, [:uint, :int, :pointer], :uint
-    attach_function :glCreateTextures, [:uint, :int, :pointer], :void
-    attach_function :glCreateTransformFeedbacks, [:int, :pointer], :void
-    attach_function :glCreateVertexArrays, [:int, :pointer], :void
-    attach_function :glCullFace, [:uint], :void
-    attach_function :glDebugMessageCallback, [:pointer, :pointer], :void
-    attach_function :glDebugMessageControl, [:uint, :uint, :uint, :int, :pointer, :uchar], :void
-    attach_function :glDebugMessageInsert, [:uint, :uint, :uint, :uint, :int, :string], :void
-    attach_function :glDeleteBuffers, [:int, :pointer], :void
-    attach_function :glDeleteFramebuffers, [:int, :pointer], :void
-    attach_function :glDeleteLists, [:uint, :int], :void
-    attach_function :glDeleteProgram, [:uint], :void
-    attach_function :glDeleteProgramPipelines, [:int, :pointer], :void
-    attach_function :glDeleteQueries, [:int, :pointer], :void
-    attach_function :glDeleteRenderbuffers, [:int, :pointer], :void
-    attach_function :glDeleteSamplers, [:int, :pointer], :void
-    attach_function :glDeleteShader, [:uint], :void
-    attach_function :glDeleteSync, [:pointer], :void
-    attach_function :glDeleteTextures, [:int, :pointer], :void
-    attach_function :glDeleteTransformFeedbacks, [:int, :pointer], :void
-    attach_function :glDeleteVertexArrays, [:int, :pointer], :void
-    attach_function :glDepthFunc, [:uint], :void
-    attach_function :glDepthMask, [:uchar], :void
-    attach_function :glDepthRange, [:double, :double], :void
-    attach_function :glDepthRangeArrayv, [:uint, :int, :pointer], :void
-    attach_function :glDepthRangeIndexed, [:uint, :double, :double], :void
-    attach_function :glDepthRangef, [:float, :float], :void
-    attach_function :glDetachShader, [:uint, :uint], :void
-    attach_function :glDisable, [:uint], :void
-    attach_function :glDisableClientState, [:uint], :void
-    attach_function :glDisableVertexArrayAttrib, [:uint, :uint], :void
-    attach_function :glDisableVertexAttribArray, [:uint], :void
-    attach_function :glDisablei, [:uint, :uint], :void
-    attach_function :glDispatchCompute, [:uint, :uint, :uint], :void
-    attach_function :glDispatchComputeIndirect, [:int], :void
-    attach_function :glDrawArrays, [:uint, :int, :int], :void
-    attach_function :glDrawArraysIndirect, [:uint, :pointer], :void
-    attach_function :glDrawArraysInstanced, [:uint, :int, :int, :int], :void
-    attach_function :glDrawArraysInstancedBaseInstance, [:uint, :int, :int, :int, :uint], :void
-    attach_function :glDrawBuffer, [:uint], :void
-    attach_function :glDrawBuffers, [:int, :pointer], :void
-    attach_function :glDrawElements, [:uint, :int, :uint, :pointer], :void
-    attach_function :glDrawElementsBaseVertex, [:uint, :int, :uint, :pointer, :int], :void
-    attach_function :glDrawElementsIndirect, [:uint, :uint, :pointer], :void
-    attach_function :glDrawElementsInstanced, [:uint, :int, :uint, :pointer, :int], :void
-    attach_function :glDrawElementsInstancedBaseInstance, [:uint, :int, :uint, :pointer, :int, :uint], :void
-    attach_function :glDrawElementsInstancedBaseVertex, [:uint, :int, :uint, :pointer, :int, :int], :void
-    attach_function :glDrawElementsInstancedBaseVertexBaseInstance, [:uint, :int, :uint, :pointer, :int, :int, :uint], :void
-    attach_function :glDrawPixels, [:int, :int, :uint, :uint, :pointer], :void
-    attach_function :glDrawRangeElements, [:uint, :uint, :uint, :int, :uint, :pointer], :void
-    attach_function :glDrawRangeElementsBaseVertex, [:uint, :uint, :uint, :int, :uint, :pointer, :int], :void
-    attach_function :glDrawTransformFeedback, [:uint, :uint], :void
-    attach_function :glDrawTransformFeedbackInstanced, [:uint, :uint, :int], :void
-    attach_function :glDrawTransformFeedbackStream, [:uint, :uint, :uint], :void
-    attach_function :glDrawTransformFeedbackStreamInstanced, [:uint, :uint, :uint, :int], :void
-    attach_function :glEdgeFlag, [:uchar], :void
-    attach_function :glEdgeFlagPointer, [:int, :pointer], :void
-    attach_function :glEdgeFlagv, [:string], :void
-    attach_function :glEnable, [:uint], :void
-    attach_function :glEnableClientState, [:uint], :void
-    attach_function :glEnableVertexArrayAttrib, [:uint, :uint], :void
-    attach_function :glEnableVertexAttribArray, [:uint], :void
-    attach_function :glEnablei, [:uint, :uint], :void
-    attach_function :glEnd, [], :void
-    attach_function :glEndConditionalRender, [], :void
-    attach_function :glEndList, [], :void
-    attach_function :glEndQuery, [:uint], :void
-    attach_function :glEndQueryIndexed, [:uint, :uint], :void
-    attach_function :glEndTransformFeedback, [], :void
-    attach_function :glEvalCoord1d, [:double], :void
-    attach_function :glEvalCoord1dv, [:pointer], :void
-    attach_function :glEvalCoord1f, [:float], :void
-    attach_function :glEvalCoord1fv, [:pointer], :void
-    attach_function :glEvalCoord2d, [:double, :double], :void
-    attach_function :glEvalCoord2dv, [:pointer], :void
-    attach_function :glEvalCoord2f, [:float, :float], :void
-    attach_function :glEvalCoord2fv, [:pointer], :void
-    attach_function :glEvalMesh1, [:uint, :int, :int], :void
-    attach_function :glEvalMesh2, [:uint, :int, :int, :int, :int], :void
-    attach_function :glEvalPoint1, [:int], :void
-    attach_function :glEvalPoint2, [:int, :int], :void
-    attach_function :glFeedbackBuffer, [:int, :uint, :pointer], :void
-    attach_function :glFenceSync, [:uint, :uint], :pointer
-    attach_function :glFinish, [], :void
-    attach_function :glFlush, [], :void
-    attach_function :glFlushMappedBufferRange, [:uint, :int, :int], :void
-    attach_function :glFlushMappedNamedBufferRange, [:uint, :int, :int], :void
-    attach_function :glFogCoordPointer, [:uint, :int, :pointer], :void
-    attach_function :glFogCoordd, [:double], :void
-    attach_function :glFogCoorddv, [:pointer], :void
-    attach_function :glFogCoordf, [:float], :void
-    attach_function :glFogCoordfv, [:pointer], :void
-    attach_function :glFogf, [:uint, :float], :void
-    attach_function :glFogfv, [:uint, :pointer], :void
-    attach_function :glFogi, [:uint, :int], :void
-    attach_function :glFogiv, [:uint, :pointer], :void
-    attach_function :glFramebufferParameteri, [:uint, :uint, :int], :void
-    attach_function :glFramebufferRenderbuffer, [:uint, :uint, :uint, :uint], :void
-    attach_function :glFramebufferTexture, [:uint, :uint, :uint, :int], :void
-    attach_function :glFramebufferTexture1D, [:uint, :uint, :uint, :uint, :int], :void
-    attach_function :glFramebufferTexture2D, [:uint, :uint, :uint, :uint, :int], :void
-    attach_function :glFramebufferTexture3D, [:uint, :uint, :uint, :uint, :int, :int], :void
-    attach_function :glFramebufferTextureLayer, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glFrontFace, [:uint], :void
-    attach_function :glFrustum, [:double, :double, :double, :double, :double, :double], :void
-    attach_function :glGenBuffers, [:int, :pointer], :void
-    attach_function :glGenFramebuffers, [:int, :pointer], :void
-    attach_function :glGenLists, [:int], :uint
-    attach_function :glGenProgramPipelines, [:int, :pointer], :void
-    attach_function :glGenQueries, [:int, :pointer], :void
-    attach_function :glGenRenderbuffers, [:int, :pointer], :void
-    attach_function :glGenSamplers, [:int, :pointer], :void
-    attach_function :glGenTextures, [:int, :pointer], :void
-    attach_function :glGenTransformFeedbacks, [:int, :pointer], :void
-    attach_function :glGenVertexArrays, [:int, :pointer], :void
-    attach_function :glGenerateMipmap, [:uint], :void
-    attach_function :glGenerateTextureMipmap, [:uint], :void
-    attach_function :glGetActiveAtomicCounterBufferiv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetActiveAttrib, [:uint, :uint, :int, :pointer, :pointer, :pointer, :pointer], :void
-    attach_function :glGetActiveSubroutineName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetActiveSubroutineUniformName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetActiveSubroutineUniformiv, [:uint, :uint, :uint, :uint, :pointer], :void
-    attach_function :glGetActiveUniform, [:uint, :uint, :int, :pointer, :pointer, :pointer, :pointer], :void
-    attach_function :glGetActiveUniformBlockName, [:uint, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetActiveUniformBlockiv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetActiveUniformName, [:uint, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetActiveUniformsiv, [:uint, :int, :pointer, :uint, :pointer], :void
-    attach_function :glGetAttachedShaders, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetAttribLocation, [:uint, :string], :int
-    attach_function :glGetBooleani_v, [:uint, :uint, :pointer], :void
-    attach_function :glGetBooleanv, [:uint, :pointer], :void
-    attach_function :glGetBufferParameteri64v, [:uint, :uint, :pointer], :void
-    attach_function :glGetBufferParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetBufferPointerv, [:uint, :uint, :pointer], :void
-    attach_function :glGetBufferSubData, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetClipPlane, [:uint, :pointer], :void
-    attach_function :glGetCompressedTexImage, [:uint, :int, :pointer], :void
-    attach_function :glGetCompressedTextureImage, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetCompressedTextureSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :int, :pointer], :void
-    attach_function :glGetDebugMessageLog, [:uint, :int, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer], :uint
-    attach_function :glGetDoublei_v, [:uint, :uint, :pointer], :void
-    attach_function :glGetDoublev, [:uint, :pointer], :void
-    attach_function :glGetError, [], :uint
-    attach_function :glGetFloati_v, [:uint, :uint, :pointer], :void
-    attach_function :glGetFloatv, [:uint, :pointer], :void
-    attach_function :glGetFragDataIndex, [:uint, :string], :int
-    attach_function :glGetFragDataLocation, [:uint, :string], :int
-    attach_function :glGetFramebufferAttachmentParameteriv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetFramebufferParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetGraphicsResetStatus, [], :uint
-    attach_function :glGetInteger64i_v, [:uint, :uint, :pointer], :void
-    attach_function :glGetInteger64v, [:uint, :pointer], :void
-    attach_function :glGetIntegeri_v, [:uint, :uint, :pointer], :void
-    attach_function :glGetIntegerv, [:uint, :pointer], :void
-    attach_function :glGetInternalformati64v, [:uint, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetInternalformativ, [:uint, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetLightfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetLightiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetMapdv, [:uint, :uint, :pointer], :void
-    attach_function :glGetMapfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetMapiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetMaterialfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetMaterialiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetMultisamplefv, [:uint, :uint, :pointer], :void
-    attach_function :glGetNamedBufferParameteri64v, [:uint, :uint, :pointer], :void
-    attach_function :glGetNamedBufferParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetNamedBufferPointerv, [:uint, :uint, :pointer], :void
-    attach_function :glGetNamedBufferSubData, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetNamedFramebufferAttachmentParameteriv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetNamedFramebufferParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetNamedRenderbufferParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetObjectLabel, [:uint, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetObjectPtrLabel, [:pointer, :int, :pointer, :pointer], :void
-    attach_function :glGetPixelMapfv, [:uint, :pointer], :void
-    attach_function :glGetPixelMapuiv, [:uint, :pointer], :void
-    attach_function :glGetPixelMapusv, [:uint, :pointer], :void
-    attach_function :glGetPointerv, [:uint, :pointer], :void
-    attach_function :glGetPolygonStipple, [:pointer], :void
-    attach_function :glGetProgramBinary, [:uint, :int, :pointer, :pointer, :pointer], :void
-    attach_function :glGetProgramInfoLog, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetProgramInterfaceiv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetProgramPipelineInfoLog, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetProgramPipelineiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetProgramResourceIndex, [:uint, :uint, :string], :uint
-    attach_function :glGetProgramResourceLocation, [:uint, :uint, :string], :int
-    attach_function :glGetProgramResourceLocationIndex, [:uint, :uint, :string], :int
-    attach_function :glGetProgramResourceName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetProgramResourceiv, [:uint, :uint, :uint, :int, :pointer, :int, :pointer, :pointer], :void
-    attach_function :glGetProgramStageiv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetProgramiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetQueryBufferObjecti64v, [:uint, :uint, :uint, :int], :void
-    attach_function :glGetQueryBufferObjectiv, [:uint, :uint, :uint, :int], :void
-    attach_function :glGetQueryBufferObjectui64v, [:uint, :uint, :uint, :int], :void
-    attach_function :glGetQueryBufferObjectuiv, [:uint, :uint, :uint, :int], :void
-    attach_function :glGetQueryIndexediv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetQueryObjecti64v, [:uint, :uint, :pointer], :void
-    attach_function :glGetQueryObjectiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetQueryObjectui64v, [:uint, :uint, :pointer], :void
-    attach_function :glGetQueryObjectuiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetQueryiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetRenderbufferParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetSamplerParameterIiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetSamplerParameterIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetSamplerParameterfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetSamplerParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetShaderInfoLog, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetShaderPrecisionFormat, [:uint, :uint, :pointer, :pointer], :void
-    attach_function :glGetShaderSource, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetShaderiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetString, [:uint], :string
-    attach_function :glGetStringi, [:uint, :uint], :string
-    attach_function :glGetSubroutineIndex, [:uint, :uint, :string], :uint
-    attach_function :glGetSubroutineUniformLocation, [:uint, :uint, :string], :int
-    attach_function :glGetSynciv, [:pointer, :uint, :int, :pointer, :pointer], :void
-    attach_function :glGetTexEnvfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexEnviv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexGendv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexGenfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexGeniv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexImage, [:uint, :int, :uint, :uint, :pointer], :void
-    attach_function :glGetTexLevelParameterfv, [:uint, :int, :uint, :pointer], :void
-    attach_function :glGetTexLevelParameteriv, [:uint, :int, :uint, :pointer], :void
-    attach_function :glGetTexParameterIiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexParameterIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexParameterfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTexParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTextureImage, [:uint, :int, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetTextureLevelParameterfv, [:uint, :int, :uint, :pointer], :void
-    attach_function :glGetTextureLevelParameteriv, [:uint, :int, :uint, :pointer], :void
-    attach_function :glGetTextureParameterIiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTextureParameterIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTextureParameterfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTextureParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glGetTextureSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetTransformFeedbackVarying, [:uint, :uint, :int, :pointer, :pointer, :pointer, :pointer], :void
-    attach_function :glGetTransformFeedbacki64_v, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetTransformFeedbacki_v, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetTransformFeedbackiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetUniformBlockIndex, [:uint, :string], :uint
-    attach_function :glGetUniformIndices, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glGetUniformLocation, [:uint, :string], :int
-    attach_function :glGetUniformSubroutineuiv, [:uint, :int, :pointer], :void
-    attach_function :glGetUniformdv, [:uint, :int, :pointer], :void
-    attach_function :glGetUniformfv, [:uint, :int, :pointer], :void
-    attach_function :glGetUniformiv, [:uint, :int, :pointer], :void
-    attach_function :glGetUniformuiv, [:uint, :int, :pointer], :void
-    attach_function :glGetVertexArrayIndexed64iv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetVertexArrayIndexediv, [:uint, :uint, :uint, :pointer], :void
-    attach_function :glGetVertexArrayiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribIiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribLdv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribPointerv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribdv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribfv, [:uint, :uint, :pointer], :void
-    attach_function :glGetVertexAttribiv, [:uint, :uint, :pointer], :void
-    attach_function :glGetnColorTable, [:uint, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetnCompressedTexImage, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetnConvolutionFilter, [:uint, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetnHistogram, [:uint, :uchar, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetnMapdv, [:uint, :uint, :int, :pointer], :void
-    attach_function :glGetnMapfv, [:uint, :uint, :int, :pointer], :void
-    attach_function :glGetnMapiv, [:uint, :uint, :int, :pointer], :void
-    attach_function :glGetnMinmax, [:uint, :uchar, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetnPixelMapfv, [:uint, :int, :pointer], :void
-    attach_function :glGetnPixelMapuiv, [:uint, :int, :pointer], :void
-    attach_function :glGetnPixelMapusv, [:uint, :int, :pointer], :void
-    attach_function :glGetnPolygonStipple, [:int, :pointer], :void
-    attach_function :glGetnSeparableFilter, [:uint, :uint, :uint, :int, :pointer, :int, :pointer, :pointer], :void
-    attach_function :glGetnTexImage, [:uint, :int, :uint, :uint, :int, :pointer], :void
-    attach_function :glGetnUniformdv, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetnUniformfv, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetnUniformiv, [:uint, :int, :int, :pointer], :void
-    attach_function :glGetnUniformuiv, [:uint, :int, :int, :pointer], :void
-    attach_function :glHint, [:uint, :uint], :void
-    attach_function :glIndexMask, [:uint], :void
-    attach_function :glIndexPointer, [:uint, :int, :pointer], :void
-    attach_function :glIndexd, [:double], :void
-    attach_function :glIndexdv, [:pointer], :void
-    attach_function :glIndexf, [:float], :void
-    attach_function :glIndexfv, [:pointer], :void
-    attach_function :glIndexi, [:int], :void
-    attach_function :glIndexiv, [:pointer], :void
-    attach_function :glIndexs, [:short], :void
-    attach_function :glIndexsv, [:pointer], :void
-    attach_function :glIndexub, [:uchar], :void
-    attach_function :glIndexubv, [:string], :void
-    attach_function :glInitNames, [], :void
-    attach_function :glInterleavedArrays, [:uint, :int, :pointer], :void
-    attach_function :glInvalidateBufferData, [:uint], :void
-    attach_function :glInvalidateBufferSubData, [:uint, :int, :int], :void
-    attach_function :glInvalidateFramebuffer, [:uint, :int, :pointer], :void
-    attach_function :glInvalidateNamedFramebufferData, [:uint, :int, :pointer], :void
-    attach_function :glInvalidateNamedFramebufferSubData, [:uint, :int, :pointer, :int, :int, :int, :int], :void
-    attach_function :glInvalidateSubFramebuffer, [:uint, :int, :pointer, :int, :int, :int, :int], :void
-    attach_function :glInvalidateTexImage, [:uint, :int], :void
-    attach_function :glInvalidateTexSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int], :void
-    attach_function :glIsBuffer, [:uint], :uchar
-    attach_function :glIsEnabled, [:uint], :uchar
-    attach_function :glIsEnabledi, [:uint, :uint], :uchar
-    attach_function :glIsFramebuffer, [:uint], :uchar
-    attach_function :glIsList, [:uint], :uchar
-    attach_function :glIsProgram, [:uint], :uchar
-    attach_function :glIsProgramPipeline, [:uint], :uchar
-    attach_function :glIsQuery, [:uint], :uchar
-    attach_function :glIsRenderbuffer, [:uint], :uchar
-    attach_function :glIsSampler, [:uint], :uchar
-    attach_function :glIsShader, [:uint], :uchar
-    attach_function :glIsSync, [:pointer], :uchar
-    attach_function :glIsTexture, [:uint], :uchar
-    attach_function :glIsTransformFeedback, [:uint], :uchar
-    attach_function :glIsVertexArray, [:uint], :uchar
-    attach_function :glLightModelf, [:uint, :float], :void
-    attach_function :glLightModelfv, [:uint, :pointer], :void
-    attach_function :glLightModeli, [:uint, :int], :void
-    attach_function :glLightModeliv, [:uint, :pointer], :void
-    attach_function :glLightf, [:uint, :uint, :float], :void
-    attach_function :glLightfv, [:uint, :uint, :pointer], :void
-    attach_function :glLighti, [:uint, :uint, :int], :void
-    attach_function :glLightiv, [:uint, :uint, :pointer], :void
-    attach_function :glLineStipple, [:int, :ushort], :void
-    attach_function :glLineWidth, [:float], :void
-    attach_function :glLinkProgram, [:uint], :void
-    attach_function :glListBase, [:uint], :void
-    attach_function :glLoadIdentity, [], :void
-    attach_function :glLoadMatrixd, [:pointer], :void
-    attach_function :glLoadMatrixf, [:pointer], :void
-    attach_function :glLoadName, [:uint], :void
-    attach_function :glLoadTransposeMatrixd, [:pointer], :void
-    attach_function :glLoadTransposeMatrixf, [:pointer], :void
-    attach_function :glLogicOp, [:uint], :void
-    attach_function :glMap1d, [:uint, :double, :double, :int, :int, :pointer], :void
-    attach_function :glMap1f, [:uint, :float, :float, :int, :int, :pointer], :void
-    attach_function :glMap2d, [:uint, :double, :double, :int, :int, :double, :double, :int, :int, :pointer], :void
-    attach_function :glMap2f, [:uint, :float, :float, :int, :int, :float, :float, :int, :int, :pointer], :void
-    attach_function :glMapBuffer, [:uint, :uint], :pointer
-    attach_function :glMapBufferRange, [:uint, :int, :int, :uint], :pointer
-    attach_function :glMapGrid1d, [:int, :double, :double], :void
-    attach_function :glMapGrid1f, [:int, :float, :float], :void
-    attach_function :glMapGrid2d, [:int, :double, :double, :int, :double, :double], :void
-    attach_function :glMapGrid2f, [:int, :float, :float, :int, :float, :float], :void
-    attach_function :glMapNamedBuffer, [:uint, :uint], :pointer
-    attach_function :glMapNamedBufferRange, [:uint, :int, :int, :uint], :pointer
-    attach_function :glMaterialf, [:uint, :uint, :float], :void
-    attach_function :glMaterialfv, [:uint, :uint, :pointer], :void
-    attach_function :glMateriali, [:uint, :uint, :int], :void
-    attach_function :glMaterialiv, [:uint, :uint, :pointer], :void
-    attach_function :glMatrixMode, [:uint], :void
-    attach_function :glMemoryBarrier, [:uint], :void
-    attach_function :glMemoryBarrierByRegion, [:uint], :void
-    attach_function :glMinSampleShading, [:float], :void
-    attach_function :glMultMatrixd, [:pointer], :void
-    attach_function :glMultMatrixf, [:pointer], :void
-    attach_function :glMultTransposeMatrixd, [:pointer], :void
-    attach_function :glMultTransposeMatrixf, [:pointer], :void
-    attach_function :glMultiDrawArrays, [:uint, :pointer, :pointer, :int], :void
-    attach_function :glMultiDrawArraysIndirect, [:uint, :pointer, :int, :int], :void
-    attach_function :glMultiDrawElements, [:uint, :pointer, :uint, :pointer, :int], :void
-    attach_function :glMultiDrawElementsBaseVertex, [:uint, :pointer, :uint, :pointer, :int, :pointer], :void
-    attach_function :glMultiDrawElementsIndirect, [:uint, :uint, :pointer, :int, :int], :void
-    attach_function :glMultiTexCoord1d, [:uint, :double], :void
-    attach_function :glMultiTexCoord1dv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord1f, [:uint, :float], :void
-    attach_function :glMultiTexCoord1fv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord1i, [:uint, :int], :void
-    attach_function :glMultiTexCoord1iv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord1s, [:uint, :short], :void
-    attach_function :glMultiTexCoord1sv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord2d, [:uint, :double, :double], :void
-    attach_function :glMultiTexCoord2dv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord2f, [:uint, :float, :float], :void
-    attach_function :glMultiTexCoord2fv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord2i, [:uint, :int, :int], :void
-    attach_function :glMultiTexCoord2iv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord2s, [:uint, :short, :short], :void
-    attach_function :glMultiTexCoord2sv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord3d, [:uint, :double, :double, :double], :void
-    attach_function :glMultiTexCoord3dv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord3f, [:uint, :float, :float, :float], :void
-    attach_function :glMultiTexCoord3fv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord3i, [:uint, :int, :int, :int], :void
-    attach_function :glMultiTexCoord3iv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord3s, [:uint, :short, :short, :short], :void
-    attach_function :glMultiTexCoord3sv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord4d, [:uint, :double, :double, :double, :double], :void
-    attach_function :glMultiTexCoord4dv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord4f, [:uint, :float, :float, :float, :float], :void
-    attach_function :glMultiTexCoord4fv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord4i, [:uint, :int, :int, :int, :int], :void
-    attach_function :glMultiTexCoord4iv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoord4s, [:uint, :short, :short, :short, :short], :void
-    attach_function :glMultiTexCoord4sv, [:uint, :pointer], :void
-    attach_function :glMultiTexCoordP1ui, [:uint, :uint, :uint], :void
-    attach_function :glMultiTexCoordP1uiv, [:uint, :uint, :pointer], :void
-    attach_function :glMultiTexCoordP2ui, [:uint, :uint, :uint], :void
-    attach_function :glMultiTexCoordP2uiv, [:uint, :uint, :pointer], :void
-    attach_function :glMultiTexCoordP3ui, [:uint, :uint, :uint], :void
-    attach_function :glMultiTexCoordP3uiv, [:uint, :uint, :pointer], :void
-    attach_function :glMultiTexCoordP4ui, [:uint, :uint, :uint], :void
-    attach_function :glMultiTexCoordP4uiv, [:uint, :uint, :pointer], :void
-    attach_function :glNamedBufferData, [:uint, :int, :pointer, :uint], :void
-    attach_function :glNamedBufferStorage, [:uint, :int, :pointer, :uint], :void
-    attach_function :glNamedBufferSubData, [:uint, :int, :int, :pointer], :void
-    attach_function :glNamedFramebufferDrawBuffer, [:uint, :uint], :void
-    attach_function :glNamedFramebufferDrawBuffers, [:uint, :int, :pointer], :void
-    attach_function :glNamedFramebufferParameteri, [:uint, :uint, :int], :void
-    attach_function :glNamedFramebufferReadBuffer, [:uint, :uint], :void
-    attach_function :glNamedFramebufferRenderbuffer, [:uint, :uint, :uint, :uint], :void
-    attach_function :glNamedFramebufferTexture, [:uint, :uint, :uint, :int], :void
-    attach_function :glNamedFramebufferTextureLayer, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glNamedRenderbufferStorage, [:uint, :uint, :int, :int], :void
-    attach_function :glNamedRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
-    attach_function :glNewList, [:uint, :uint], :void
-    attach_function :glNormal3b, [:char, :char, :char], :void
-    attach_function :glNormal3bv, [:pointer], :void
-    attach_function :glNormal3d, [:double, :double, :double], :void
-    attach_function :glNormal3dv, [:pointer], :void
-    attach_function :glNormal3f, [:float, :float, :float], :void
-    attach_function :glNormal3fv, [:pointer], :void
-    attach_function :glNormal3i, [:int, :int, :int], :void
-    attach_function :glNormal3iv, [:pointer], :void
-    attach_function :glNormal3s, [:short, :short, :short], :void
-    attach_function :glNormal3sv, [:pointer], :void
-    attach_function :glNormalP3ui, [:uint, :uint], :void
-    attach_function :glNormalP3uiv, [:uint, :pointer], :void
-    attach_function :glNormalPointer, [:uint, :int, :pointer], :void
-    attach_function :glObjectLabel, [:uint, :uint, :int, :string], :void
-    attach_function :glObjectPtrLabel, [:pointer, :int, :string], :void
-    attach_function :glOrtho, [:double, :double, :double, :double, :double, :double], :void
-    attach_function :glPassThrough, [:float], :void
-    attach_function :glPatchParameterfv, [:uint, :pointer], :void
-    attach_function :glPatchParameteri, [:uint, :int], :void
-    attach_function :glPauseTransformFeedback, [], :void
-    attach_function :glPixelMapfv, [:uint, :int, :pointer], :void
-    attach_function :glPixelMapuiv, [:uint, :int, :pointer], :void
-    attach_function :glPixelMapusv, [:uint, :int, :pointer], :void
-    attach_function :glPixelStoref, [:uint, :float], :void
-    attach_function :glPixelStorei, [:uint, :int], :void
-    attach_function :glPixelTransferf, [:uint, :float], :void
-    attach_function :glPixelTransferi, [:uint, :int], :void
-    attach_function :glPixelZoom, [:float, :float], :void
-    attach_function :glPointParameterf, [:uint, :float], :void
-    attach_function :glPointParameterfv, [:uint, :pointer], :void
-    attach_function :glPointParameteri, [:uint, :int], :void
-    attach_function :glPointParameteriv, [:uint, :pointer], :void
-    attach_function :glPointSize, [:float], :void
-    attach_function :glPolygonMode, [:uint, :uint], :void
-    attach_function :glPolygonOffset, [:float, :float], :void
-    attach_function :glPolygonStipple, [:string], :void
-    attach_function :glPopAttrib, [], :void
-    attach_function :glPopClientAttrib, [], :void
-    attach_function :glPopDebugGroup, [], :void
-    attach_function :glPopMatrix, [], :void
-    attach_function :glPopName, [], :void
-    attach_function :glPrimitiveRestartIndex, [:uint], :void
-    attach_function :glPrioritizeTextures, [:int, :pointer, :pointer], :void
-    attach_function :glProgramBinary, [:uint, :uint, :pointer, :int], :void
-    attach_function :glProgramParameteri, [:uint, :uint, :int], :void
-    attach_function :glProgramUniform1d, [:uint, :int, :double], :void
-    attach_function :glProgramUniform1dv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform1f, [:uint, :int, :float], :void
-    attach_function :glProgramUniform1fv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform1i, [:uint, :int, :int], :void
-    attach_function :glProgramUniform1iv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform1ui, [:uint, :int, :uint], :void
-    attach_function :glProgramUniform1uiv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform2d, [:uint, :int, :double, :double], :void
-    attach_function :glProgramUniform2dv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform2f, [:uint, :int, :float, :float], :void
-    attach_function :glProgramUniform2fv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform2i, [:uint, :int, :int, :int], :void
-    attach_function :glProgramUniform2iv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform2ui, [:uint, :int, :uint, :uint], :void
-    attach_function :glProgramUniform2uiv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform3d, [:uint, :int, :double, :double, :double], :void
-    attach_function :glProgramUniform3dv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform3f, [:uint, :int, :float, :float, :float], :void
-    attach_function :glProgramUniform3fv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform3i, [:uint, :int, :int, :int, :int], :void
-    attach_function :glProgramUniform3iv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform3ui, [:uint, :int, :uint, :uint, :uint], :void
-    attach_function :glProgramUniform3uiv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform4d, [:uint, :int, :double, :double, :double, :double], :void
-    attach_function :glProgramUniform4dv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform4f, [:uint, :int, :float, :float, :float, :float], :void
-    attach_function :glProgramUniform4fv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform4i, [:uint, :int, :int, :int, :int, :int], :void
-    attach_function :glProgramUniform4iv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniform4ui, [:uint, :int, :uint, :uint, :uint, :uint], :void
-    attach_function :glProgramUniform4uiv, [:uint, :int, :int, :pointer], :void
-    attach_function :glProgramUniformMatrix2dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix2fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix2x3dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix2x3fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix2x4dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix2x4fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix3dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix3fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix3x2dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix3x2fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix3x4dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix3x4fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix4dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix4fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix4x2dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix4x2fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix4x3dv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProgramUniformMatrix4x3fv, [:uint, :int, :int, :uchar, :pointer], :void
-    attach_function :glProvokingVertex, [:uint], :void
-    attach_function :glPushAttrib, [:uint], :void
-    attach_function :glPushClientAttrib, [:uint], :void
-    attach_function :glPushDebugGroup, [:uint, :uint, :int, :string], :void
-    attach_function :glPushMatrix, [], :void
-    attach_function :glPushName, [:uint], :void
-    attach_function :glQueryCounter, [:uint, :uint], :void
-    attach_function :glRasterPos2d, [:double, :double], :void
-    attach_function :glRasterPos2dv, [:pointer], :void
-    attach_function :glRasterPos2f, [:float, :float], :void
-    attach_function :glRasterPos2fv, [:pointer], :void
-    attach_function :glRasterPos2i, [:int, :int], :void
-    attach_function :glRasterPos2iv, [:pointer], :void
-    attach_function :glRasterPos2s, [:short, :short], :void
-    attach_function :glRasterPos2sv, [:pointer], :void
-    attach_function :glRasterPos3d, [:double, :double, :double], :void
-    attach_function :glRasterPos3dv, [:pointer], :void
-    attach_function :glRasterPos3f, [:float, :float, :float], :void
-    attach_function :glRasterPos3fv, [:pointer], :void
-    attach_function :glRasterPos3i, [:int, :int, :int], :void
-    attach_function :glRasterPos3iv, [:pointer], :void
-    attach_function :glRasterPos3s, [:short, :short, :short], :void
-    attach_function :glRasterPos3sv, [:pointer], :void
-    attach_function :glRasterPos4d, [:double, :double, :double, :double], :void
-    attach_function :glRasterPos4dv, [:pointer], :void
-    attach_function :glRasterPos4f, [:float, :float, :float, :float], :void
-    attach_function :glRasterPos4fv, [:pointer], :void
-    attach_function :glRasterPos4i, [:int, :int, :int, :int], :void
-    attach_function :glRasterPos4iv, [:pointer], :void
-    attach_function :glRasterPos4s, [:short, :short, :short, :short], :void
-    attach_function :glRasterPos4sv, [:pointer], :void
-    attach_function :glReadBuffer, [:uint], :void
-    attach_function :glReadPixels, [:int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glReadnPixels, [:int, :int, :int, :int, :uint, :uint, :int, :pointer], :void
-    attach_function :glRectd, [:double, :double, :double, :double], :void
-    attach_function :glRectdv, [:pointer, :pointer], :void
-    attach_function :glRectf, [:float, :float, :float, :float], :void
-    attach_function :glRectfv, [:pointer, :pointer], :void
-    attach_function :glRecti, [:int, :int, :int, :int], :void
-    attach_function :glRectiv, [:pointer, :pointer], :void
-    attach_function :glRects, [:short, :short, :short, :short], :void
-    attach_function :glRectsv, [:pointer, :pointer], :void
-    attach_function :glReleaseShaderCompiler, [], :void
-    attach_function :glRenderMode, [:uint], :int
-    attach_function :glRenderbufferStorage, [:uint, :uint, :int, :int], :void
-    attach_function :glRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
-    attach_function :glResumeTransformFeedback, [], :void
-    attach_function :glRotated, [:double, :double, :double, :double], :void
-    attach_function :glRotatef, [:float, :float, :float, :float], :void
-    attach_function :glSampleCoverage, [:float, :uchar], :void
-    attach_function :glSampleMaski, [:uint, :uint], :void
-    attach_function :glSamplerParameterIiv, [:uint, :uint, :pointer], :void
-    attach_function :glSamplerParameterIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glSamplerParameterf, [:uint, :uint, :float], :void
-    attach_function :glSamplerParameterfv, [:uint, :uint, :pointer], :void
-    attach_function :glSamplerParameteri, [:uint, :uint, :int], :void
-    attach_function :glSamplerParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glScaled, [:double, :double, :double], :void
-    attach_function :glScalef, [:float, :float, :float], :void
-    attach_function :glScissor, [:int, :int, :int, :int], :void
-    attach_function :glScissorArrayv, [:uint, :int, :pointer], :void
-    attach_function :glScissorIndexed, [:uint, :int, :int, :int, :int], :void
-    attach_function :glScissorIndexedv, [:uint, :pointer], :void
-    attach_function :glSecondaryColor3b, [:char, :char, :char], :void
-    attach_function :glSecondaryColor3bv, [:pointer], :void
-    attach_function :glSecondaryColor3d, [:double, :double, :double], :void
-    attach_function :glSecondaryColor3dv, [:pointer], :void
-    attach_function :glSecondaryColor3f, [:float, :float, :float], :void
-    attach_function :glSecondaryColor3fv, [:pointer], :void
-    attach_function :glSecondaryColor3i, [:int, :int, :int], :void
-    attach_function :glSecondaryColor3iv, [:pointer], :void
-    attach_function :glSecondaryColor3s, [:short, :short, :short], :void
-    attach_function :glSecondaryColor3sv, [:pointer], :void
-    attach_function :glSecondaryColor3ub, [:uchar, :uchar, :uchar], :void
-    attach_function :glSecondaryColor3ubv, [:string], :void
-    attach_function :glSecondaryColor3ui, [:uint, :uint, :uint], :void
-    attach_function :glSecondaryColor3uiv, [:pointer], :void
-    attach_function :glSecondaryColor3us, [:ushort, :ushort, :ushort], :void
-    attach_function :glSecondaryColor3usv, [:pointer], :void
-    attach_function :glSecondaryColorP3ui, [:uint, :uint], :void
-    attach_function :glSecondaryColorP3uiv, [:uint, :pointer], :void
-    attach_function :glSecondaryColorPointer, [:int, :uint, :int, :pointer], :void
-    attach_function :glSelectBuffer, [:int, :pointer], :void
-    attach_function :glShadeModel, [:uint], :void
-    attach_function :glShaderBinary, [:int, :pointer, :uint, :pointer, :int], :void
-    attach_function :glShaderSource, [:uint, :int, :pointer, :pointer], :void
-    attach_function :glShaderStorageBlockBinding, [:uint, :uint, :uint], :void
-    attach_function :glStencilFunc, [:uint, :int, :uint], :void
-    attach_function :glStencilFuncSeparate, [:uint, :uint, :int, :uint], :void
-    attach_function :glStencilMask, [:uint], :void
-    attach_function :glStencilMaskSeparate, [:uint, :uint], :void
-    attach_function :glStencilOp, [:uint, :uint, :uint], :void
-    attach_function :glStencilOpSeparate, [:uint, :uint, :uint, :uint], :void
-    attach_function :glTexBuffer, [:uint, :uint, :uint], :void
-    attach_function :glTexBufferRange, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glTexCoord1d, [:double], :void
-    attach_function :glTexCoord1dv, [:pointer], :void
-    attach_function :glTexCoord1f, [:float], :void
-    attach_function :glTexCoord1fv, [:pointer], :void
-    attach_function :glTexCoord1i, [:int], :void
-    attach_function :glTexCoord1iv, [:pointer], :void
-    attach_function :glTexCoord1s, [:short], :void
-    attach_function :glTexCoord1sv, [:pointer], :void
-    attach_function :glTexCoord2d, [:double, :double], :void
-    attach_function :glTexCoord2dv, [:pointer], :void
-    attach_function :glTexCoord2f, [:float, :float], :void
-    attach_function :glTexCoord2fv, [:pointer], :void
-    attach_function :glTexCoord2i, [:int, :int], :void
-    attach_function :glTexCoord2iv, [:pointer], :void
-    attach_function :glTexCoord2s, [:short, :short], :void
-    attach_function :glTexCoord2sv, [:pointer], :void
-    attach_function :glTexCoord3d, [:double, :double, :double], :void
-    attach_function :glTexCoord3dv, [:pointer], :void
-    attach_function :glTexCoord3f, [:float, :float, :float], :void
-    attach_function :glTexCoord3fv, [:pointer], :void
-    attach_function :glTexCoord3i, [:int, :int, :int], :void
-    attach_function :glTexCoord3iv, [:pointer], :void
-    attach_function :glTexCoord3s, [:short, :short, :short], :void
-    attach_function :glTexCoord3sv, [:pointer], :void
-    attach_function :glTexCoord4d, [:double, :double, :double, :double], :void
-    attach_function :glTexCoord4dv, [:pointer], :void
-    attach_function :glTexCoord4f, [:float, :float, :float, :float], :void
-    attach_function :glTexCoord4fv, [:pointer], :void
-    attach_function :glTexCoord4i, [:int, :int, :int, :int], :void
-    attach_function :glTexCoord4iv, [:pointer], :void
-    attach_function :glTexCoord4s, [:short, :short, :short, :short], :void
-    attach_function :glTexCoord4sv, [:pointer], :void
-    attach_function :glTexCoordP1ui, [:uint, :uint], :void
-    attach_function :glTexCoordP1uiv, [:uint, :pointer], :void
-    attach_function :glTexCoordP2ui, [:uint, :uint], :void
-    attach_function :glTexCoordP2uiv, [:uint, :pointer], :void
-    attach_function :glTexCoordP3ui, [:uint, :uint], :void
-    attach_function :glTexCoordP3uiv, [:uint, :pointer], :void
-    attach_function :glTexCoordP4ui, [:uint, :uint], :void
-    attach_function :glTexCoordP4uiv, [:uint, :pointer], :void
-    attach_function :glTexCoordPointer, [:int, :uint, :int, :pointer], :void
-    attach_function :glTexEnvf, [:uint, :uint, :float], :void
-    attach_function :glTexEnvfv, [:uint, :uint, :pointer], :void
-    attach_function :glTexEnvi, [:uint, :uint, :int], :void
-    attach_function :glTexEnviv, [:uint, :uint, :pointer], :void
-    attach_function :glTexGend, [:uint, :uint, :double], :void
-    attach_function :glTexGendv, [:uint, :uint, :pointer], :void
-    attach_function :glTexGenf, [:uint, :uint, :float], :void
-    attach_function :glTexGenfv, [:uint, :uint, :pointer], :void
-    attach_function :glTexGeni, [:uint, :uint, :int], :void
-    attach_function :glTexGeniv, [:uint, :uint, :pointer], :void
-    attach_function :glTexImage1D, [:uint, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTexImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTexImage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
-    attach_function :glTexImage3D, [:uint, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTexImage3DMultisample, [:uint, :int, :uint, :int, :int, :int, :uchar], :void
-    attach_function :glTexParameterIiv, [:uint, :uint, :pointer], :void
-    attach_function :glTexParameterIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glTexParameterf, [:uint, :uint, :float], :void
-    attach_function :glTexParameterfv, [:uint, :uint, :pointer], :void
-    attach_function :glTexParameteri, [:uint, :uint, :int], :void
-    attach_function :glTexParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glTexStorage1D, [:uint, :int, :uint, :int], :void
-    attach_function :glTexStorage2D, [:uint, :int, :uint, :int, :int], :void
-    attach_function :glTexStorage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
-    attach_function :glTexStorage3D, [:uint, :int, :uint, :int, :int, :int], :void
-    attach_function :glTexStorage3DMultisample, [:uint, :int, :uint, :int, :int, :int, :uchar], :void
-    attach_function :glTexSubImage1D, [:uint, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTextureBarrier, [], :void
-    attach_function :glTextureBuffer, [:uint, :uint, :uint], :void
-    attach_function :glTextureBufferRange, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glTextureParameterIiv, [:uint, :uint, :pointer], :void
-    attach_function :glTextureParameterIuiv, [:uint, :uint, :pointer], :void
-    attach_function :glTextureParameterf, [:uint, :uint, :float], :void
-    attach_function :glTextureParameterfv, [:uint, :uint, :pointer], :void
-    attach_function :glTextureParameteri, [:uint, :uint, :int], :void
-    attach_function :glTextureParameteriv, [:uint, :uint, :pointer], :void
-    attach_function :glTextureStorage1D, [:uint, :int, :uint, :int], :void
-    attach_function :glTextureStorage2D, [:uint, :int, :uint, :int, :int], :void
-    attach_function :glTextureStorage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
-    attach_function :glTextureStorage3D, [:uint, :int, :uint, :int, :int, :int], :void
-    attach_function :glTextureStorage3DMultisample, [:uint, :int, :uint, :int, :int, :int, :uchar], :void
-    attach_function :glTextureSubImage1D, [:uint, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTextureSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
-    attach_function :glTextureView, [:uint, :uint, :uint, :uint, :uint, :uint, :uint, :uint], :void
-    attach_function :glTransformFeedbackBufferBase, [:uint, :uint, :uint], :void
-    attach_function :glTransformFeedbackBufferRange, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glTransformFeedbackVaryings, [:uint, :int, :pointer, :uint], :void
-    attach_function :glTranslated, [:double, :double, :double], :void
-    attach_function :glTranslatef, [:float, :float, :float], :void
-    attach_function :glUniform1d, [:int, :double], :void
-    attach_function :glUniform1dv, [:int, :int, :pointer], :void
-    attach_function :glUniform1f, [:int, :float], :void
-    attach_function :glUniform1fv, [:int, :int, :pointer], :void
-    attach_function :glUniform1i, [:int, :int], :void
-    attach_function :glUniform1iv, [:int, :int, :pointer], :void
-    attach_function :glUniform1ui, [:int, :uint], :void
-    attach_function :glUniform1uiv, [:int, :int, :pointer], :void
-    attach_function :glUniform2d, [:int, :double, :double], :void
-    attach_function :glUniform2dv, [:int, :int, :pointer], :void
-    attach_function :glUniform2f, [:int, :float, :float], :void
-    attach_function :glUniform2fv, [:int, :int, :pointer], :void
-    attach_function :glUniform2i, [:int, :int, :int], :void
-    attach_function :glUniform2iv, [:int, :int, :pointer], :void
-    attach_function :glUniform2ui, [:int, :uint, :uint], :void
-    attach_function :glUniform2uiv, [:int, :int, :pointer], :void
-    attach_function :glUniform3d, [:int, :double, :double, :double], :void
-    attach_function :glUniform3dv, [:int, :int, :pointer], :void
-    attach_function :glUniform3f, [:int, :float, :float, :float], :void
-    attach_function :glUniform3fv, [:int, :int, :pointer], :void
-    attach_function :glUniform3i, [:int, :int, :int, :int], :void
-    attach_function :glUniform3iv, [:int, :int, :pointer], :void
-    attach_function :glUniform3ui, [:int, :uint, :uint, :uint], :void
-    attach_function :glUniform3uiv, [:int, :int, :pointer], :void
-    attach_function :glUniform4d, [:int, :double, :double, :double, :double], :void
-    attach_function :glUniform4dv, [:int, :int, :pointer], :void
-    attach_function :glUniform4f, [:int, :float, :float, :float, :float], :void
-    attach_function :glUniform4fv, [:int, :int, :pointer], :void
-    attach_function :glUniform4i, [:int, :int, :int, :int, :int], :void
-    attach_function :glUniform4iv, [:int, :int, :pointer], :void
-    attach_function :glUniform4ui, [:int, :uint, :uint, :uint, :uint], :void
-    attach_function :glUniform4uiv, [:int, :int, :pointer], :void
-    attach_function :glUniformBlockBinding, [:uint, :uint, :uint], :void
-    attach_function :glUniformMatrix2dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix2fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix2x3dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix2x3fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix2x4dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix2x4fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix3dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix3fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix3x2dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix3x2fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix3x4dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix3x4fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix4dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix4fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix4x2dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix4x2fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix4x3dv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformMatrix4x3fv, [:int, :int, :uchar, :pointer], :void
-    attach_function :glUniformSubroutinesuiv, [:uint, :int, :pointer], :void
-    attach_function :glUnmapBuffer, [:uint], :uchar
-    attach_function :glUnmapNamedBuffer, [:uint], :uchar
-    attach_function :glUseProgram, [:uint], :void
-    attach_function :glUseProgramStages, [:uint, :uint, :uint], :void
-    attach_function :glValidateProgram, [:uint], :void
-    attach_function :glValidateProgramPipeline, [:uint], :void
-    attach_function :glVertex2d, [:double, :double], :void
-    attach_function :glVertex2dv, [:pointer], :void
-    attach_function :glVertex2f, [:float, :float], :void
-    attach_function :glVertex2fv, [:pointer], :void
-    attach_function :glVertex2i, [:int, :int], :void
-    attach_function :glVertex2iv, [:pointer], :void
-    attach_function :glVertex2s, [:short, :short], :void
-    attach_function :glVertex2sv, [:pointer], :void
-    attach_function :glVertex3d, [:double, :double, :double], :void
-    attach_function :glVertex3dv, [:pointer], :void
-    attach_function :glVertex3f, [:float, :float, :float], :void
-    attach_function :glVertex3fv, [:pointer], :void
-    attach_function :glVertex3i, [:int, :int, :int], :void
-    attach_function :glVertex3iv, [:pointer], :void
-    attach_function :glVertex3s, [:short, :short, :short], :void
-    attach_function :glVertex3sv, [:pointer], :void
-    attach_function :glVertex4d, [:double, :double, :double, :double], :void
-    attach_function :glVertex4dv, [:pointer], :void
-    attach_function :glVertex4f, [:float, :float, :float, :float], :void
-    attach_function :glVertex4fv, [:pointer], :void
-    attach_function :glVertex4i, [:int, :int, :int, :int], :void
-    attach_function :glVertex4iv, [:pointer], :void
-    attach_function :glVertex4s, [:short, :short, :short, :short], :void
-    attach_function :glVertex4sv, [:pointer], :void
-    attach_function :glVertexArrayAttribBinding, [:uint, :uint, :uint], :void
-    attach_function :glVertexArrayAttribFormat, [:uint, :uint, :int, :uint, :uchar, :uint], :void
-    attach_function :glVertexArrayAttribIFormat, [:uint, :uint, :int, :uint, :uint], :void
-    attach_function :glVertexArrayAttribLFormat, [:uint, :uint, :int, :uint, :uint], :void
-    attach_function :glVertexArrayBindingDivisor, [:uint, :uint, :uint], :void
-    attach_function :glVertexArrayElementBuffer, [:uint, :uint], :void
-    attach_function :glVertexArrayVertexBuffer, [:uint, :uint, :uint, :int, :int], :void
-    attach_function :glVertexArrayVertexBuffers, [:uint, :uint, :int, :pointer, :pointer, :pointer], :void
-    attach_function :glVertexAttrib1d, [:uint, :double], :void
-    attach_function :glVertexAttrib1dv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib1f, [:uint, :float], :void
-    attach_function :glVertexAttrib1fv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib1s, [:uint, :short], :void
-    attach_function :glVertexAttrib1sv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib2d, [:uint, :double, :double], :void
-    attach_function :glVertexAttrib2dv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib2f, [:uint, :float, :float], :void
-    attach_function :glVertexAttrib2fv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib2s, [:uint, :short, :short], :void
-    attach_function :glVertexAttrib2sv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib3d, [:uint, :double, :double, :double], :void
-    attach_function :glVertexAttrib3dv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib3f, [:uint, :float, :float, :float], :void
-    attach_function :glVertexAttrib3fv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib3s, [:uint, :short, :short, :short], :void
-    attach_function :glVertexAttrib3sv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4Nbv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4Niv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4Nsv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4Nub, [:uint, :uchar, :uchar, :uchar, :uchar], :void
-    attach_function :glVertexAttrib4Nubv, [:uint, :string], :void
-    attach_function :glVertexAttrib4Nuiv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4Nusv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4bv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4d, [:uint, :double, :double, :double, :double], :void
-    attach_function :glVertexAttrib4dv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4f, [:uint, :float, :float, :float, :float], :void
-    attach_function :glVertexAttrib4fv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4iv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4s, [:uint, :short, :short, :short, :short], :void
-    attach_function :glVertexAttrib4sv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4ubv, [:uint, :string], :void
-    attach_function :glVertexAttrib4uiv, [:uint, :pointer], :void
-    attach_function :glVertexAttrib4usv, [:uint, :pointer], :void
-    attach_function :glVertexAttribBinding, [:uint, :uint], :void
-    attach_function :glVertexAttribDivisor, [:uint, :uint], :void
-    attach_function :glVertexAttribFormat, [:uint, :int, :uint, :uchar, :uint], :void
-    attach_function :glVertexAttribI1i, [:uint, :int], :void
-    attach_function :glVertexAttribI1iv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI1ui, [:uint, :uint], :void
-    attach_function :glVertexAttribI1uiv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI2i, [:uint, :int, :int], :void
-    attach_function :glVertexAttribI2iv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI2ui, [:uint, :uint, :uint], :void
-    attach_function :glVertexAttribI2uiv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI3i, [:uint, :int, :int, :int], :void
-    attach_function :glVertexAttribI3iv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI3ui, [:uint, :uint, :uint, :uint], :void
-    attach_function :glVertexAttribI3uiv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI4bv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI4i, [:uint, :int, :int, :int, :int], :void
-    attach_function :glVertexAttribI4iv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI4sv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI4ubv, [:uint, :string], :void
-    attach_function :glVertexAttribI4ui, [:uint, :uint, :uint, :uint, :uint], :void
-    attach_function :glVertexAttribI4uiv, [:uint, :pointer], :void
-    attach_function :glVertexAttribI4usv, [:uint, :pointer], :void
-    attach_function :glVertexAttribIFormat, [:uint, :int, :uint, :uint], :void
-    attach_function :glVertexAttribIPointer, [:uint, :int, :uint, :int, :pointer], :void
-    attach_function :glVertexAttribL1d, [:uint, :double], :void
-    attach_function :glVertexAttribL1dv, [:uint, :pointer], :void
-    attach_function :glVertexAttribL2d, [:uint, :double, :double], :void
-    attach_function :glVertexAttribL2dv, [:uint, :pointer], :void
-    attach_function :glVertexAttribL3d, [:uint, :double, :double, :double], :void
-    attach_function :glVertexAttribL3dv, [:uint, :pointer], :void
-    attach_function :glVertexAttribL4d, [:uint, :double, :double, :double, :double], :void
-    attach_function :glVertexAttribL4dv, [:uint, :pointer], :void
-    attach_function :glVertexAttribLFormat, [:uint, :int, :uint, :uint], :void
-    attach_function :glVertexAttribLPointer, [:uint, :int, :uint, :int, :pointer], :void
-    attach_function :glVertexAttribP1ui, [:uint, :uint, :uchar, :uint], :void
-    attach_function :glVertexAttribP1uiv, [:uint, :uint, :uchar, :pointer], :void
-    attach_function :glVertexAttribP2ui, [:uint, :uint, :uchar, :uint], :void
-    attach_function :glVertexAttribP2uiv, [:uint, :uint, :uchar, :pointer], :void
-    attach_function :glVertexAttribP3ui, [:uint, :uint, :uchar, :uint], :void
-    attach_function :glVertexAttribP3uiv, [:uint, :uint, :uchar, :pointer], :void
-    attach_function :glVertexAttribP4ui, [:uint, :uint, :uchar, :uint], :void
-    attach_function :glVertexAttribP4uiv, [:uint, :uint, :uchar, :pointer], :void
-    attach_function :glVertexAttribPointer, [:uint, :int, :uint, :uchar, :int, :pointer], :void
-    attach_function :glVertexBindingDivisor, [:uint, :uint], :void
-    attach_function :glVertexP2ui, [:uint, :uint], :void
-    attach_function :glVertexP2uiv, [:uint, :pointer], :void
-    attach_function :glVertexP3ui, [:uint, :uint], :void
-    attach_function :glVertexP3uiv, [:uint, :pointer], :void
-    attach_function :glVertexP4ui, [:uint, :uint], :void
-    attach_function :glVertexP4uiv, [:uint, :pointer], :void
-    attach_function :glVertexPointer, [:int, :uint, :int, :pointer], :void
-    attach_function :glViewport, [:int, :int, :int, :int], :void
-    attach_function :glViewportArrayv, [:uint, :int, :pointer], :void
-    attach_function :glViewportIndexedf, [:uint, :float, :float, :float, :float], :void
-    attach_function :glViewportIndexedfv, [:uint, :pointer], :void
-    attach_function :glWaitSync, [:pointer, :uint, :uint64], :void
-    attach_function :glWindowPos2d, [:double, :double], :void
-    attach_function :glWindowPos2dv, [:pointer], :void
-    attach_function :glWindowPos2f, [:float, :float], :void
-    attach_function :glWindowPos2fv, [:pointer], :void
-    attach_function :glWindowPos2i, [:int, :int], :void
-    attach_function :glWindowPos2iv, [:pointer], :void
-    attach_function :glWindowPos2s, [:short, :short], :void
-    attach_function :glWindowPos2sv, [:pointer], :void
-    attach_function :glWindowPos3d, [:double, :double, :double], :void
-    attach_function :glWindowPos3dv, [:pointer], :void
-    attach_function :glWindowPos3f, [:float, :float, :float], :void
-    attach_function :glWindowPos3fv, [:pointer], :void
-    attach_function :glWindowPos3i, [:int, :int, :int], :void
-    attach_function :glWindowPos3iv, [:pointer], :void
-    attach_function :glWindowPos3s, [:short, :short, :short], :void
-    attach_function :glWindowPos3sv, [:pointer], :void
+    def self.unsafe_attach_function(func, args, returns, options = {})
+        begin
+            attach_function func, args, returns, options
+        rescue FFI::NotFoundError
+            # Ignore Functions Not Found
+        end
+    end
+
+    unsafe_attach_function :glAccum, [:uint, :float], :void
+    unsafe_attach_function :glActiveShaderProgram, [:uint, :uint], :void
+    unsafe_attach_function :glActiveTexture, [:uint], :void
+    unsafe_attach_function :glAlphaFunc, [:uint, :float], :void
+    unsafe_attach_function :glAreTexturesResident, [:int, :pointer, :pointer], :uchar
+    unsafe_attach_function :glArrayElement, [:int], :void
+    unsafe_attach_function :glAttachShader, [:uint, :uint], :void
+    unsafe_attach_function :glBegin, [:uint], :void
+    unsafe_attach_function :glBeginConditionalRender, [:uint, :uint], :void
+    unsafe_attach_function :glBeginQuery, [:uint, :uint], :void
+    unsafe_attach_function :glBeginQueryIndexed, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glBeginTransformFeedback, [:uint], :void
+    unsafe_attach_function :glBindAttribLocation, [:uint, :uint, :string], :void
+    unsafe_attach_function :glBindBuffer, [:uint, :uint], :void
+    unsafe_attach_function :glBindBufferBase, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glBindBufferRange, [:uint, :uint, :uint, :long, :long], :void
+    unsafe_attach_function :glBindBuffersBase, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glBindBuffersRange, [:uint, :uint, :int, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glBindFragDataLocation, [:uint, :uint, :string], :void
+    unsafe_attach_function :glBindFragDataLocationIndexed, [:uint, :uint, :uint, :string], :void
+    unsafe_attach_function :glBindFramebuffer, [:uint, :uint], :void
+    unsafe_attach_function :glBindImageTexture, [:uint, :uint, :int, :uchar, :int, :uint, :uint], :void
+    unsafe_attach_function :glBindImageTextures, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glBindProgramPipeline, [:uint], :void
+    unsafe_attach_function :glBindRenderbuffer, [:uint, :uint], :void
+    unsafe_attach_function :glBindSampler, [:uint, :uint], :void
+    unsafe_attach_function :glBindSamplers, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glBindTexture, [:uint, :uint], :void
+    unsafe_attach_function :glBindTextureUnit, [:uint, :uint], :void
+    unsafe_attach_function :glBindTextures, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glBindTransformFeedback, [:uint, :uint], :void
+    unsafe_attach_function :glBindVertexArray, [:uint], :void
+    unsafe_attach_function :glBindVertexBuffer, [:uint, :uint, :long, :int], :void
+    unsafe_attach_function :glBindVertexBuffers, [:uint, :int, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glBitmap, [:int, :int, :float, :float, :float, :float, :string], :void
+    unsafe_attach_function :glBlendColor, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glBlendEquation, [:uint], :void
+    unsafe_attach_function :glBlendEquationSeparate, [:uint, :uint], :void
+    unsafe_attach_function :glBlendEquationSeparatei, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glBlendEquationi, [:uint, :uint], :void
+    unsafe_attach_function :glBlendFunc, [:uint, :uint], :void
+    unsafe_attach_function :glBlendFuncSeparate, [:uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glBlendFuncSeparatei, [:uint, :uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glBlendFunci, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glBlitFramebuffer, [:int, :int, :int, :int, :int, :int, :int, :int, :uint, :uint], :void
+    unsafe_attach_function :glBlitNamedFramebuffer, [:uint, :uint, :int, :int, :int, :int, :int, :int, :int, :int, :uint, :uint], :void
+    unsafe_attach_function :glBufferData, [:uint, :long, :pointer, :uint], :void
+    unsafe_attach_function :glBufferStorage, [:uint, :long, :pointer, :uint], :void
+    unsafe_attach_function :glBufferSubData, [:uint, :long, :long, :pointer], :void
+    unsafe_attach_function :glCallList, [:uint], :void
+    unsafe_attach_function :glCallLists, [:int, :uint, :pointer], :void
+    unsafe_attach_function :glCheckFramebufferStatus, [:uint], :uint
+    unsafe_attach_function :glCheckNamedFramebufferStatus, [:uint, :uint], :uint
+    unsafe_attach_function :glClampColor, [:uint, :uint], :void
+    unsafe_attach_function :glClear, [:uint], :void
+    unsafe_attach_function :glClearAccum, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glClearBufferData, [:uint, :uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glClearBufferSubData, [:uint, :uint, :long, :long, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glClearBufferfi, [:uint, :int, :float, :int], :void
+    unsafe_attach_function :glClearBufferfv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glClearBufferiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glClearBufferuiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glClearColor, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glClearDepth, [:double], :void
+    unsafe_attach_function :glClearDepthf, [:float], :void
+    unsafe_attach_function :glClearIndex, [:float], :void
+    unsafe_attach_function :glClearNamedBufferData, [:uint, :uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glClearNamedBufferSubData, [:uint, :uint, :long, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glClearNamedFramebufferfi, [:uint, :uint, :float, :int], :void
+    unsafe_attach_function :glClearNamedFramebufferfv, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glClearNamedFramebufferiv, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glClearNamedFramebufferuiv, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glClearStencil, [:int], :void
+    unsafe_attach_function :glClearTexImage, [:uint, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glClearTexSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glClientActiveTexture, [:uint], :void
+    unsafe_attach_function :glClientWaitSync, [:pointer, :uint, :ulong_long], :uint
+    unsafe_attach_function :glClipControl, [:uint, :uint], :void
+    unsafe_attach_function :glClipPlane, [:uint, :pointer], :void
+    unsafe_attach_function :glColor3b, [:char, :char, :char], :void
+    unsafe_attach_function :glColor3bv, [:pointer], :void
+    unsafe_attach_function :glColor3d, [:double, :double, :double], :void
+    unsafe_attach_function :glColor3dv, [:pointer], :void
+    unsafe_attach_function :glColor3f, [:float, :float, :float], :void
+    unsafe_attach_function :glColor3fv, [:pointer], :void
+    unsafe_attach_function :glColor3i, [:int, :int, :int], :void
+    unsafe_attach_function :glColor3iv, [:pointer], :void
+    unsafe_attach_function :glColor3s, [:short, :short, :short], :void
+    unsafe_attach_function :glColor3sv, [:pointer], :void
+    unsafe_attach_function :glColor3ub, [:uchar, :uchar, :uchar], :void
+    unsafe_attach_function :glColor3ubv, [:string], :void
+    unsafe_attach_function :glColor3ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glColor3uiv, [:pointer], :void
+    unsafe_attach_function :glColor3us, [:ushort, :ushort, :ushort], :void
+    unsafe_attach_function :glColor3usv, [:pointer], :void
+    unsafe_attach_function :glColor4b, [:char, :char, :char, :char], :void
+    unsafe_attach_function :glColor4bv, [:pointer], :void
+    unsafe_attach_function :glColor4d, [:double, :double, :double, :double], :void
+    unsafe_attach_function :glColor4dv, [:pointer], :void
+    unsafe_attach_function :glColor4f, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glColor4fv, [:pointer], :void
+    unsafe_attach_function :glColor4i, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glColor4iv, [:pointer], :void
+    unsafe_attach_function :glColor4s, [:short, :short, :short, :short], :void
+    unsafe_attach_function :glColor4sv, [:pointer], :void
+    unsafe_attach_function :glColor4ub, [:uchar, :uchar, :uchar, :uchar], :void
+    unsafe_attach_function :glColor4ubv, [:string], :void
+    unsafe_attach_function :glColor4ui, [:uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glColor4uiv, [:pointer], :void
+    unsafe_attach_function :glColor4us, [:ushort, :ushort, :ushort, :ushort], :void
+    unsafe_attach_function :glColor4usv, [:pointer], :void
+    unsafe_attach_function :glColorMask, [:uchar, :uchar, :uchar, :uchar], :void
+    unsafe_attach_function :glColorMaski, [:uint, :uchar, :uchar, :uchar, :uchar], :void
+    unsafe_attach_function :glColorMaterial, [:uint, :uint], :void
+    unsafe_attach_function :glColorP3ui, [:uint, :uint], :void
+    unsafe_attach_function :glColorP3uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glColorP4ui, [:uint, :uint], :void
+    unsafe_attach_function :glColorP4uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glColorPointer, [:int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCompileShader, [:uint], :void
+    unsafe_attach_function :glCompressedTexImage1D, [:uint, :int, :uint, :int, :int, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTexImage2D, [:uint, :int, :uint, :int, :int, :int, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTexImage3D, [:uint, :int, :uint, :int, :int, :int, :int, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTexSubImage1D, [:uint, :int, :int, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTextureSubImage1D, [:uint, :int, :int, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTextureSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCompressedTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glCopyBufferSubData, [:uint, :uint, :long, :long, :long], :void
+    unsafe_attach_function :glCopyImageSubData, [:uint, :uint, :int, :int, :int, :int, :uint, :uint, :int, :int, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyNamedBufferSubData, [:uint, :uint, :long, :long, :int], :void
+    unsafe_attach_function :glCopyPixels, [:int, :int, :int, :int, :uint], :void
+    unsafe_attach_function :glCopyTexImage1D, [:uint, :int, :uint, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTexImage2D, [:uint, :int, :uint, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTexSubImage1D, [:uint, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTextureSubImage1D, [:uint, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTextureSubImage2D, [:uint, :int, :int, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCopyTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glCreateBuffers, [:int, :pointer], :void
+    unsafe_attach_function :glCreateFramebuffers, [:int, :pointer], :void
+    unsafe_attach_function :glCreateProgram, [], :uint
+    unsafe_attach_function :glCreateProgramPipelines, [:int, :pointer], :void
+    unsafe_attach_function :glCreateQueries, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glCreateRenderbuffers, [:int, :pointer], :void
+    unsafe_attach_function :glCreateSamplers, [:int, :pointer], :void
+    unsafe_attach_function :glCreateShader, [:uint], :uint
+    unsafe_attach_function :glCreateShaderProgramv, [:uint, :int, :pointer], :uint
+    unsafe_attach_function :glCreateTextures, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glCreateTransformFeedbacks, [:int, :pointer], :void
+    unsafe_attach_function :glCreateVertexArrays, [:int, :pointer], :void
+    unsafe_attach_function :glCullFace, [:uint], :void
+    unsafe_attach_function :glDebugMessageCallback, [:pointer, :pointer], :void
+    unsafe_attach_function :glDebugMessageControl, [:uint, :uint, :uint, :int, :pointer, :uchar], :void
+    unsafe_attach_function :glDebugMessageInsert, [:uint, :uint, :uint, :uint, :int, :string], :void
+    unsafe_attach_function :glDeleteBuffers, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteFramebuffers, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteLists, [:uint, :int], :void
+    unsafe_attach_function :glDeleteProgram, [:uint], :void
+    unsafe_attach_function :glDeleteProgramPipelines, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteQueries, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteRenderbuffers, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteSamplers, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteShader, [:uint], :void
+    unsafe_attach_function :glDeleteSync, [:pointer], :void
+    unsafe_attach_function :glDeleteTextures, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteTransformFeedbacks, [:int, :pointer], :void
+    unsafe_attach_function :glDeleteVertexArrays, [:int, :pointer], :void
+    unsafe_attach_function :glDepthFunc, [:uint], :void
+    unsafe_attach_function :glDepthMask, [:uchar], :void
+    unsafe_attach_function :glDepthRange, [:double, :double], :void
+    unsafe_attach_function :glDepthRangeArrayv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glDepthRangeIndexed, [:uint, :double, :double], :void
+    unsafe_attach_function :glDepthRangef, [:float, :float], :void
+    unsafe_attach_function :glDetachShader, [:uint, :uint], :void
+    unsafe_attach_function :glDisable, [:uint], :void
+    unsafe_attach_function :glDisableClientState, [:uint], :void
+    unsafe_attach_function :glDisableVertexArrayAttrib, [:uint, :uint], :void
+    unsafe_attach_function :glDisableVertexAttribArray, [:uint], :void
+    unsafe_attach_function :glDisablei, [:uint, :uint], :void
+    unsafe_attach_function :glDispatchCompute, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glDispatchComputeIndirect, [:long], :void
+    unsafe_attach_function :glDrawArrays, [:uint, :int, :int], :void
+    unsafe_attach_function :glDrawArraysIndirect, [:uint, :pointer], :void
+    unsafe_attach_function :glDrawArraysInstanced, [:uint, :int, :int, :int], :void
+    unsafe_attach_function :glDrawArraysInstancedBaseInstance, [:uint, :int, :int, :int, :uint], :void
+    unsafe_attach_function :glDrawBuffer, [:uint], :void
+    unsafe_attach_function :glDrawBuffers, [:int, :pointer], :void
+    unsafe_attach_function :glDrawElements, [:uint, :int, :uint, :pointer], :void
+    unsafe_attach_function :glDrawElementsBaseVertex, [:uint, :int, :uint, :pointer, :int], :void
+    unsafe_attach_function :glDrawElementsIndirect, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glDrawElementsInstanced, [:uint, :int, :uint, :pointer, :int], :void
+    unsafe_attach_function :glDrawElementsInstancedBaseInstance, [:uint, :int, :uint, :pointer, :int, :uint], :void
+    unsafe_attach_function :glDrawElementsInstancedBaseVertex, [:uint, :int, :uint, :pointer, :int, :int], :void
+    unsafe_attach_function :glDrawElementsInstancedBaseVertexBaseInstance, [:uint, :int, :uint, :pointer, :int, :int, :uint], :void
+    unsafe_attach_function :glDrawPixels, [:int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glDrawRangeElements, [:uint, :uint, :uint, :int, :uint, :pointer], :void
+    unsafe_attach_function :glDrawRangeElementsBaseVertex, [:uint, :uint, :uint, :int, :uint, :pointer, :int], :void
+    unsafe_attach_function :glDrawTransformFeedback, [:uint, :uint], :void
+    unsafe_attach_function :glDrawTransformFeedbackInstanced, [:uint, :uint, :int], :void
+    unsafe_attach_function :glDrawTransformFeedbackStream, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glDrawTransformFeedbackStreamInstanced, [:uint, :uint, :uint, :int], :void
+    unsafe_attach_function :glEdgeFlag, [:uchar], :void
+    unsafe_attach_function :glEdgeFlagPointer, [:int, :pointer], :void
+    unsafe_attach_function :glEdgeFlagv, [:string], :void
+    unsafe_attach_function :glEnable, [:uint], :void
+    unsafe_attach_function :glEnableClientState, [:uint], :void
+    unsafe_attach_function :glEnableVertexArrayAttrib, [:uint, :uint], :void
+    unsafe_attach_function :glEnableVertexAttribArray, [:uint], :void
+    unsafe_attach_function :glEnablei, [:uint, :uint], :void
+    unsafe_attach_function :glEnd, [], :void
+    unsafe_attach_function :glEndConditionalRender, [], :void
+    unsafe_attach_function :glEndList, [], :void
+    unsafe_attach_function :glEndQuery, [:uint], :void
+    unsafe_attach_function :glEndQueryIndexed, [:uint, :uint], :void
+    unsafe_attach_function :glEndTransformFeedback, [], :void
+    unsafe_attach_function :glEvalCoord1d, [:double], :void
+    unsafe_attach_function :glEvalCoord1dv, [:pointer], :void
+    unsafe_attach_function :glEvalCoord1f, [:float], :void
+    unsafe_attach_function :glEvalCoord1fv, [:pointer], :void
+    unsafe_attach_function :glEvalCoord2d, [:double, :double], :void
+    unsafe_attach_function :glEvalCoord2dv, [:pointer], :void
+    unsafe_attach_function :glEvalCoord2f, [:float, :float], :void
+    unsafe_attach_function :glEvalCoord2fv, [:pointer], :void
+    unsafe_attach_function :glEvalMesh1, [:uint, :int, :int], :void
+    unsafe_attach_function :glEvalMesh2, [:uint, :int, :int, :int, :int], :void
+    unsafe_attach_function :glEvalPoint1, [:int], :void
+    unsafe_attach_function :glEvalPoint2, [:int, :int], :void
+    unsafe_attach_function :glFeedbackBuffer, [:int, :uint, :pointer], :void
+    unsafe_attach_function :glFenceSync, [:uint, :uint], :pointer
+    unsafe_attach_function :glFinish, [], :void
+    unsafe_attach_function :glFlush, [], :void
+    unsafe_attach_function :glFlushMappedBufferRange, [:uint, :long, :long], :void
+    unsafe_attach_function :glFlushMappedNamedBufferRange, [:uint, :long, :int], :void
+    unsafe_attach_function :glFogCoordPointer, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glFogCoordd, [:double], :void
+    unsafe_attach_function :glFogCoorddv, [:pointer], :void
+    unsafe_attach_function :glFogCoordf, [:float], :void
+    unsafe_attach_function :glFogCoordfv, [:pointer], :void
+    unsafe_attach_function :glFogf, [:uint, :float], :void
+    unsafe_attach_function :glFogfv, [:uint, :pointer], :void
+    unsafe_attach_function :glFogi, [:uint, :int], :void
+    unsafe_attach_function :glFogiv, [:uint, :pointer], :void
+    unsafe_attach_function :glFramebufferParameteri, [:uint, :uint, :int], :void
+    unsafe_attach_function :glFramebufferRenderbuffer, [:uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glFramebufferTexture, [:uint, :uint, :uint, :int], :void
+    unsafe_attach_function :glFramebufferTexture1D, [:uint, :uint, :uint, :uint, :int], :void
+    unsafe_attach_function :glFramebufferTexture2D, [:uint, :uint, :uint, :uint, :int], :void
+    unsafe_attach_function :glFramebufferTexture3D, [:uint, :uint, :uint, :uint, :int, :int], :void
+    unsafe_attach_function :glFramebufferTextureLayer, [:uint, :uint, :uint, :int, :int], :void
+    unsafe_attach_function :glFrontFace, [:uint], :void
+    unsafe_attach_function :glFrustum, [:double, :double, :double, :double, :double, :double], :void
+    unsafe_attach_function :glGenBuffers, [:int, :pointer], :void
+    unsafe_attach_function :glGenFramebuffers, [:int, :pointer], :void
+    unsafe_attach_function :glGenLists, [:int], :uint
+    unsafe_attach_function :glGenProgramPipelines, [:int, :pointer], :void
+    unsafe_attach_function :glGenQueries, [:int, :pointer], :void
+    unsafe_attach_function :glGenRenderbuffers, [:int, :pointer], :void
+    unsafe_attach_function :glGenSamplers, [:int, :pointer], :void
+    unsafe_attach_function :glGenTextures, [:int, :pointer], :void
+    unsafe_attach_function :glGenTransformFeedbacks, [:int, :pointer], :void
+    unsafe_attach_function :glGenVertexArrays, [:int, :pointer], :void
+    unsafe_attach_function :glGenerateMipmap, [:uint], :void
+    unsafe_attach_function :glGenerateTextureMipmap, [:uint], :void
+    unsafe_attach_function :glGetActiveAtomicCounterBufferiv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetActiveAttrib, [:uint, :uint, :int, :pointer, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glGetActiveSubroutineName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetActiveSubroutineUniformName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetActiveSubroutineUniformiv, [:uint, :uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetActiveUniform, [:uint, :uint, :int, :pointer, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glGetActiveUniformBlockName, [:uint, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetActiveUniformBlockiv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetActiveUniformName, [:uint, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetActiveUniformsiv, [:uint, :int, :pointer, :uint, :pointer], :void
+    unsafe_attach_function :glGetAttachedShaders, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetAttribLocation, [:uint, :string], :int
+    unsafe_attach_function :glGetBooleani_v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetBooleanv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetBufferParameteri64v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetBufferParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetBufferPointerv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetBufferSubData, [:uint, :long, :long, :pointer], :void
+    unsafe_attach_function :glGetClipPlane, [:uint, :pointer], :void
+    unsafe_attach_function :glGetCompressedTexImage, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetCompressedTextureImage, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glGetCompressedTextureSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :int, :pointer], :void
+    unsafe_attach_function :glGetDebugMessageLog, [:uint, :int, :pointer, :pointer, :pointer, :pointer, :pointer, :pointer], :uint
+    unsafe_attach_function :glGetDoublei_v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetDoublev, [:uint, :pointer], :void
+    unsafe_attach_function :glGetError, [], :uint
+    unsafe_attach_function :glGetFloati_v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetFloatv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetFragDataIndex, [:uint, :string], :int
+    unsafe_attach_function :glGetFragDataLocation, [:uint, :string], :int
+    unsafe_attach_function :glGetFramebufferAttachmentParameteriv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetFramebufferParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetGraphicsResetStatus, [], :uint
+    unsafe_attach_function :glGetInteger64i_v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetInteger64v, [:uint, :pointer], :void
+    unsafe_attach_function :glGetIntegeri_v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetIntegerv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetInternalformati64v, [:uint, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetInternalformativ, [:uint, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetLightfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetLightiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetMapdv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetMapfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetMapiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetMaterialfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetMaterialiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetMultisamplefv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetNamedBufferParameteri64v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetNamedBufferParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetNamedBufferPointerv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetNamedBufferSubData, [:uint, :long, :int, :pointer], :void
+    unsafe_attach_function :glGetNamedFramebufferAttachmentParameteriv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetNamedFramebufferParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetNamedRenderbufferParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetObjectLabel, [:uint, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetObjectPtrLabel, [:pointer, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetPixelMapfv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetPixelMapuiv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetPixelMapusv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetPointerv, [:uint, :pointer], :void
+    unsafe_attach_function :glGetPolygonStipple, [:pointer], :void
+    unsafe_attach_function :glGetProgramBinary, [:uint, :int, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glGetProgramInfoLog, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetProgramInterfaceiv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetProgramPipelineInfoLog, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetProgramPipelineiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetProgramResourceIndex, [:uint, :uint, :string], :uint
+    unsafe_attach_function :glGetProgramResourceLocation, [:uint, :uint, :string], :int
+    unsafe_attach_function :glGetProgramResourceLocationIndex, [:uint, :uint, :string], :int
+    unsafe_attach_function :glGetProgramResourceName, [:uint, :uint, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetProgramResourceiv, [:uint, :uint, :uint, :int, :pointer, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetProgramStageiv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetProgramiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetQueryBufferObjecti64v, [:uint, :uint, :uint, :long], :void
+    unsafe_attach_function :glGetQueryBufferObjectiv, [:uint, :uint, :uint, :long], :void
+    unsafe_attach_function :glGetQueryBufferObjectui64v, [:uint, :uint, :uint, :long], :void
+    unsafe_attach_function :glGetQueryBufferObjectuiv, [:uint, :uint, :uint, :long], :void
+    unsafe_attach_function :glGetQueryIndexediv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetQueryObjecti64v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetQueryObjectiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetQueryObjectui64v, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetQueryObjectuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetQueryiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetRenderbufferParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetSamplerParameterIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetSamplerParameterIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetSamplerParameterfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetSamplerParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetShaderInfoLog, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetShaderPrecisionFormat, [:uint, :uint, :pointer, :pointer], :void
+    unsafe_attach_function :glGetShaderSource, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetShaderiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetString, [:uint], :string
+    unsafe_attach_function :glGetStringi, [:uint, :uint], :string
+    unsafe_attach_function :glGetSubroutineIndex, [:uint, :uint, :string], :uint
+    unsafe_attach_function :glGetSubroutineUniformLocation, [:uint, :uint, :string], :int
+    unsafe_attach_function :glGetSynciv, [:pointer, :uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetTexEnvfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexEnviv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexGendv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexGenfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexGeniv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexImage, [:uint, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexLevelParameterfv, [:uint, :int, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexLevelParameteriv, [:uint, :int, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexParameterIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexParameterIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexParameterfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTexParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureImage, [:uint, :int, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetTextureLevelParameterfv, [:uint, :int, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureLevelParameteriv, [:uint, :int, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureParameterIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureParameterIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureParameterfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTextureSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetTransformFeedbackVarying, [:uint, :uint, :int, :pointer, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glGetTransformFeedbacki64_v, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTransformFeedbacki_v, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetTransformFeedbackiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetUniformBlockIndex, [:uint, :string], :uint
+    unsafe_attach_function :glGetUniformIndices, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetUniformLocation, [:uint, :string], :int
+    unsafe_attach_function :glGetUniformSubroutineuiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetUniformdv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetUniformfv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetUniformiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetUniformuiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetVertexArrayIndexed64iv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexArrayIndexediv, [:uint, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexArrayiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribLdv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribPointerv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribdv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetVertexAttribiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glGetnColorTable, [:uint, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnCompressedTexImage, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glGetnConvolutionFilter, [:uint, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnHistogram, [:uint, :uchar, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnMapdv, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnMapfv, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnMapiv, [:uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnMinmax, [:uint, :uchar, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnPixelMapfv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnPixelMapuiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnPixelMapusv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnPolygonStipple, [:int, :pointer], :void
+    unsafe_attach_function :glGetnSeparableFilter, [:uint, :uint, :uint, :int, :pointer, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glGetnTexImage, [:uint, :int, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glGetnUniformdv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glGetnUniformfv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glGetnUniformiv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glGetnUniformuiv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glHint, [:uint, :uint], :void
+    unsafe_attach_function :glIndexMask, [:uint], :void
+    unsafe_attach_function :glIndexPointer, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glIndexd, [:double], :void
+    unsafe_attach_function :glIndexdv, [:pointer], :void
+    unsafe_attach_function :glIndexf, [:float], :void
+    unsafe_attach_function :glIndexfv, [:pointer], :void
+    unsafe_attach_function :glIndexi, [:int], :void
+    unsafe_attach_function :glIndexiv, [:pointer], :void
+    unsafe_attach_function :glIndexs, [:short], :void
+    unsafe_attach_function :glIndexsv, [:pointer], :void
+    unsafe_attach_function :glIndexub, [:uchar], :void
+    unsafe_attach_function :glIndexubv, [:string], :void
+    unsafe_attach_function :glInitNames, [], :void
+    unsafe_attach_function :glInterleavedArrays, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glInvalidateBufferData, [:uint], :void
+    unsafe_attach_function :glInvalidateBufferSubData, [:uint, :long, :long], :void
+    unsafe_attach_function :glInvalidateFramebuffer, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glInvalidateNamedFramebufferData, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glInvalidateNamedFramebufferSubData, [:uint, :int, :pointer, :int, :int, :int, :int], :void
+    unsafe_attach_function :glInvalidateSubFramebuffer, [:uint, :int, :pointer, :int, :int, :int, :int], :void
+    unsafe_attach_function :glInvalidateTexImage, [:uint, :int], :void
+    unsafe_attach_function :glInvalidateTexSubImage, [:uint, :int, :int, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glIsBuffer, [:uint], :uchar
+    unsafe_attach_function :glIsEnabled, [:uint], :uchar
+    unsafe_attach_function :glIsEnabledi, [:uint, :uint], :uchar
+    unsafe_attach_function :glIsFramebuffer, [:uint], :uchar
+    unsafe_attach_function :glIsList, [:uint], :uchar
+    unsafe_attach_function :glIsProgram, [:uint], :uchar
+    unsafe_attach_function :glIsProgramPipeline, [:uint], :uchar
+    unsafe_attach_function :glIsQuery, [:uint], :uchar
+    unsafe_attach_function :glIsRenderbuffer, [:uint], :uchar
+    unsafe_attach_function :glIsSampler, [:uint], :uchar
+    unsafe_attach_function :glIsShader, [:uint], :uchar
+    unsafe_attach_function :glIsSync, [:pointer], :uchar
+    unsafe_attach_function :glIsTexture, [:uint], :uchar
+    unsafe_attach_function :glIsTransformFeedback, [:uint], :uchar
+    unsafe_attach_function :glIsVertexArray, [:uint], :uchar
+    unsafe_attach_function :glLightModelf, [:uint, :float], :void
+    unsafe_attach_function :glLightModelfv, [:uint, :pointer], :void
+    unsafe_attach_function :glLightModeli, [:uint, :int], :void
+    unsafe_attach_function :glLightModeliv, [:uint, :pointer], :void
+    unsafe_attach_function :glLightf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glLightfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glLighti, [:uint, :uint, :int], :void
+    unsafe_attach_function :glLightiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glLineStipple, [:int, :ushort], :void
+    unsafe_attach_function :glLineWidth, [:float], :void
+    unsafe_attach_function :glLinkProgram, [:uint], :void
+    unsafe_attach_function :glListBase, [:uint], :void
+    unsafe_attach_function :glLoadIdentity, [], :void
+    unsafe_attach_function :glLoadMatrixd, [:pointer], :void
+    unsafe_attach_function :glLoadMatrixf, [:pointer], :void
+    unsafe_attach_function :glLoadName, [:uint], :void
+    unsafe_attach_function :glLoadTransposeMatrixd, [:pointer], :void
+    unsafe_attach_function :glLoadTransposeMatrixf, [:pointer], :void
+    unsafe_attach_function :glLogicOp, [:uint], :void
+    unsafe_attach_function :glMap1d, [:uint, :double, :double, :int, :int, :pointer], :void
+    unsafe_attach_function :glMap1f, [:uint, :float, :float, :int, :int, :pointer], :void
+    unsafe_attach_function :glMap2d, [:uint, :double, :double, :int, :int, :double, :double, :int, :int, :pointer], :void
+    unsafe_attach_function :glMap2f, [:uint, :float, :float, :int, :int, :float, :float, :int, :int, :pointer], :void
+    unsafe_attach_function :glMapBuffer, [:uint, :uint], :pointer
+    unsafe_attach_function :glMapBufferRange, [:uint, :long, :long, :uint], :pointer
+    unsafe_attach_function :glMapGrid1d, [:int, :double, :double], :void
+    unsafe_attach_function :glMapGrid1f, [:int, :float, :float], :void
+    unsafe_attach_function :glMapGrid2d, [:int, :double, :double, :int, :double, :double], :void
+    unsafe_attach_function :glMapGrid2f, [:int, :float, :float, :int, :float, :float], :void
+    unsafe_attach_function :glMapNamedBuffer, [:uint, :uint], :pointer
+    unsafe_attach_function :glMapNamedBufferRange, [:uint, :long, :int, :uint], :pointer
+    unsafe_attach_function :glMaterialf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glMaterialfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glMateriali, [:uint, :uint, :int], :void
+    unsafe_attach_function :glMaterialiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glMatrixMode, [:uint], :void
+    unsafe_attach_function :glMemoryBarrier, [:uint], :void
+    unsafe_attach_function :glMemoryBarrierByRegion, [:uint], :void
+    unsafe_attach_function :glMinSampleShading, [:float], :void
+    unsafe_attach_function :glMultMatrixd, [:pointer], :void
+    unsafe_attach_function :glMultMatrixf, [:pointer], :void
+    unsafe_attach_function :glMultTransposeMatrixd, [:pointer], :void
+    unsafe_attach_function :glMultTransposeMatrixf, [:pointer], :void
+    unsafe_attach_function :glMultiDrawArrays, [:uint, :pointer, :pointer, :int], :void
+    unsafe_attach_function :glMultiDrawArraysIndirect, [:uint, :pointer, :int, :int], :void
+    unsafe_attach_function :glMultiDrawElements, [:uint, :pointer, :uint, :pointer, :int], :void
+    unsafe_attach_function :glMultiDrawElementsBaseVertex, [:uint, :pointer, :uint, :pointer, :int, :pointer], :void
+    unsafe_attach_function :glMultiDrawElementsIndirect, [:uint, :uint, :pointer, :int, :int], :void
+    unsafe_attach_function :glMultiTexCoord1d, [:uint, :double], :void
+    unsafe_attach_function :glMultiTexCoord1dv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord1f, [:uint, :float], :void
+    unsafe_attach_function :glMultiTexCoord1fv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord1i, [:uint, :int], :void
+    unsafe_attach_function :glMultiTexCoord1iv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord1s, [:uint, :short], :void
+    unsafe_attach_function :glMultiTexCoord1sv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord2d, [:uint, :double, :double], :void
+    unsafe_attach_function :glMultiTexCoord2dv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord2f, [:uint, :float, :float], :void
+    unsafe_attach_function :glMultiTexCoord2fv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord2i, [:uint, :int, :int], :void
+    unsafe_attach_function :glMultiTexCoord2iv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord2s, [:uint, :short, :short], :void
+    unsafe_attach_function :glMultiTexCoord2sv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord3d, [:uint, :double, :double, :double], :void
+    unsafe_attach_function :glMultiTexCoord3dv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord3f, [:uint, :float, :float, :float], :void
+    unsafe_attach_function :glMultiTexCoord3fv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord3i, [:uint, :int, :int, :int], :void
+    unsafe_attach_function :glMultiTexCoord3iv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord3s, [:uint, :short, :short, :short], :void
+    unsafe_attach_function :glMultiTexCoord3sv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord4d, [:uint, :double, :double, :double, :double], :void
+    unsafe_attach_function :glMultiTexCoord4dv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord4f, [:uint, :float, :float, :float, :float], :void
+    unsafe_attach_function :glMultiTexCoord4fv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord4i, [:uint, :int, :int, :int, :int], :void
+    unsafe_attach_function :glMultiTexCoord4iv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoord4s, [:uint, :short, :short, :short, :short], :void
+    unsafe_attach_function :glMultiTexCoord4sv, [:uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoordP1ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glMultiTexCoordP1uiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoordP2ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glMultiTexCoordP2uiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoordP3ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glMultiTexCoordP3uiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glMultiTexCoordP4ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glMultiTexCoordP4uiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glNamedBufferData, [:uint, :int, :pointer, :uint], :void
+    unsafe_attach_function :glNamedBufferStorage, [:uint, :int, :pointer, :uint], :void
+    unsafe_attach_function :glNamedBufferSubData, [:uint, :long, :int, :pointer], :void
+    unsafe_attach_function :glNamedFramebufferDrawBuffer, [:uint, :uint], :void
+    unsafe_attach_function :glNamedFramebufferDrawBuffers, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glNamedFramebufferParameteri, [:uint, :uint, :int], :void
+    unsafe_attach_function :glNamedFramebufferReadBuffer, [:uint, :uint], :void
+    unsafe_attach_function :glNamedFramebufferRenderbuffer, [:uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glNamedFramebufferTexture, [:uint, :uint, :uint, :int], :void
+    unsafe_attach_function :glNamedFramebufferTextureLayer, [:uint, :uint, :uint, :int, :int], :void
+    unsafe_attach_function :glNamedRenderbufferStorage, [:uint, :uint, :int, :int], :void
+    unsafe_attach_function :glNamedRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
+    unsafe_attach_function :glNewList, [:uint, :uint], :void
+    unsafe_attach_function :glNormal3b, [:char, :char, :char], :void
+    unsafe_attach_function :glNormal3bv, [:pointer], :void
+    unsafe_attach_function :glNormal3d, [:double, :double, :double], :void
+    unsafe_attach_function :glNormal3dv, [:pointer], :void
+    unsafe_attach_function :glNormal3f, [:float, :float, :float], :void
+    unsafe_attach_function :glNormal3fv, [:pointer], :void
+    unsafe_attach_function :glNormal3i, [:int, :int, :int], :void
+    unsafe_attach_function :glNormal3iv, [:pointer], :void
+    unsafe_attach_function :glNormal3s, [:short, :short, :short], :void
+    unsafe_attach_function :glNormal3sv, [:pointer], :void
+    unsafe_attach_function :glNormalP3ui, [:uint, :uint], :void
+    unsafe_attach_function :glNormalP3uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glNormalPointer, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glObjectLabel, [:uint, :uint, :int, :string], :void
+    unsafe_attach_function :glObjectPtrLabel, [:pointer, :int, :string], :void
+    unsafe_attach_function :glOrtho, [:double, :double, :double, :double, :double, :double], :void
+    unsafe_attach_function :glPassThrough, [:float], :void
+    unsafe_attach_function :glPatchParameterfv, [:uint, :pointer], :void
+    unsafe_attach_function :glPatchParameteri, [:uint, :int], :void
+    unsafe_attach_function :glPauseTransformFeedback, [], :void
+    unsafe_attach_function :glPixelMapfv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glPixelMapuiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glPixelMapusv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glPixelStoref, [:uint, :float], :void
+    unsafe_attach_function :glPixelStorei, [:uint, :int], :void
+    unsafe_attach_function :glPixelTransferf, [:uint, :float], :void
+    unsafe_attach_function :glPixelTransferi, [:uint, :int], :void
+    unsafe_attach_function :glPixelZoom, [:float, :float], :void
+    unsafe_attach_function :glPointParameterf, [:uint, :float], :void
+    unsafe_attach_function :glPointParameterfv, [:uint, :pointer], :void
+    unsafe_attach_function :glPointParameteri, [:uint, :int], :void
+    unsafe_attach_function :glPointParameteriv, [:uint, :pointer], :void
+    unsafe_attach_function :glPointSize, [:float], :void
+    unsafe_attach_function :glPolygonMode, [:uint, :uint], :void
+    unsafe_attach_function :glPolygonOffset, [:float, :float], :void
+    unsafe_attach_function :glPolygonStipple, [:string], :void
+    unsafe_attach_function :glPopAttrib, [], :void
+    unsafe_attach_function :glPopClientAttrib, [], :void
+    unsafe_attach_function :glPopDebugGroup, [], :void
+    unsafe_attach_function :glPopMatrix, [], :void
+    unsafe_attach_function :glPopName, [], :void
+    unsafe_attach_function :glPrimitiveRestartIndex, [:uint], :void
+    unsafe_attach_function :glPrioritizeTextures, [:int, :pointer, :pointer], :void
+    unsafe_attach_function :glProgramBinary, [:uint, :uint, :pointer, :int], :void
+    unsafe_attach_function :glProgramParameteri, [:uint, :uint, :int], :void
+    unsafe_attach_function :glProgramUniform1d, [:uint, :int, :double], :void
+    unsafe_attach_function :glProgramUniform1dv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform1f, [:uint, :int, :float], :void
+    unsafe_attach_function :glProgramUniform1fv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform1i, [:uint, :int, :int], :void
+    unsafe_attach_function :glProgramUniform1iv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform1ui, [:uint, :int, :uint], :void
+    unsafe_attach_function :glProgramUniform1uiv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform2d, [:uint, :int, :double, :double], :void
+    unsafe_attach_function :glProgramUniform2dv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform2f, [:uint, :int, :float, :float], :void
+    unsafe_attach_function :glProgramUniform2fv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform2i, [:uint, :int, :int, :int], :void
+    unsafe_attach_function :glProgramUniform2iv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform2ui, [:uint, :int, :uint, :uint], :void
+    unsafe_attach_function :glProgramUniform2uiv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform3d, [:uint, :int, :double, :double, :double], :void
+    unsafe_attach_function :glProgramUniform3dv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform3f, [:uint, :int, :float, :float, :float], :void
+    unsafe_attach_function :glProgramUniform3fv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform3i, [:uint, :int, :int, :int, :int], :void
+    unsafe_attach_function :glProgramUniform3iv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform3ui, [:uint, :int, :uint, :uint, :uint], :void
+    unsafe_attach_function :glProgramUniform3uiv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform4d, [:uint, :int, :double, :double, :double, :double], :void
+    unsafe_attach_function :glProgramUniform4dv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform4f, [:uint, :int, :float, :float, :float, :float], :void
+    unsafe_attach_function :glProgramUniform4fv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform4i, [:uint, :int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glProgramUniform4iv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniform4ui, [:uint, :int, :uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glProgramUniform4uiv, [:uint, :int, :int, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix2dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix2fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix2x3dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix2x3fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix2x4dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix2x4fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix3dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix3fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix3x2dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix3x2fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix3x4dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix3x4fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix4dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix4fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix4x2dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix4x2fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix4x3dv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProgramUniformMatrix4x3fv, [:uint, :int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glProvokingVertex, [:uint], :void
+    unsafe_attach_function :glPushAttrib, [:uint], :void
+    unsafe_attach_function :glPushClientAttrib, [:uint], :void
+    unsafe_attach_function :glPushDebugGroup, [:uint, :uint, :int, :string], :void
+    unsafe_attach_function :glPushMatrix, [], :void
+    unsafe_attach_function :glPushName, [:uint], :void
+    unsafe_attach_function :glQueryCounter, [:uint, :uint], :void
+    unsafe_attach_function :glRasterPos2d, [:double, :double], :void
+    unsafe_attach_function :glRasterPos2dv, [:pointer], :void
+    unsafe_attach_function :glRasterPos2f, [:float, :float], :void
+    unsafe_attach_function :glRasterPos2fv, [:pointer], :void
+    unsafe_attach_function :glRasterPos2i, [:int, :int], :void
+    unsafe_attach_function :glRasterPos2iv, [:pointer], :void
+    unsafe_attach_function :glRasterPos2s, [:short, :short], :void
+    unsafe_attach_function :glRasterPos2sv, [:pointer], :void
+    unsafe_attach_function :glRasterPos3d, [:double, :double, :double], :void
+    unsafe_attach_function :glRasterPos3dv, [:pointer], :void
+    unsafe_attach_function :glRasterPos3f, [:float, :float, :float], :void
+    unsafe_attach_function :glRasterPos3fv, [:pointer], :void
+    unsafe_attach_function :glRasterPos3i, [:int, :int, :int], :void
+    unsafe_attach_function :glRasterPos3iv, [:pointer], :void
+    unsafe_attach_function :glRasterPos3s, [:short, :short, :short], :void
+    unsafe_attach_function :glRasterPos3sv, [:pointer], :void
+    unsafe_attach_function :glRasterPos4d, [:double, :double, :double, :double], :void
+    unsafe_attach_function :glRasterPos4dv, [:pointer], :void
+    unsafe_attach_function :glRasterPos4f, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glRasterPos4fv, [:pointer], :void
+    unsafe_attach_function :glRasterPos4i, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glRasterPos4iv, [:pointer], :void
+    unsafe_attach_function :glRasterPos4s, [:short, :short, :short, :short], :void
+    unsafe_attach_function :glRasterPos4sv, [:pointer], :void
+    unsafe_attach_function :glReadBuffer, [:uint], :void
+    unsafe_attach_function :glReadPixels, [:int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glReadnPixels, [:int, :int, :int, :int, :uint, :uint, :int, :pointer], :void
+    unsafe_attach_function :glRectd, [:double, :double, :double, :double], :void
+    unsafe_attach_function :glRectdv, [:pointer, :pointer], :void
+    unsafe_attach_function :glRectf, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glRectfv, [:pointer, :pointer], :void
+    unsafe_attach_function :glRecti, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glRectiv, [:pointer, :pointer], :void
+    unsafe_attach_function :glRects, [:short, :short, :short, :short], :void
+    unsafe_attach_function :glRectsv, [:pointer, :pointer], :void
+    unsafe_attach_function :glReleaseShaderCompiler, [], :void
+    unsafe_attach_function :glRenderMode, [:uint], :int
+    unsafe_attach_function :glRenderbufferStorage, [:uint, :uint, :int, :int], :void
+    unsafe_attach_function :glRenderbufferStorageMultisample, [:uint, :int, :uint, :int, :int], :void
+    unsafe_attach_function :glResumeTransformFeedback, [], :void
+    unsafe_attach_function :glRotated, [:double, :double, :double, :double], :void
+    unsafe_attach_function :glRotatef, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glSampleCoverage, [:float, :uchar], :void
+    unsafe_attach_function :glSampleMaski, [:uint, :uint], :void
+    unsafe_attach_function :glSamplerParameterIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glSamplerParameterIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glSamplerParameterf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glSamplerParameterfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glSamplerParameteri, [:uint, :uint, :int], :void
+    unsafe_attach_function :glSamplerParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glScaled, [:double, :double, :double], :void
+    unsafe_attach_function :glScalef, [:float, :float, :float], :void
+    unsafe_attach_function :glScissor, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glScissorArrayv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glScissorIndexed, [:uint, :int, :int, :int, :int], :void
+    unsafe_attach_function :glScissorIndexedv, [:uint, :pointer], :void
+    unsafe_attach_function :glSecondaryColor3b, [:char, :char, :char], :void
+    unsafe_attach_function :glSecondaryColor3bv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColor3d, [:double, :double, :double], :void
+    unsafe_attach_function :glSecondaryColor3dv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColor3f, [:float, :float, :float], :void
+    unsafe_attach_function :glSecondaryColor3fv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColor3i, [:int, :int, :int], :void
+    unsafe_attach_function :glSecondaryColor3iv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColor3s, [:short, :short, :short], :void
+    unsafe_attach_function :glSecondaryColor3sv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColor3ub, [:uchar, :uchar, :uchar], :void
+    unsafe_attach_function :glSecondaryColor3ubv, [:string], :void
+    unsafe_attach_function :glSecondaryColor3ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glSecondaryColor3uiv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColor3us, [:ushort, :ushort, :ushort], :void
+    unsafe_attach_function :glSecondaryColor3usv, [:pointer], :void
+    unsafe_attach_function :glSecondaryColorP3ui, [:uint, :uint], :void
+    unsafe_attach_function :glSecondaryColorP3uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glSecondaryColorPointer, [:int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glSelectBuffer, [:int, :pointer], :void
+    unsafe_attach_function :glShadeModel, [:uint], :void
+    unsafe_attach_function :glShaderBinary, [:int, :pointer, :uint, :pointer, :int], :void
+    unsafe_attach_function :glShaderSource, [:uint, :int, :pointer, :pointer], :void
+    unsafe_attach_function :glShaderStorageBlockBinding, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glStencilFunc, [:uint, :int, :uint], :void
+    unsafe_attach_function :glStencilFuncSeparate, [:uint, :uint, :int, :uint], :void
+    unsafe_attach_function :glStencilMask, [:uint], :void
+    unsafe_attach_function :glStencilMaskSeparate, [:uint, :uint], :void
+    unsafe_attach_function :glStencilOp, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glStencilOpSeparate, [:uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glTexBuffer, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glTexBufferRange, [:uint, :uint, :uint, :long, :long], :void
+    unsafe_attach_function :glTexCoord1d, [:double], :void
+    unsafe_attach_function :glTexCoord1dv, [:pointer], :void
+    unsafe_attach_function :glTexCoord1f, [:float], :void
+    unsafe_attach_function :glTexCoord1fv, [:pointer], :void
+    unsafe_attach_function :glTexCoord1i, [:int], :void
+    unsafe_attach_function :glTexCoord1iv, [:pointer], :void
+    unsafe_attach_function :glTexCoord1s, [:short], :void
+    unsafe_attach_function :glTexCoord1sv, [:pointer], :void
+    unsafe_attach_function :glTexCoord2d, [:double, :double], :void
+    unsafe_attach_function :glTexCoord2dv, [:pointer], :void
+    unsafe_attach_function :glTexCoord2f, [:float, :float], :void
+    unsafe_attach_function :glTexCoord2fv, [:pointer], :void
+    unsafe_attach_function :glTexCoord2i, [:int, :int], :void
+    unsafe_attach_function :glTexCoord2iv, [:pointer], :void
+    unsafe_attach_function :glTexCoord2s, [:short, :short], :void
+    unsafe_attach_function :glTexCoord2sv, [:pointer], :void
+    unsafe_attach_function :glTexCoord3d, [:double, :double, :double], :void
+    unsafe_attach_function :glTexCoord3dv, [:pointer], :void
+    unsafe_attach_function :glTexCoord3f, [:float, :float, :float], :void
+    unsafe_attach_function :glTexCoord3fv, [:pointer], :void
+    unsafe_attach_function :glTexCoord3i, [:int, :int, :int], :void
+    unsafe_attach_function :glTexCoord3iv, [:pointer], :void
+    unsafe_attach_function :glTexCoord3s, [:short, :short, :short], :void
+    unsafe_attach_function :glTexCoord3sv, [:pointer], :void
+    unsafe_attach_function :glTexCoord4d, [:double, :double, :double, :double], :void
+    unsafe_attach_function :glTexCoord4dv, [:pointer], :void
+    unsafe_attach_function :glTexCoord4f, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glTexCoord4fv, [:pointer], :void
+    unsafe_attach_function :glTexCoord4i, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glTexCoord4iv, [:pointer], :void
+    unsafe_attach_function :glTexCoord4s, [:short, :short, :short, :short], :void
+    unsafe_attach_function :glTexCoord4sv, [:pointer], :void
+    unsafe_attach_function :glTexCoordP1ui, [:uint, :uint], :void
+    unsafe_attach_function :glTexCoordP1uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glTexCoordP2ui, [:uint, :uint], :void
+    unsafe_attach_function :glTexCoordP2uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glTexCoordP3ui, [:uint, :uint], :void
+    unsafe_attach_function :glTexCoordP3uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glTexCoordP4ui, [:uint, :uint], :void
+    unsafe_attach_function :glTexCoordP4uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glTexCoordPointer, [:int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glTexEnvf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glTexEnvfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexEnvi, [:uint, :uint, :int], :void
+    unsafe_attach_function :glTexEnviv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexGend, [:uint, :uint, :double], :void
+    unsafe_attach_function :glTexGendv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexGenf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glTexGenfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexGeni, [:uint, :uint, :int], :void
+    unsafe_attach_function :glTexGeniv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexImage1D, [:uint, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexImage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
+    unsafe_attach_function :glTexImage3D, [:uint, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexImage3DMultisample, [:uint, :int, :uint, :int, :int, :int, :uchar], :void
+    unsafe_attach_function :glTexParameterIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexParameterIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexParameterf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glTexParameterfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexParameteri, [:uint, :uint, :int], :void
+    unsafe_attach_function :glTexParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexStorage1D, [:uint, :int, :uint, :int], :void
+    unsafe_attach_function :glTexStorage2D, [:uint, :int, :uint, :int, :int], :void
+    unsafe_attach_function :glTexStorage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
+    unsafe_attach_function :glTexStorage3D, [:uint, :int, :uint, :int, :int, :int], :void
+    unsafe_attach_function :glTexStorage3DMultisample, [:uint, :int, :uint, :int, :int, :int, :uchar], :void
+    unsafe_attach_function :glTexSubImage1D, [:uint, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTexSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureBarrier, [], :void
+    unsafe_attach_function :glTextureBuffer, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glTextureBufferRange, [:uint, :uint, :uint, :long, :int], :void
+    unsafe_attach_function :glTextureParameterIiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureParameterIuiv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureParameterf, [:uint, :uint, :float], :void
+    unsafe_attach_function :glTextureParameterfv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureParameteri, [:uint, :uint, :int], :void
+    unsafe_attach_function :glTextureParameteriv, [:uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureStorage1D, [:uint, :int, :uint, :int], :void
+    unsafe_attach_function :glTextureStorage2D, [:uint, :int, :uint, :int, :int], :void
+    unsafe_attach_function :glTextureStorage2DMultisample, [:uint, :int, :uint, :int, :int, :uchar], :void
+    unsafe_attach_function :glTextureStorage3D, [:uint, :int, :uint, :int, :int, :int], :void
+    unsafe_attach_function :glTextureStorage3DMultisample, [:uint, :int, :uint, :int, :int, :int, :uchar], :void
+    unsafe_attach_function :glTextureSubImage1D, [:uint, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureSubImage2D, [:uint, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureSubImage3D, [:uint, :int, :int, :int, :int, :int, :int, :int, :uint, :uint, :pointer], :void
+    unsafe_attach_function :glTextureView, [:uint, :uint, :uint, :uint, :uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glTransformFeedbackBufferBase, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glTransformFeedbackBufferRange, [:uint, :uint, :uint, :long, :int], :void
+    unsafe_attach_function :glTransformFeedbackVaryings, [:uint, :int, :pointer, :uint], :void
+    unsafe_attach_function :glTranslated, [:double, :double, :double], :void
+    unsafe_attach_function :glTranslatef, [:float, :float, :float], :void
+    unsafe_attach_function :glUniform1d, [:int, :double], :void
+    unsafe_attach_function :glUniform1dv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform1f, [:int, :float], :void
+    unsafe_attach_function :glUniform1fv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform1i, [:int, :int], :void
+    unsafe_attach_function :glUniform1iv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform1ui, [:int, :uint], :void
+    unsafe_attach_function :glUniform1uiv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform2d, [:int, :double, :double], :void
+    unsafe_attach_function :glUniform2dv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform2f, [:int, :float, :float], :void
+    unsafe_attach_function :glUniform2fv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform2i, [:int, :int, :int], :void
+    unsafe_attach_function :glUniform2iv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform2ui, [:int, :uint, :uint], :void
+    unsafe_attach_function :glUniform2uiv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform3d, [:int, :double, :double, :double], :void
+    unsafe_attach_function :glUniform3dv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform3f, [:int, :float, :float, :float], :void
+    unsafe_attach_function :glUniform3fv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform3i, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glUniform3iv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform3ui, [:int, :uint, :uint, :uint], :void
+    unsafe_attach_function :glUniform3uiv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform4d, [:int, :double, :double, :double, :double], :void
+    unsafe_attach_function :glUniform4dv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform4f, [:int, :float, :float, :float, :float], :void
+    unsafe_attach_function :glUniform4fv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform4i, [:int, :int, :int, :int, :int], :void
+    unsafe_attach_function :glUniform4iv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniform4ui, [:int, :uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glUniform4uiv, [:int, :int, :pointer], :void
+    unsafe_attach_function :glUniformBlockBinding, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glUniformMatrix2dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix2fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix2x3dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix2x3fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix2x4dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix2x4fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix3dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix3fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix3x2dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix3x2fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix3x4dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix3x4fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix4dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix4fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix4x2dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix4x2fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix4x3dv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformMatrix4x3fv, [:int, :int, :uchar, :pointer], :void
+    unsafe_attach_function :glUniformSubroutinesuiv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glUnmapBuffer, [:uint], :uchar
+    unsafe_attach_function :glUnmapNamedBuffer, [:uint], :uchar
+    unsafe_attach_function :glUseProgram, [:uint], :void
+    unsafe_attach_function :glUseProgramStages, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glValidateProgram, [:uint], :void
+    unsafe_attach_function :glValidateProgramPipeline, [:uint], :void
+    unsafe_attach_function :glVertex2d, [:double, :double], :void
+    unsafe_attach_function :glVertex2dv, [:pointer], :void
+    unsafe_attach_function :glVertex2f, [:float, :float], :void
+    unsafe_attach_function :glVertex2fv, [:pointer], :void
+    unsafe_attach_function :glVertex2i, [:int, :int], :void
+    unsafe_attach_function :glVertex2iv, [:pointer], :void
+    unsafe_attach_function :glVertex2s, [:short, :short], :void
+    unsafe_attach_function :glVertex2sv, [:pointer], :void
+    unsafe_attach_function :glVertex3d, [:double, :double, :double], :void
+    unsafe_attach_function :glVertex3dv, [:pointer], :void
+    unsafe_attach_function :glVertex3f, [:float, :float, :float], :void
+    unsafe_attach_function :glVertex3fv, [:pointer], :void
+    unsafe_attach_function :glVertex3i, [:int, :int, :int], :void
+    unsafe_attach_function :glVertex3iv, [:pointer], :void
+    unsafe_attach_function :glVertex3s, [:short, :short, :short], :void
+    unsafe_attach_function :glVertex3sv, [:pointer], :void
+    unsafe_attach_function :glVertex4d, [:double, :double, :double, :double], :void
+    unsafe_attach_function :glVertex4dv, [:pointer], :void
+    unsafe_attach_function :glVertex4f, [:float, :float, :float, :float], :void
+    unsafe_attach_function :glVertex4fv, [:pointer], :void
+    unsafe_attach_function :glVertex4i, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glVertex4iv, [:pointer], :void
+    unsafe_attach_function :glVertex4s, [:short, :short, :short, :short], :void
+    unsafe_attach_function :glVertex4sv, [:pointer], :void
+    unsafe_attach_function :glVertexArrayAttribBinding, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glVertexArrayAttribFormat, [:uint, :uint, :int, :uint, :uchar, :uint], :void
+    unsafe_attach_function :glVertexArrayAttribIFormat, [:uint, :uint, :int, :uint, :uint], :void
+    unsafe_attach_function :glVertexArrayAttribLFormat, [:uint, :uint, :int, :uint, :uint], :void
+    unsafe_attach_function :glVertexArrayBindingDivisor, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glVertexArrayElementBuffer, [:uint, :uint], :void
+    unsafe_attach_function :glVertexArrayVertexBuffer, [:uint, :uint, :uint, :long, :int], :void
+    unsafe_attach_function :glVertexArrayVertexBuffers, [:uint, :uint, :int, :pointer, :pointer, :pointer], :void
+    unsafe_attach_function :glVertexAttrib1d, [:uint, :double], :void
+    unsafe_attach_function :glVertexAttrib1dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib1f, [:uint, :float], :void
+    unsafe_attach_function :glVertexAttrib1fv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib1s, [:uint, :short], :void
+    unsafe_attach_function :glVertexAttrib1sv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib2d, [:uint, :double, :double], :void
+    unsafe_attach_function :glVertexAttrib2dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib2f, [:uint, :float, :float], :void
+    unsafe_attach_function :glVertexAttrib2fv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib2s, [:uint, :short, :short], :void
+    unsafe_attach_function :glVertexAttrib2sv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib3d, [:uint, :double, :double, :double], :void
+    unsafe_attach_function :glVertexAttrib3dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib3f, [:uint, :float, :float, :float], :void
+    unsafe_attach_function :glVertexAttrib3fv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib3s, [:uint, :short, :short, :short], :void
+    unsafe_attach_function :glVertexAttrib3sv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4Nbv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4Niv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4Nsv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4Nub, [:uint, :uchar, :uchar, :uchar, :uchar], :void
+    unsafe_attach_function :glVertexAttrib4Nubv, [:uint, :string], :void
+    unsafe_attach_function :glVertexAttrib4Nuiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4Nusv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4bv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4d, [:uint, :double, :double, :double, :double], :void
+    unsafe_attach_function :glVertexAttrib4dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4f, [:uint, :float, :float, :float, :float], :void
+    unsafe_attach_function :glVertexAttrib4fv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4iv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4s, [:uint, :short, :short, :short, :short], :void
+    unsafe_attach_function :glVertexAttrib4sv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4ubv, [:uint, :string], :void
+    unsafe_attach_function :glVertexAttrib4uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttrib4usv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribBinding, [:uint, :uint], :void
+    unsafe_attach_function :glVertexAttribDivisor, [:uint, :uint], :void
+    unsafe_attach_function :glVertexAttribFormat, [:uint, :int, :uint, :uchar, :uint], :void
+    unsafe_attach_function :glVertexAttribI1i, [:uint, :int], :void
+    unsafe_attach_function :glVertexAttribI1iv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI1ui, [:uint, :uint], :void
+    unsafe_attach_function :glVertexAttribI1uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI2i, [:uint, :int, :int], :void
+    unsafe_attach_function :glVertexAttribI2iv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI2ui, [:uint, :uint, :uint], :void
+    unsafe_attach_function :glVertexAttribI2uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI3i, [:uint, :int, :int, :int], :void
+    unsafe_attach_function :glVertexAttribI3iv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI3ui, [:uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glVertexAttribI3uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI4bv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI4i, [:uint, :int, :int, :int, :int], :void
+    unsafe_attach_function :glVertexAttribI4iv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI4sv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI4ubv, [:uint, :string], :void
+    unsafe_attach_function :glVertexAttribI4ui, [:uint, :uint, :uint, :uint, :uint], :void
+    unsafe_attach_function :glVertexAttribI4uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribI4usv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribIFormat, [:uint, :int, :uint, :uint], :void
+    unsafe_attach_function :glVertexAttribIPointer, [:uint, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glVertexAttribL1d, [:uint, :double], :void
+    unsafe_attach_function :glVertexAttribL1dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribL2d, [:uint, :double, :double], :void
+    unsafe_attach_function :glVertexAttribL2dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribL3d, [:uint, :double, :double, :double], :void
+    unsafe_attach_function :glVertexAttribL3dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribL4d, [:uint, :double, :double, :double, :double], :void
+    unsafe_attach_function :glVertexAttribL4dv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexAttribLFormat, [:uint, :int, :uint, :uint], :void
+    unsafe_attach_function :glVertexAttribLPointer, [:uint, :int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glVertexAttribP1ui, [:uint, :uint, :uchar, :uint], :void
+    unsafe_attach_function :glVertexAttribP1uiv, [:uint, :uint, :uchar, :pointer], :void
+    unsafe_attach_function :glVertexAttribP2ui, [:uint, :uint, :uchar, :uint], :void
+    unsafe_attach_function :glVertexAttribP2uiv, [:uint, :uint, :uchar, :pointer], :void
+    unsafe_attach_function :glVertexAttribP3ui, [:uint, :uint, :uchar, :uint], :void
+    unsafe_attach_function :glVertexAttribP3uiv, [:uint, :uint, :uchar, :pointer], :void
+    unsafe_attach_function :glVertexAttribP4ui, [:uint, :uint, :uchar, :uint], :void
+    unsafe_attach_function :glVertexAttribP4uiv, [:uint, :uint, :uchar, :pointer], :void
+    unsafe_attach_function :glVertexAttribPointer, [:uint, :int, :uint, :uchar, :int, :pointer], :void
+    unsafe_attach_function :glVertexBindingDivisor, [:uint, :uint], :void
+    unsafe_attach_function :glVertexP2ui, [:uint, :uint], :void
+    unsafe_attach_function :glVertexP2uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexP3ui, [:uint, :uint], :void
+    unsafe_attach_function :glVertexP3uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexP4ui, [:uint, :uint], :void
+    unsafe_attach_function :glVertexP4uiv, [:uint, :pointer], :void
+    unsafe_attach_function :glVertexPointer, [:int, :uint, :int, :pointer], :void
+    unsafe_attach_function :glViewport, [:int, :int, :int, :int], :void
+    unsafe_attach_function :glViewportArrayv, [:uint, :int, :pointer], :void
+    unsafe_attach_function :glViewportIndexedf, [:uint, :float, :float, :float, :float], :void
+    unsafe_attach_function :glViewportIndexedfv, [:uint, :pointer], :void
+    unsafe_attach_function :glWaitSync, [:pointer, :uint, :ulong_long], :void
+    unsafe_attach_function :glWindowPos2d, [:double, :double], :void
+    unsafe_attach_function :glWindowPos2dv, [:pointer], :void
+    unsafe_attach_function :glWindowPos2f, [:float, :float], :void
+    unsafe_attach_function :glWindowPos2fv, [:pointer], :void
+    unsafe_attach_function :glWindowPos2i, [:int, :int], :void
+    unsafe_attach_function :glWindowPos2iv, [:pointer], :void
+    unsafe_attach_function :glWindowPos2s, [:short, :short], :void
+    unsafe_attach_function :glWindowPos2sv, [:pointer], :void
+    unsafe_attach_function :glWindowPos3d, [:double, :double, :double], :void
+    unsafe_attach_function :glWindowPos3dv, [:pointer], :void
+    unsafe_attach_function :glWindowPos3f, [:float, :float, :float], :void
+    unsafe_attach_function :glWindowPos3fv, [:pointer], :void
+    unsafe_attach_function :glWindowPos3i, [:int, :int, :int], :void
+    unsafe_attach_function :glWindowPos3iv, [:pointer], :void
+    unsafe_attach_function :glWindowPos3s, [:short, :short, :short], :void
+    unsafe_attach_function :glWindowPos3sv, [:pointer], :void
 
     
     GL_2D = 0x0600

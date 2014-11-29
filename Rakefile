@@ -3,9 +3,8 @@ require 'rake/testtask'
 require 'tmpdir'
 
 # Dependency Locations
-SDL_INCLUDE = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\include\SDL2'
-SDL_LIB = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\lib'
-SDL_BIN = 'C:\Users\GG\Desktop\SDL2-2.0.3\i686-w64-mingw32\bin'
+SDL_INCLUDE = 'ext/macosx/SDL2.framework/Headers'
+SDL_LIB = 'ext/macosx'
 
 # C File Locations
 PROJ_INCLUDE = 'lib/rubygl/native/include/'
@@ -26,7 +25,7 @@ def os
             when /solaris|bsd/
                 :unix
             else
-                raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
+                raise Error::WebDriverError, "Unknown OS: #{host_os.inspect}"
         end
     )
 end
@@ -37,19 +36,28 @@ task :default => [:bindings, :build, :clean]
 
 # Builds The RubyGL Shared Library From C Source Files And SDL Library
 task :build do
-    files = ['Window', 'GLContext', 'Input', 'OpenGL']
+    files = ['Window', 'GLContext', 'Input']
+    
+    # OpenGL Function On macosx Are Already Loaded
+    files << 'OpenGL' if os == :windows || os == :linux
     
     # Build Object Files
-    obj = "gcc -I#{SDL_INCLUDE}  -I#{PROJ_INCLUDE} -c -fPIC REPLACE.c -o REPLACE.o"
+    obj = "gcc -I#{SDL_INCLUDE} -I#{PROJ_INCLUDE} -c -fPIC REPLACE.c -o REPLACE.o"
     files.each { |file|
         sh (obj.gsub(/REPLACE/, PROJ_SRC + file))
         file = file.prepend PROJ_SRC
     }
 
     # Build Shared Object File
-    bin = "gcc -L#{SDL_LIB} #{files.join('.o ') << '.o'} -lSDL2main -lSDL2 \
-           -lopengl32 -shared -o ext/#{os.to_s}/RubyGL.so"
-    sh bin 
+    if os == :windows
+        sh "gcc -o ext/windows/RubyGL.so #{files.join('.o ') << '.o'} \
+        -shared -L#{SDL_LIB} -lSDL2main -lSDL2"
+    elsif os == :macosx
+        sh "gcc -o ext/macosx/RubyGL.so #{files.join('.o ') << '.o'} \
+        -shared -F#{SDL_LIB} -framework SDL2"
+    else
+        abort("No Library Build Command For Current OS")
+    end
 end
 
 # Created The Documentation For The Library
