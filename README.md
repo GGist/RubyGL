@@ -16,6 +16,9 @@ Examples Gallery
 
 Frequently Asked Questions
 --------------------------
+**Q: Why am I getting an error saying the library could not be loaded?**  
+A: Both shared libraries are compiled as 32-bit binaries. As such, you will need a 32-bit version of ruby and the ruby devkit (to use the appropriate ffi gem) in order to run your program. If you wish to use 64-bit versions of these tools, you will have to get the appropriate SDL binary and recompile the rubygl binary.
+
 **Q: Why are my shaders not working?**  
 A: You probably have an older version of GLSL (1.2 or earler) so your version of GLSL may not support the ```in``` and ```out``` 
 variables (the shaders in ShaderGenerator use these). To work around this, you can change the ```in``` qualifiers in the 
