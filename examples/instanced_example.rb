@@ -7,17 +7,17 @@ puts RubyGL::Native::glGetString(RubyGL::Native::GL_VERSION)
 # Create A Custom Faceted Shader
 shader = RubyGL::Shader.new('''
     #version 130
-	uniform mat4 perspective;
-	uniform mat4 modelview;
+    uniform mat4 perspective;
+    uniform mat4 modelview;
     in vec3 position;
     in vec3 offset;
     out vec3 vPosition;
 	
     void main() {
-		vec4 hPosition = modelview * vec4(offset + position, 1);
+        vec4 hPosition = modelview * vec4(offset + position, 1);
         vPosition = hPosition.xyz;
         
-		gl_Position = perspective * hPosition;
+        gl_Position = perspective * hPosition;
     }
 ''','''
     #version 130
